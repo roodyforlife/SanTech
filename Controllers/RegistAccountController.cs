@@ -9,23 +9,26 @@ using System.Threading.Tasks;
 
 namespace SanTech.Controllers
 {
-    public class RegistratController : Controller
+    public class RegistAccountController : Controller
     {
         private readonly IAuthorizatService authorizatService;
         private readonly IDbUserService dbUserService;
-        public RegistratController(IAuthorizatService authorizatService, IDbUserService dbUserService)
+        public RegistAccountController(IAuthorizatService authorizatService, IDbUserService dbUserService)
         {
             this.authorizatService = authorizatService;
             this.dbUserService = dbUserService;
         }
         [HttpGet]
-        public IActionResult Registrat()
+        public IActionResult RegistAccount()
         {
-            ViewBag.Account = ControllerContext.HttpContext.Session.GetString("Login");
+            var user = ControllerContext.HttpContext.Session.GetString("Login");
+            ViewBag.Account = user;
+            if (user is not null)
+                return RedirectPermanent("../Home/Index");
             return View();
         }
         [HttpPost]
-        public IActionResult Registrat(User user)
+        public IActionResult RegistAccount(User user)
         {
             if(authorizatService.IsRegistered(user.Login))
             {

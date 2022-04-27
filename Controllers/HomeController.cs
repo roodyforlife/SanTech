@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SanTech.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,23 @@ namespace SanTech.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IDbUserService dbUserService;
+        public HomeController(IDbUserService dbUserService)
+        {
+            this.dbUserService = dbUserService;
+        }
         public IActionResult Index()
         {
-            ViewBag.Account = ControllerContext.HttpContext.Session.GetString("Login");
+            var user = ControllerContext.HttpContext.Session.GetString("Login");
+            ViewBag.Account = user;
+            if(user is not null)
+            ViewBag.IsAdmin = dbUserService.Get(user).IsAdmin;
             return View();
         }
-        public void SignOutAccount()
+        public string SignOutAccount()
         {
             ControllerContext.HttpContext.Session.Remove("Login");
+            return "";
         }
     }
 }

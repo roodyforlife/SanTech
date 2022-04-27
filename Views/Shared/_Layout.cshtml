@@ -17,23 +17,7 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/script.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function () {
-  $('.exit__button').click(function(){
-      var formData = new FormData();
-      $.ajax({
-          url: "/Home/SignOutAccount",
-          type: 'POST',
-          cache: false,
-          contentType: false,
-          processData: false,
-          data: formData,
-          success: function (response) {
-          }
-      });
-   });
-});
-    </script>
+    <script src="~/js/ajaxes.js" type="text/javascript"></script>
     <div class="basket">
         <div class="basket__content _scroll">
             <div id="exit__basket" class="basket__content__exit"></div>
@@ -97,6 +81,9 @@
         </div>
     </div>
     <div class="container">
+         <div class="exit__alert">
+            <span class="text1">Вы вышли из аккаунта</span>
+        </div>
         <div class="header">
             <div class="header__content">
                 <div class="header__logo"><img src="~/img/logo.png" alt=""></div>
@@ -141,13 +128,18 @@
                             <ul class="text1 profile__pull__menu__list">
                                 @if (ViewBag.Account is not null)
                                 {
+                                <div class="profile__pull__menu__logged">
                                 <li>Матвей Колосс</li>
+                                @if(ViewBag.IsAdmin)
+                                {
+                                    <a><li class="text1 pull__menu__list__text">Админ-панель</li></a>
+                                }
                                 <li>
                                     <div class="pull__menu__list__bonus">
                                         <div class="list__bonus__logo">
                                             <svg viewBox="0 0 350 350" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <g transform="translate(0.000000,256.000000) scale(0.100000,-0.100000)"
-                                                   stroke="none">
+                                                    stroke="none">
                                                     <path d="M1165 2549 c-373 -34 -730 -245 -936 -552 -79 -118 -120 -200 -157
 -317 -106 -330 -81 -672 69 -973 88 -176 254 -367 412 -475 433 -297 993 -304
 1429 -19 123 80 285 242 365 365 244 372 276 828 88 1247 -103 231 -341 473
@@ -165,13 +157,13 @@ c346 -4 353 -5 429 -30z" />
                                         <div class="list__bonus__text">Бонусы: 20</div>
                                     </div>
                                 </li>
-                                
-                                <li>
-                                    <div class="exit__button pull__menu__list__text">Выйти</div>
-                                </li>
+                                    <li>
+                                        <div style="cursor: pointer;" class="pull__menu__list__text exit__button">Выйти</div>
+                                    </li>
+                            </div>
                                 }
                                 else {
-                                <a asp-action="SignIn" asp-controller="SignIn"><li>Вход/Регистрация</li></a>
+                                   <li><a asp-action="SignInAccount" asp-controller="SignInAccount"><div class="text1 pull__menu__list__text login__button">Вход/Регистрация</div></a></li>
                                 }
                             </ul>
                         </div>

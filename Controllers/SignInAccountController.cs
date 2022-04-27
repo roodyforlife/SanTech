@@ -9,23 +9,26 @@ using System.Threading.Tasks;
 
 namespace SanTech.Controllers
 {
-    public class SignInController : Controller
+    public class SignInAccountController : Controller
     {
         private readonly IDbUserService dbUserService;
         private readonly IAuthorizatService authorizatService;
-        public SignInController(IDbUserService dbUserService, IAuthorizatService authorizatService)
+        public SignInAccountController(IDbUserService dbUserService, IAuthorizatService authorizatService)
         {
             this.dbUserService = dbUserService;
             this.authorizatService = authorizatService;
         }
         [HttpGet]
-        public IActionResult SignIn()
+        public IActionResult SignInAccount()
         {
-            ViewBag.Account = ControllerContext.HttpContext.Session.GetString("Login");
+            var user = ControllerContext.HttpContext.Session.GetString("Login");
+            ViewBag.Account = user;
+            if (user is not null)
+                return RedirectPermanent("../Home/Index");
             return View();
         }
         [HttpPost]
-        public IActionResult SignIn(UserLogin user)
+        public IActionResult SignInAccount(UserLogin user)
         {
             if (!authorizatService.IsRegistered(user.Login))
                 ModelState.AddModelError("Login", "Такого аккаунта не существует");
