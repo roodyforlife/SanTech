@@ -26,7 +26,7 @@ namespace SanTech.Controllers
         public string SignOutAccount()
         {
             ControllerContext.HttpContext.Session.Remove("Login");
-            return "";
+            return "<li><a href='../SignInAccount/SignInAccount'><div class='text1 pull__menu__list__text login__button'>Вход/Регистрация</div></a></li>";
         }
     }
 }
