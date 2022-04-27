@@ -14,10 +14,9 @@ namespace SanTech.Controllers
             ViewBag.Account = ControllerContext.HttpContext.Session.GetString("Login");
             return View();
         }
-        public IActionResult SignOutAccount1()
+        public void SignOutAccount()
         {
             ControllerContext.HttpContext.Session.Remove("Login");
-            return RedirectPermanent("../Home/Index");
         }
     }
 }

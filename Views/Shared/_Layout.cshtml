@@ -17,6 +17,23 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/script.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+  $('.exit__button').click(function(){
+      var formData = new FormData();
+      $.ajax({
+          url: "/Home/SignOutAccount",
+          type: 'POST',
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: formData,
+          success: function (response) {
+          }
+      });
+   });
+});
+    </script>
     <div class="basket">
         <div class="basket__content _scroll">
             <div id="exit__basket" class="basket__content__exit"></div>
@@ -148,11 +165,10 @@ c346 -4 353 -5 429 -30z" />
                                         <div class="list__bonus__text">Бонусы: 20</div>
                                     </div>
                                 </li>
-                                <a asp-action="SignOutAccount1" asp-controller="Home">
+                                
                                 <li>
-                                    <div class="pull__menu__list__text">Выйти</div>
+                                    <div class="exit__button pull__menu__list__text">Выйти</div>
                                 </li>
-                                </a>
                                 }
                                 else {
                                 <a asp-action="SignIn" asp-controller="SignIn"><li>Вход/Регистрация</li></a>
