@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SanTech.Interfaces;
+using SanTech.Models;
+using SanTech.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +27,10 @@ namespace SanTech
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<ApplicationContext>();
+            services.AddSession();
+            services.AddScoped<IDbUserService, DbUserService>();
+            services.AddScoped<IAuthorizatService, AuthorizatService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +50,7 @@ namespace SanTech
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

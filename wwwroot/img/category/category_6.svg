@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="103" height="103" viewBox="0 0 103 103" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_74_152)">
+<path d="M15.2556 99.9119C22.0289 99.9119 27.5198 94.421 27.5198 87.6476C27.5198 80.8742 22.0289 75.3833 15.2556 75.3833C8.48218 75.3833 2.99127 80.8742 2.99127 87.6476C2.99127 94.421 8.48218 99.9119 15.2556 99.9119Z" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M77.0755 26.9214H88.0436V102.704" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M15.2556 72.7907V26.9214H26.2236" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M60.7231 53.8431H42.4763C33.5024 53.8431 26.1239 46.5643 26.1239 37.4907V2.99121H76.9758V37.4907C77.0755 46.5643 69.697 53.8431 60.7231 53.8431Z" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M15.1559 64.3125H88.0436" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M12.2642 20.939C5.08515 20.939 4.28748 26.7221 4.28748 33.9012V36.8925H12.364" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M100.009 17.9478V35.8955" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M88.0436 26.9214H100.009" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M15.2556 26.9216V17.9478V26.9216Z" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+</g>
+<defs>
+<clipPath id="clip0_74_152">
+<rect width="103" height="103" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="103" height="103" viewBox="0 0 103 103" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_73_122)">
+<g clip-path="url(#clip1_73_122)">
+<path d="M15.1 45.2002C15.1 35.8002 22.7 28.2002 32.1 28.2002C41.5 28.2002 49.1 35.8002 49.1 45.2002" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M32.1 51.2002C35.1375 51.2002 37.6 48.7378 37.6 45.7002C37.6 42.6626 35.1375 40.2002 32.1 40.2002C29.0624 40.2002 26.6 42.6626 26.6 45.7002C26.6 48.7378 29.0624 51.2002 32.1 51.2002Z" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M26.2 45.2002H16.3H8.09998C8.09998 58.5002 18.9 69.2002 32.1 69.2002C45.4 69.2002 56.1 58.5002 56.1 45.2002H48H37.1" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M42.5 66.8002C42.8 67.5002 43 68.3002 43 69.1002V94.2002C43 97.5002 40.3 100.1 37.1 100.1H26.9C23.6 100.1 21 97.4002 21 94.2002V69.1002C21 68.2002 21.2 67.4002 21.5 66.7002" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M91 26.2L100 49.2V68.7C100 73.4 96.2 77.2 91.5 77.2H65V57.2H83.7C84.9 57.2 85.8 56.1 85.5 54.9L76.1 26H55.9C52.6 26 50 23.3 50 20.1V8.9C50 5.7 52.7 3 55.9 3H76L91 3.1C95.9 3.1 99.9 7.2 99.9 12.1V17.2C100 22.1 96 26.2 91 26.2Z" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M48.4 8H44.6C42.1 8 40 10.1 40 12.6V16.4C40 18.9 42.1 21 44.6 21H48.4" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M40 14.5H20" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M63 3.2002V26.2002" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M77.3 38.2001H71.2L68.5 27.5001L74.4 26.1001L77.3 38.2001Z" fill="#FF2F00"/>
+<path d="M0 58.2002H12" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M0 60.2002H14" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+<path d="M65 67.2002H100.2" stroke="#FF2F00" stroke-width="6" stroke-miterlimit="10"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_73_122">
+<rect width="103" height="103" fill="white"/>
+</clipPath>
+<clipPath id="clip1_73_122">
+<rect width="103" height="103.2" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Cera Pro';
+    src: local('Cera Pro Light'), local('CeraPro-Light'),
+        url('../fonts/CeraPro-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cera Pro';
+    src: local('Cera Pro Medium'), local('CeraPro-Medium'),
+        url('../fonts/CeraPro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cera Pro';
+    src: local('Cera Pro Black'), local('CeraPro-Black'),
+        url('../fonts/CeraPro-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cera Pro';
+    src: local('Cera Pro Bold'), local('CeraPro-Bold'),
+        url('../fonts/CeraPro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cera Pro';
+    src: local('Cera Pro Regular'), local('CeraPro-Regular'),
+        url('../fonts//CeraPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cera Pro';
+    src: local('Cera Pro Thin'), local('CeraPro-Thin'),
+        url('../fonts/CeraPro-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+:root {
+    --yellow-color: #ffc244;
+    --yellowHover-color: #fdcd6b;
+    --gray-color: #f3f3f3;
+    --grayHover-color: #d3d3d3;
+    --red-color: #ff3838;
+    --redHover-color: #ff5c5c;
+    --darkGray-color: #777;
+    --darkGrayHover-color: #999;
+    --blue-color: rgb(109, 148, 253);
+    --blueHover-color: rgb(145, 174, 255);
+}

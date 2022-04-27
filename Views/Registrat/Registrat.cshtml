@@ -1,0 +1,39 @@
+﻿@model SanTech.Models.User
+@{
+    Layout = "_Layout";
+}
+<link href="~/css/validation.css" rel="stylesheet" />
+<link href="~/css/authorization.css" rel="stylesheet" />
+<div class="authorization">
+    <div class="authorization__content">
+        <div class="authorization__content__header">
+            <a asp-action="SignIn" asp-controller="SignIn" class="authorization__content__header__login tablinks" id="Login__button">
+                <span class="text1 authorization__content__header__text">Вход</span>
+            </a>
+            <a asp-action="Registrat" asp-controller="Registrat" class="authorization__content__header__registration tablinks _active__button" id="Registration__button">
+                <span class="text1 authorization__content__header__text">Регистрация</span>
+            </a>
+        </div>
+        <div class="authorization__content__form">
+            <div id="Registration">
+                <form asp-action="Registrat" asp-controller="Registrat">
+                    <p class="text1 input__display__text">Введите логин <span asp-validation-for="Login"></span></p>
+                    <input type="text" asp-for="Login" class="text1 form__input" />
+                    <p class="text1 input__display__text">Введите пароль <span asp-validation-for="Password"></span></p>
+                    <input type="password" asp-for="Password" class="text1 form__input" />
+                    <p class="text1 input__display__text">Повторите пароль <span asp-validation-for="PasswordConfirm"></span></p>
+                    <input type="password" asp-for="PasswordConfirm" class="text1 form__input" />
+                    <p class="text1 input__display__text">Введите ваше имя <span asp-validation-for="Name"></span></p>
+                    <input type="text" asp-for="Name" class="text1 form__input" />
+                    <p class="text1 input__display__text">Введите email-адрес <span asp-validation-for="Email"></span></p>
+                    <input type="email" asp-for="Email" class="text1 form__input" />
+                    <p class="text1 input__display__text">Введите номер телефона <span asp-validation-for="Phone"></span></p>
+                    <input type="tel" asp-for="Phone" class="text1 form__input" />
+                    <button type="submit" class="button1 text1 form__button"><span>Регистрация</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

@@ -1,1 +1,190 @@
-﻿
+﻿@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/nullStyle.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/basket.css">
+    <title>SanTech</title>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/script.js"></script>
+    <div class="basket">
+        <div class="basket__content _scroll">
+            <div id="exit__basket" class="basket__content__exit"></div>
+            <div class="text2 basket__content__title">Корзина</div>
+            <div class="basket__content__orders _scroll">
+                <div class="basket__content__item">
+                    <div class="basket__content__item__first">
+                        <div class="basket__content__item__trash">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px"
+                                 viewBox="0 0 612.08 612.08" style="enable-background:new 0 0 612.08 612.08;"
+                                 xml:space="preserve">
+                            <g>
+                            <path d="M432,96h-48V32c0-17.672-14.328-32-32-32H160c-17.672,0-32,14.328-32,32v64H80c-17.672,0-32,14.328-32,32v32h416v-32
+		C464,110.328,449.672,96,432,96z M192,96V64h128v32H192z" />
+                            <path d="M80,480.004C80,497.676,94.324,512,111.996,512h288.012C417.676,512,432,497.676,432,480.008v-0.004V192H80V480.004z
+		 M320,272c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M240,272
+		c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M160,272c0-8.836,7.164-16,16-16
+		s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z" />
+                                </g>
+                        </div>
+                        <div class="basket__content__item__image"><img src="img/3070.jpg" alt=""></div>
+                        <div class="basket__content__item__info">
+                            <div class="text1 basket__content__item__info__title">
+                                Какой-то текст с названием товара
+                            </div>
+                            <div class="text1 basket__content__item__info__cost">3 034 грн.</div>
+
+                        </div>
+                    </div>
+                    <div class="basket__content__item__second">
+                        <div class="basket__content__item__amount">
+                            <div class="basket__content__item__amount__count">
+                                <div class="text1 amount__count__button" onclick="CountButton(-1, 1)">-</div>
+                                <input readonly min="1" value="1" type="number" id="input__count1" class="text1 basket__content__item__amount__input">
+                                <div class="text1 amount__count__button" onclick="CountButton(1, 1)">+</div>
+                            </div>
+                            <div class="text1 basket__content__item__amount__cost">34 255 грн.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="basket__content__total">
+                <div class="basket__content__total__info">
+                    <div class="text2 basket__content__total__info__title">
+                        Итог: <span class="basket__content__total__info__cost">3244 грн.</span>
+                    </div>
+                    <a href="" class="button1 basket__content__total__info__button">
+                        <div class="basket__content__total__info__button__basket">
+                            <svg width="30" height="30" viewBox="0 0 70 70" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M2.91675 5.83337V11.6667H13.9511L17.1867 26.8887L17.1978 26.8864L18.5582 33.2883L18.5209 33.2961L22.0926 50.0993C19.4017 51.1721 17.5001 53.8015 17.5001 56.875C17.5001 60.9021 20.7647 64.1667 24.7917 64.1667C28.8188 64.1667 32.0834 60.9021 32.0834 56.875C32.0834 56.3757 32.0332 55.8881 31.9376 55.4167H49.7292C49.6336 55.8881 49.5834 56.3757 49.5834 56.875C49.5834 60.9021 52.848 64.1667 56.8751 64.1667C60.9021 64.1667 64.1667 60.9021 64.1667 56.875C64.1667 52.848 60.9021 49.5834 56.8751 49.5834H27.9466L26.7067 43.75H60.8855L67.0834 14.5834H20.5348L18.6959 5.93231V5.83337H2.91675ZM56.8751 55.4167C56.0698 55.4167 55.4167 56.0698 55.4167 56.875C55.4167 57.6803 56.0698 58.3334 56.8751 58.3334C57.6804 58.3334 58.3334 57.6803 58.3334 56.875C58.3334 56.0698 57.6804 55.4167 56.8751 55.4167ZM23.3334 56.875C23.3334 56.0698 23.9863 55.4167 24.7917 55.4167C25.5972 55.4167 26.2501 56.0698 26.2501 56.875C26.2501 57.6803 25.5972 58.3334 24.7917 58.3334C23.9863 58.3334 23.3334 57.6803 23.3334 56.875ZM21.7866 20.4167L25.5053 37.9167H56.1614L59.8801 20.4167H21.7866Z"
+                                      fill="#000" />
+                            </svg>
+                        </div>
+                        <span class="text1 basket__content__total__info__button__text">Оформить заказ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="header__content">
+                <div class="header__logo"><img src="~/img/logo.png" alt=""></div>
+                <div class="header__menu">
+                    <a href="">
+                        <div class="header__menu__item">
+                            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 489.075 489.075"
+                                 style="enable-background:new 0 0 489.075 489.075;" xml:space="preserve">
+                            <path fill="#000"
+                                  d="M482.453,220.775l-115.5-111.2v-88.5c0-11.4-9.4-20.8-20.8-20.8s-20.8,9.4-20.8,20.8v48.5l-66.6-64.1
+                            c-7.3-7.3-19.8-7.3-28.1,0l-223.6,215.3c-8.3,8.3-9.4,20.8-1,29.1c8.4,8.3,20.8,9.4,29.1,1l3.1-3v220.4c0,11.4,9.4,20.8,20.8,20.8
+                            h372.4c11.4,0,19.8-9.4,20.8-19.8v-219.3l2.1,2c15.2,10.5,26,3.1,29.1-2.1C490.753,241.575,490.753,228.075,482.453,220.775z
+                             M281.653,448.575h-72.8v-111.3h72.8V448.575z M410.653,448.575h-88.4v-132.1c0-11.4-9.4-20.8-20.8-20.8h-113.4
+                            c-11.4,0-20.8,9.4-20.8,20.8v132.1h-87.4v-203.9h330.8V448.575L410.653,448.575z M83.853,204.175l161.4-155l159.8,155H83.853z" />
+                            </svg>
+                            <p class="text1">Главная</p>
+                        </div>
+                    </a>
+                    <div class="header__menu__item" onclick="copyTelephoneToClipboard('#telephone__clip')">
+                        <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 53.942 53.942"
+                             style="enable-background:new 0 0 53.942 53.942;" xml:space="preserve">
+                        <path fill="#fff" d="M53.364,40.908c-2.008-3.796-8.981-7.912-9.288-8.092c-0.896-0.51-1.831-0.78-2.706-0.78c-1.301,0-2.366,0.596-3.011,1.68
+	c-1.02,1.22-2.285,2.646-2.592,2.867c-2.376,1.612-4.236,1.429-6.294-0.629L17.987,24.467c-2.045-2.045-2.233-3.928-0.632-6.291
+	c0.224-0.309,1.65-1.575,2.87-2.596c0.778-0.463,1.312-1.151,1.546-1.995c0.311-1.123,0.082-2.444-0.652-3.731
+	c-0.173-0.296-4.291-7.27-8.085-9.277c-0.708-0.375-1.506-0.573-2.306-0.573c-1.318,0-2.558,0.514-3.49,1.445L4.7,3.986
+	c-4.014,4.013-5.467,8.562-4.321,13.52c0.956,4.132,3.742,8.529,8.282,13.068l14.705,14.705c5.746,5.746,11.224,8.66,16.282,8.66
+	c0,0,0,0,0.001,0c3.72,0,7.188-1.581,10.305-4.698l2.537-2.537C54.033,45.163,54.383,42.833,53.364,40.908z" />
+                        </svg>
+                        <p class="text1">Телефон</p>
+                        <div id="telephone__clip" style="display: none;">0800200500400</div>
+                    </div>
+                    <div class="header__menu__item" id="Profile">
+                        <svg width="40" height="40" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M7 7C5.34315 7 4 5.65685 4 4C4 2.34315 5.34315 1 7 1C8.65686 1 10 2.34315 10 4C10 5.65685 8.65686 7 7 7ZM3 4C3 1.79086 4.79086 0 7 0C9.20914 0 11 1.79086 11 4C11 6.20914 9.20914 8 7 8C4.79086 8 3 6.20914 3 4ZM5.25 10H8.75C11.0972 10 13 11.9028 13 14.25C13 14.6642 12.6642 15 12.25 15H1.75C1.33579 15 1 14.6642 1 14.25C1 11.9028 2.90279 10 5.25 10ZM0 14.25C0 11.3505 2.35051 9 5.25 9H8.75C11.6495 9 14 11.3505 14 14.25C14 15.2165 13.2165 16 12.25 16H1.75C0.783502 16 0 15.2165 0 14.25Z"
+                                  fill="#fff" />
+                        </svg>
+                        <p class="text1">Профиль</p>
+                        <div class="profile__pull__menu">
+                            <ul class="text1 profile__pull__menu__list">
+                                @if (ViewBag.Account is not null)
+                                {
+                                <li>Матвей Колосс</li>
+                                <li>
+                                    <div class="pull__menu__list__bonus">
+                                        <div class="list__bonus__logo">
+                                            <svg viewBox="0 0 350 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g transform="translate(0.000000,256.000000) scale(0.100000,-0.100000)"
+                                                   stroke="none">
+                                                    <path d="M1165 2549 c-373 -34 -730 -245 -936 -552 -79 -118 -120 -200 -157
+-317 -106 -330 -81 -672 69 -973 88 -176 254 -367 412 -475 433 -297 993 -304
+1429 -19 123 80 285 242 365 365 244 372 276 828 88 1247 -103 231 -341 473
+-583 594 -204 102 -460 151 -687 130z m427 -501 c192 -64 276 -168 286 -353 8
+-152 -38 -253 -148 -324 l-57 -37 46 -22 c118 -54 189 -160 198 -298 17 -258
+-118 -430 -376 -478 -65 -13 -154 -16 -407 -16 l-324 0 0 781 0 781 353 -4
+c346 -4 353 -5 429 -30z" />
+                                                    <path d="M1080 1639 l0 -211 188 4 c183 3 188 4 234 31 57 33 83 68 99 131 16
+64 -2 145 -41 190 -48 54 -105 66 -306 66 l-174 0 0 -211z" />
+                                                    <path d="M1082 983 l3 -238 175 0 c197 0 247 9 305 58 53 43 75 97 75 182 0
+85 -22 139 -75 182 -54 45 -102 53 -305 53 l-180 0 2 -237z" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="list__bonus__text">Бонусы: 20</div>
+                                    </div>
+                                </li>
+                                <a asp-action="SignOutAccount1" asp-controller="Home">
+                                <li>
+                                    <div class="pull__menu__list__text">Выйти</div>
+                                </li>
+                                </a>
+                                }
+                                else {
+                                <a asp-action="SignIn" asp-controller="SignIn"><li>Вход/Регистрация</li></a>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header__menu__item">
+                        <svg width="40" height="40" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M32.6904 16.7074L35.115 19.8633L37.3941 16.6006C41.8388 10.2374 48.8345 9.09819 54.6538 11.5013C60.5017 13.9164 64.9502 19.8392 64.0498 27.6634C63.5864 31.6933 61.6211 35.7503 58.7015 39.6651C55.7925 43.5656 52.0556 47.1633 48.3068 50.2491C44.5674 53.3273 40.8822 55.8421 38.1271 57.5892C36.8729 58.3843 35.8168 59.0169 35.0427 59.4681C34.2642 58.9909 33.1973 58.3207 31.9289 57.4816C29.168 55.6551 25.4749 53.0441 21.7266 49.8979C17.9682 46.7436 14.2204 43.1059 11.3016 39.2369C8.36501 35.3443 6.41437 31.4106 5.95383 27.6429C5.06378 20.3616 9.25707 14.4233 15.0171 11.8824C20.6891 9.38041 27.7261 10.2466 32.6904 16.7074Z"
+                                  fill="#fff" />
+                        </svg>
+                        <p class="text1">Избранные</p>
+                    </div>
+                    <div class="header__menu__item" id="backet">
+                        <svg width="40" height="40" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M2.91675 5.83337V11.6667H13.9511L17.1867 26.8887L17.1978 26.8864L18.5582 33.2883L18.5209 33.2961L22.0926 50.0993C19.4017 51.1721 17.5001 53.8015 17.5001 56.875C17.5001 60.9021 20.7647 64.1667 24.7917 64.1667C28.8188 64.1667 32.0834 60.9021 32.0834 56.875C32.0834 56.3757 32.0332 55.8881 31.9376 55.4167H49.7292C49.6336 55.8881 49.5834 56.3757 49.5834 56.875C49.5834 60.9021 52.848 64.1667 56.8751 64.1667C60.9021 64.1667 64.1667 60.9021 64.1667 56.875C64.1667 52.848 60.9021 49.5834 56.8751 49.5834H27.9466L26.7067 43.75H60.8855L67.0834 14.5834H20.5348L18.6959 5.93231V5.83337H2.91675ZM56.8751 55.4167C56.0698 55.4167 55.4167 56.0698 55.4167 56.875C55.4167 57.6803 56.0698 58.3334 56.8751 58.3334C57.6804 58.3334 58.3334 57.6803 58.3334 56.875C58.3334 56.0698 57.6804 55.4167 56.8751 55.4167ZM23.3334 56.875C23.3334 56.0698 23.9863 55.4167 24.7917 55.4167C25.5972 55.4167 26.2501 56.0698 26.2501 56.875C26.2501 57.6803 25.5972 58.3334 24.7917 58.3334C23.9863 58.3334 23.3334 57.6803 23.3334 56.875ZM21.7866 20.4167L25.5053 37.9167H56.1614L59.8801 20.4167H21.7866Z"
+                                  fill="#fff" />
+                            <div class="menu__item__count"><span>3</span></div>
+                        </svg>
+                        <p class="text1">Корзина</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/js/range.js"></script>
+</body>
+
+</html>

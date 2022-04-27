@@ -1,0 +1,31 @@
+﻿@model SanTech.Models.UserLogin
+@{
+    Layout = "_Layout";
+}
+<link href="~/css/validation.css" rel="stylesheet" />
+<link href="~/css/authorization.css" rel="stylesheet" />
+<div class="authorization">
+    <div class="authorization__content">
+        <div class="authorization__content__header">
+            <a asp-action="SignIn" asp-controller="SignIn" class="authorization__content__header__login _active__button tablinks" id="Login__button">
+                <span class="text1 authorization__content__header__text">Вход</span>
+            </a>
+            <a asp-action="Registrat" asp-controller="Registrat" class="authorization__content__header__registration tablinks" id="Registration__button">
+                <span class="text1 authorization__content__header__text">Регистрация</span>
+            </a>
+        </div>
+        <div class="authorization__content__form">
+            <div id="Login">
+                <form asp-action="SignIn" asp-controller="SignIn">
+                    <p class="text1 input__display__text">Введите логин <span asp-validation-for="Login"></span></p>
+                    <input type="text" asp-for="Login" class="text1 form__input" />
+                    <p class="text1 input__display__text">Введите пароль <span asp-validation-for="Password"></span></p>
+                    <input type="password" asp-for="Password" class="text1 form__input" />
+                    <button type="submit" class="button1 text1 form__button"><span>Войти</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

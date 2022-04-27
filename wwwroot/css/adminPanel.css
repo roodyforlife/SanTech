@@ -1,0 +1,365 @@
+.adminPanel__title {
+    margin: 20px 0;
+}
+
+.adminPanel {
+    width: 100%;
+    box-shadow: 0 0 10px 0px rgba(34, 34, 34, .3);
+}
+
+.adminPanel__header {
+    width: 100%;
+}
+
+.adminPanel__header__menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adminPanel__header__menu__item {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    cursor: pointer;
+}
+
+.adminPanel__products,
+.adminPanel__applications,
+.adminPanel__users,
+.adminPanel__create{
+    display: none;
+}
+
+._active__adminPanel {
+    display: block;
+}
+
+._active__adminMenuItem {
+    border-bottom: 1px solid var(--yellow-color);
+}
+
+.admin__toggleContent {
+    padding: 20px;
+}
+
+.admin__toggleContent__item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+}
+
+.admin__toggleContent__item:not(:last-child) {
+    border-bottom: 1px solid var(--gray-color);
+}
+
+.admin__toggleContent__item__first {
+    display: flex;
+}
+
+.admin__toggleContent__item__image {
+    width: 150px;
+    height: 150px;
+    background: var(--gray-color);
+    overflow: hidden;
+    margin: 0 20px 0 0;
+}
+
+.admin__toggleContent__item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin__toggleContent__item__info {
+    max-width: 50%;
+}
+
+.admin__toggleContent__item__info__title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.admin__toggleContent__item__info__code,
+.admin__applications__info__item__code {
+    color: #a4a4a4;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.admin__toggleContent__item__info__sale {
+    margin-bottom: 10px;
+}
+
+.admin__toggleContent__item__info__bonus {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.admin__toggleContent__item__info__bonus__logo {
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 0;
+}
+
+.admin__toggleContent__item__info__bonus__logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.admin__toggleContent__item__info__bonus__text {}
+
+.admin__toggleContent__item__buttons {}
+
+.admin__toggleContent__item__buttons__delete,
+.admin__toggleContent__item__buttons__redact,
+.admin__toggleContent__item__buttons__view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    height: auto;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.admin__toggleContent__item__buttons__delete {
+    background: var(--red-color);
+    margin-bottom: 10px;
+}
+
+.admin__toggleContent__item__buttons__delete:hover {
+    background: var(--redHover-color);
+}
+
+.admin__toggleContent__item__buttons__redact {
+    background: var(--yellow-color);
+    margin-bottom: 10px;
+}
+
+.admin__toggleContent__item__buttons__redact:hover {
+    background: var(--yellowHover-color);
+}
+
+.admin__toggleContent__item__buttons__view {
+    background: var(--blue-color);
+}
+
+.admin__toggleContent__item__buttons__view:hover {
+    background: var(--blueHover-color);
+}
+
+.sale__style {
+    color: var(--red-color);
+    font-weight: 600;
+}
+
+.admin__toggleContent__item__info__cost {
+    color: var(--red-color);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.admin__toggleContent__item__buttons {}
+
+.admin__toggleContent__item {}
+
+.admin__toggleContent__item__first {}
+
+.admin__users__avatar {
+    margin: 0 20px 0 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.admin__users__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin__users__info {}
+
+.admin__users__info__name,
+.admin__applications__info__item__title {
+    font-weight: 600;
+    margin: 0 0 10px 0;
+}
+
+.admin__users__info__login,
+.admin__users__info__email,
+.admin__users__info__phone {
+    margin: 0 0 10px 0;
+}
+
+.admin__users__info__email {
+    word-wrap: break-word;
+}
+
+.admin__users__info__phone {
+    word-wrap: break-word;
+}
+
+.admin__users__info__bonus {
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+}
+
+.admin__users__info__bonus__logo {
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 0;
+}
+
+.admin__users__info__bonus__logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.admin__users__info__bonus__text {}
+
+.admin__users__info__erase {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.admin__applications__info {
+    margin: 0 10px 0 20px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.admin__applications__info__item {
+    padding: 10px 0;
+}
+
+.admin__applications__info__item:not(:last-child) {
+    border-bottom: 1px solid var(--gray-color);
+}
+
+.admin__applications__info__item__title {
+    word-wrap: break-word;
+}
+
+.admin__applications__info__item__code {
+    word-wrap: break-word;
+}
+
+.admin__applications__info__item__cost {
+    color: black;
+    font-weight: 800;
+}
+
+.admin__toggleContent__item__total {
+    margin: 10px 0;
+}
+
+.chous {
+    margin: 0 auto;
+    max-width: 500px;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.18s ease-in-out;
+    border: 1px solid rgba(34, 34, 34, .3);
+    color: black;
+}
+
+.chous:hover {
+    background: var(--yellow-color);
+    background-position: bottom left;
+}
+
+.adminPanel__create__content {
+    text-align: center;
+}
+
+.adminPanel__create__content__input {
+    margin-bottom: 20px;
+}
+
+.adminPanel__create__content__input input[type="text"],
+.adminPanel__create__content__input input[type="number"],
+.adminPanel__create__content__input textarea {
+    padding: 0 20px;
+    max-width: 500px;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    background: var(--gray-color);
+}
+
+.my {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.adminPanel__create__content__input textarea {
+    padding: 20px;
+    height: 300px;
+}
+
+.adminPanel__create__content__input__button {
+    max-width: 500px;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    background: var(--yellow-color);
+}
+
+.adminPanel__create__content__input__button:hover {
+    background: var(--yellowHover-color);
+}
+
+@media(max-width: 630px) {
+    .admin__toggleContent__item {
+        display: block;
+    }
+
+    .admin__toggleContent__item__buttons {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .admin__toggleContent__item__buttons__delete,
+    .admin__toggleContent__item__buttons__redact,
+    .admin__toggleContent__item__buttons__view {
+        margin: 0;
+    }
+}
+
+@media(max-width: 420px) {
+    .admin__toggleContent__item__buttons {
+        display: block;
+    }
+
+    .admin__toggleContent__item__buttons__delete,
+    .admin__toggleContent__item__buttons__redact,
+    .admin__toggleContent__item__buttons__view {
+        margin-top: 10px;
+    }
+
+    .admin__toggleContent__item__image {
+        width: 75px;
+        height: 75px;
+    }
+}
