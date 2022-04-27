@@ -18,9 +18,12 @@ namespace SanTech.Controllers
         public IActionResult Index()
         {
             var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.Account = user;
-            if(user is not null)
-            ViewBag.IsAdmin = dbUserService.Get(user).IsAdmin;
+            ViewBag.LoggedAccount = user;
+            if (user is not null)
+            {
+                ViewBag.IsAdmin = dbUserService.Get(user).IsAdmin;
+                ViewBag.User = dbUserService.Get(user);
+            }
             return View();
         }
         public string SignOutAccount()

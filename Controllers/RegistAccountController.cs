@@ -22,9 +22,9 @@ namespace SanTech.Controllers
         public IActionResult RegistAccount()
         {
             var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.Account = user;
+            ViewBag.LoggedAccount = user;
             if (user is not null)
-                return RedirectPermanent("../Home/Index");
+                return Redirect("../Home/Index");
             return View();
         }
         [HttpPost]

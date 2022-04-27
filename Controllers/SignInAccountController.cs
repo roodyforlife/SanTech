@@ -22,18 +22,16 @@ namespace SanTech.Controllers
         public IActionResult SignInAccount()
         {
             var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.Account = user;
+            ViewBag.LoggedAccount = user;
             if (user is not null)
-                return RedirectPermanent("../Home/Index");
+                return Redirect("../Home/Index");
             return View();
         }
         [HttpPost]
         public IActionResult SignInAccount(UserLogin user)
         {
-            if (!authorizatService.IsRegistered(user.Login))
-                ModelState.AddModelError("Login", "Такого аккаунта не существует");
-            if(!authorizatService.PasswordIsCorrect(user.Login, user.Password))
-                ModelState.AddModelError("Password", "Неверный пароль");
+            if (!authorizatService.PasswordIsCorrect(user.Login, user.Password) || !authorizatService.IsRegistered(user.Login))
+                ModelState.AddModelError("Password", "Неверный логин или пароль");
             if (ModelState.IsValid)
             {
                 ControllerContext.HttpContext.Session.SetString("Login", user.Login);

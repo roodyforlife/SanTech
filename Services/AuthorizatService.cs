@@ -24,6 +24,8 @@ namespace SanTech.Services
 
         public bool PasswordIsCorrect(string login, string password)
         {
+            if (!IsRegistered(login))
+                return false;
             return dbUserService.Get(login).Password == password;
         }
     }

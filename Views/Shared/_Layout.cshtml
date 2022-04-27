@@ -86,9 +86,9 @@
         </div>
         <div class="header">
             <div class="header__content">
-                <div class="header__logo"><img src="~/img/logo.png" alt=""></div>
+                <a href="../Home/Index"><div class="header__logo"><img src="~/img/logo.png" alt=""></div></a>
                 <div class="header__menu">
-                    <a href="">
+                    <a href="../Home/Index">
                         <div class="header__menu__item">
                             <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 489.075 489.075"
@@ -126,10 +126,10 @@
                         <p class="text1">Профиль</p>
                         <div class="profile__pull__menu">
                             <ul class="text1 profile__pull__menu__list">
-                                @if (ViewBag.Account is not null)
+                                @if (ViewBag.LoggedAccount is not null)
                                 {
                                 <div class="profile__pull__menu__logged">
-                                <li>Матвей Колосс</li>
+                                <li>@ViewBag.User.Name</li>
                                 @if(ViewBag.IsAdmin)
                                 {
                                     <a><li class="text1 pull__menu__list__text">Админ-панель</li></a>
@@ -154,7 +154,7 @@ c346 -4 353 -5 429 -30z" />
                                                 </g>
                                             </svg>
                                         </div>
-                                        <div class="list__bonus__text">Бонусы: 20</div>
+                                        <div class="list__bonus__text">Бонусы: @ViewBag.User.Bonus</div>
                                     </div>
                                 </li>
                                     <li>
