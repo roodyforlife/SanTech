@@ -29,7 +29,8 @@ namespace SanTech.Controllers
                 ViewBag.LoggedAccount = user;
                 ViewBag.IsAdmin = isAdmin;
                 ViewBag.User = dbUserService.Get(user);
-            return View();
+                ViewBag.UserBase = dbUserService.GetAll();
+            return View(dbProductService.GetAll());
         }
         [HttpPost]
         public bool CreateNewProduct(Product product, IFormFile UploadedFile)

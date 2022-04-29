@@ -24,5 +24,10 @@ namespace SanTech.Services
         {
             return db.Users.ToList().FirstOrDefault(x => x.Login == user);
         }
+
+        public IEnumerable<User> GetAll()
+        {
+            return db.Users.ToList();
+        }
     }
 }

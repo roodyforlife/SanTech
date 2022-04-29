@@ -1,4 +1,6 @@
-﻿@{ 
+﻿@model IEnumerable<Product>
+@using SanTech.Models
+@{ 
     Layout = "_Layout";
 }
 <link href="~/css/adminPanel.css" rel="stylesheet" />
@@ -22,28 +24,26 @@
             </div>
         </div>
         <div class="adminPanel__products admin__toggleContent _active__adminPanel" id="Products">
+            @foreach (Product u in Model)
+            {
             <div class="admin__toggleContent__item">
                 <div class="admin__toggleContent__item__first">
-                    <div class="admin__toggleContent__item__image"><img src="img/3070.jpg" alt=""></div>
+                    <div class="admin__toggleContent__item__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt=""></div>
                     <div class="admin__toggleContent__item__info">
-                        <div class="text1 admin__toggleContent__item__info__title">
-                            Какой-то текст с названием
-                            товара
-                        </div>
-                        <div class="text1 admin__toggleContent__item__info__code">Код: 32783248932</div>
+                        <div class="text1 admin__toggleContent__item__info__title">@u.Title</div>
+                        <div class="text1 admin__toggleContent__item__info__code">Код: @u.Id</div>
                         <div class="admin__toggleContent__item__info__bonus">
                             <div class="admin__toggleContent__item__info__bonus__logo">
-                                <img src="img/bonus.svg"
-                                     alt="">
+                                <img src="~/img/bonus.svg" alt="">
                             </div>
                             <div class="text1 admin__toggleContent__item__info__bonus__text">
-                                Бонусы: <span class="sale__style">15</span>
+                                Бонусы: <span class="sale__style">@u.BonusNumber</span>
                             </div>
                         </div>
                         <div class="text1 admin__toggleContent__item__info__sale">
-                            Скидка: <span class="sale__style">15%</span>
+                            Скидка: <span class="sale__style">@u.SaleProcent%</span>
                         </div>
-                        <div class="text1 admin__toggleContent__item__info__cost">3270 грн.</div>
+                        <div class="text1 admin__toggleContent__item__info__cost">@u.Cost.ToString("N0") грн.</div>
                     </div>
                 </div>
                 <div class="admin__toggleContent__item__buttons">
@@ -58,20 +58,23 @@
                     </div>
                 </div>
             </div>
+            }
         </div>
         <div class="adminPanel__users admin__toggleContent" id="Users">
+            @foreach (User u in ViewBag.UserBase)
+            {
             <div class=" admin__toggleContent__item">
                 <div class="admin__toggleContent__item__first">
-                    <div class="admin__users__avatar"><img src="img/default_avatar.png" alt=""></div>
+                    <div class="admin__users__avatar"><img src="~/img/default_avatar.png" alt=""></div>
                     <div class="admin__users__info">
-                        <div class="text1 admin__users__info__name">Владимир</div>
-                        <div class="text1 admin__users__info__login">Login: users10</div>
-                        <div class="text1 admin__users__info__email">Email: kolossmatveyka@gmail.com</div>
-                        <div class="text1 admin__users__info__phone">Телефон: 0665644969</div>
+                        <div class="text1 admin__users__info__name">@u.Name</div>
+                        <div class="text1 admin__users__info__login">Login: @u.Login</div>
+                        <div class="text1 admin__users__info__email">Email: @u.Email</div>
+                        <div class="text1 admin__users__info__phone">Телефон: @u.Phone</div>
                         <div class="admin__users__info__bonus">
-                            <div class="admin__users__info__bonus__logo"><img src="img/bonus.svg" alt=""></div>
+                            <div class="admin__users__info__bonus__logo"><img src="~/img/bonus.svg" alt=""></div>
                             <div class="text1 admin__users__info__bonus__text">
-                                Количество бонусов: <span class="sale__style">1546</span>
+                                Количество бонусов: <span class="sale__style">@u.Bonus</span>
                             </div>
                         </div>
                     </div>
@@ -82,6 +85,7 @@
                     </div>
                 </div>
             </div>
+            }
         </div>
         <div class="adminPanel__applications admin__toggleContent" id="Applications">
             <div class="admin__toggleContent__item">
