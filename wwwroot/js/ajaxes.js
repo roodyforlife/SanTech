@@ -59,3 +59,25 @@ $(document).ready(function () {
         });
     });
 });
+
+function AddToBasket(Id) {
+    var formData = new FormData();
+    formData.append("Id", Id);
+    $.ajax({
+        url: "/Home/AddToBasket",
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+            console.log("added" + Id);
+            if (response) {
+                alert('Успешно')
+            }
+            else {
+                alert('Вы не авторизованы!')
+            }
+        }
+    });
+}

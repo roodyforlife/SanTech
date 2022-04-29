@@ -42,5 +42,9 @@ namespace SanTech.Controllers
             var products = dbProductService.GetProductsInRange(from, count).ToList();
             return View(products);
         }
+        public bool AddToBasket(int Id)
+        {
+            return ControllerContext.HttpContext.Session.GetString("Login") is null ? false : true;
+        }
     }
 }

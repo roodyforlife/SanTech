@@ -32,6 +32,6 @@ namespace SanTech.Models
         public string Phone { get; set; }
         public int Bonus { get; set; }
         public bool IsAdmin { get; set; }
-        public IEnumerable<Basket> Basket { get; set; }
+        public List<Basket> Basket = new();
     }
 }
