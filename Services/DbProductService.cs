@@ -20,9 +20,25 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
+        public void AddThereAre()
+        {
+            for(int i = 0; i < 1000; i++)
+            {
+                db.Products.Add(new Product("Title" + i, "Описание", i, i, 400 + i, new byte[] { 1, 34, 2, 54, 3, 35, 45, }));
+            }
+            db.SaveChanges();
+        }
+
         public IEnumerable<Product> GetAll()
         {
             return db.Products.ToList();
+        }
+
+        public IEnumerable<Product> GetProductsInRange(int from, int count)
+        {
+            if (from < 0 || count <= 0)
+                throw new ArgumentOutOfRangeException();
+            return db.Products.Skip(from).Take(count);
         }
     }
 }

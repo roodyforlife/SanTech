@@ -35,7 +35,7 @@ namespace SanTech.Controllers
         [HttpPost]
         public bool CreateNewProduct(Product product, IFormFile UploadedFile)
         {
-            if (product.Title is null || product.Desc is null || product.Cost == 0 || UploadedFile is null)
+            if (product.Title is null || product.Desc is null || product.Cost == 0 || UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
                 return true;
             product.Image = fileService.FromImageToByte(UploadedFile);
             dbProductService.Add(product);

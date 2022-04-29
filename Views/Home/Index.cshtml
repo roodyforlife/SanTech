@@ -177,7 +177,10 @@
                           fill="#000" />
                 </svg>
             </div>
+            @if (u.SaleProcent != 0)
+            {
             <div class="ads__content__item__saleInfo"><span class="text1">-@u.SaleProcent%</span></div>
+            }
         </div>
         }
     </div>

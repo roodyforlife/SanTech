@@ -14,5 +14,14 @@ namespace SanTech.Models
         public int BonusNumber { get; set; }
         public int Cost { get; set; }
         public byte[] Image { get; set; }
+        public Product(string Title, string Desc, int SaleProcent, int BonusNumber, int Cost, byte[] Image)
+        {
+            this.Title = Title;
+            this.Desc = Desc;
+            this.SaleProcent = SaleProcent;
+            this.BonusNumber = BonusNumber;
+            this.Cost = Cost;
+            this.Image = Image;
+        }
     }
 }
