@@ -20,6 +20,7 @@ namespace SanTech.Controllers
         }
         public IActionResult Index()
         {
+            //dbProductService.AddThereAre();
             var user = ControllerContext.HttpContext.Session.GetString("Login");
             ViewBag.LoggedAccount = user;
             if (user is not null)

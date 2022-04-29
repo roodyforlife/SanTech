@@ -5,7 +5,7 @@ $(window).resize(function () {
     firstLoads();
     $(window).resize(function () { });
 });
-$(document).ready(function(){
+$(document).ready(function () {
     firstLoads();
 });
 function firstLoads() {

@@ -22,7 +22,7 @@ namespace SanTech.Services
 
         public void AddThereAre()
         {
-            for(int i = 0; i < 1000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 db.Products.Add(new Product("Title" + i, "Описание", i, i, 400 + i, new byte[] { 1, 34, 2, 54, 3, 35, 45, }));
             }

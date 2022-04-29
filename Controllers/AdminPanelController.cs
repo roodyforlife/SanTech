@@ -20,6 +20,7 @@ namespace SanTech.Controllers
             this.fileService = fileService;
             this.dbUserService = dbUserService;
         }
+        [HttpGet]
         public IActionResult AdminPanel()
         {
             var user = ControllerContext.HttpContext.Session.GetString("Login");
@@ -33,7 +34,7 @@ namespace SanTech.Controllers
             return View(dbProductService.GetAll());
         }
         [HttpPost]
-        public bool CreateNewProduct(Product product, IFormFile UploadedFile)
+        public bool AdminPanel(Product product, IFormFile UploadedFile)
         {
             if (product.Title is null || product.Desc is null || product.Cost == 0 || UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
                 return true;
