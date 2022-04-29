@@ -152,13 +152,13 @@
             <div class="text1 ads__content__item__code">Код: @u.Id</div>
             @if (u.SaleProcent == 0)
             {
-            <div class="text1 ads__content__item__cost">@u.Cost.ToString("N") грн.</div>
+            <div class="text1 ads__content__item__cost">@u.Cost.ToString("N0") грн.</div>
             }
             else
             {
             <div class="ads__content__item__sale">
                 <div class="text1 item__sale__old">@u.Cost</div>
-                <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent))/100;}@saleCost грн.</div>
+                <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent))/100;}@saleCost.ToString("N0") грн.</div>
             </div>
             }
             <div class="ads__content__item__basket">

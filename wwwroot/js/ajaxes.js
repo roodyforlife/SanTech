@@ -21,12 +21,21 @@
     $(".adminPanel__create__content__input__button").click(function () {
         let uploadedFile = $('#myfile');
         var formData = new FormData();
-        formData.append('uploadedFile', uploadedFile[0].files[0])
-        formData.append("title", $('#Title').val());
-        formData.append("Desc", $('#Desc').val());
-        formData.append("SaleProcent", $('#SaleProcent').val());
-        formData.append("BonusNumber", $('#BonusNumber').val());
-        formData.append("Cost", $('#Cost').val());
+        var product = {
+            Title: $('#Title').val(),
+            Desc: $('#Desc').val(),
+            SaleProcent: $('#SaleProcent').val(),
+            BonusNumber: $('#BonusNumber').val(),
+            Cost: $('#Cost').val()
+        };
+        var blob = new Blob(product)
+        formData.append("product", blob);
+        // formData.append('UploadedFile', uploadedFile[0].files[0])
+        // formData.append("Title", $('#Title').val());
+        // formData.append("Desc", $('#Desc').val());
+        // formData.append("SaleProcent", $('#SaleProcent').val());
+        // formData.append("BonusNumber", $('#BonusNumber').val());
+        // formData.append("Cost", $('#Cost').val());
         $.ajax({
             url: "/AdminPanel/AdminPanel12",
             type: 'POST',
@@ -35,9 +44,14 @@
             processData: false,
             data: formData,
             success: function (response) {
-                console.log($('.admin__create__input').val(null));
-                $('#myfile').prev().text('Выберите фотографию');
-                alert("Товар добавлен");
+                if (response) {
+                    alert("Ошибка при введении данных. Возможно вы не заполнили какое-то поле.")
+                }
+                else {
+                    console.log($('.admin__create__input').val(null));
+                    $('#myfile').prev().text('Выберите фотографию');
+                    alert("Товар добавлен");
+                }
             }
         });
     });
