@@ -32,13 +32,12 @@ namespace SanTech.Controllers
                 ViewBag.UserBase = dbUserService.GetAll();
             return View(dbProductService.GetAll());
         }
-        [HttpPost]
-        public void AddNewProduct(CreateProduct product)
+        public bool AddNewProduct(CreateProduct product)
         {
-            /*if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
-                return true;*/
-            ///dbProductService.Add(product);
-            //return false;
+            if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
+                return true;
+            dbProductService.Add(product);
+            return false;
         }
     }
 }

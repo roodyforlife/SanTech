@@ -23,16 +23,21 @@ $(document).ready(function () {
     $(".adminPanel__create__content__input__button").click(function () {
         var formData = new FormData()
         let uploadedFile = $('#myfile');
+        //formData.append('UploadedFile', uploadedFile[0].files[0])
         formData.append('UploadedFile', uploadedFile[0].files[0])
-
-        var product = {
-            Title: $('#Title').val(),
-            Desc: $('#Desc').val(),
-            SaleProcent: $('#SaleProcent').val(),
-            BonusNumber: $('#BonusNumber').val(),
-            Cost: $('#Cost').val(),
-            UploadedFile: formData
-        }
+    formData.append("Title", $('#Title').val());
+    formData.append("Desc", $('#Desc').val());
+    formData.append("SaleProcent", $('#SaleProcent').val());
+    formData.append("BonusNumber", $('#BonusNumber').val());
+    formData.append("Cost", $('#Cost').val());
+        // var product = {
+        //     Title: $('#Title').val(),
+        //     Desc: $('#Desc').val(),
+        //     SaleProcent: $('#SaleProcent').val(),
+        //     BonusNumber: $('#BonusNumber').val(),
+        //     Cost: $('#Cost').val(),
+        //     UploadedFile: formData
+        // }
 
         $.ajax({
             url: "/AdminPanel/AddNewProduct",
@@ -40,7 +45,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            data: product,
+            data: formData,
             success: function (response) {
                 if (response) {
                     alert("Ошибка при введении данных. Возможно вы не заполнили какое-то поле.")
