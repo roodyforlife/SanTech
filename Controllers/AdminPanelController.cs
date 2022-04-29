@@ -20,9 +20,8 @@ namespace SanTech.Controllers
             this.fileService = fileService;
             this.dbUserService = dbUserService;
         }
-        [HttpGet]
         public IActionResult AdminPanel()
-        {
+            {
             var user = ControllerContext.HttpContext.Session.GetString("Login");
             if(user is null || !dbUserService.Get(user).IsAdmin)
                 return Redirect("../Home/Index");
@@ -34,13 +33,12 @@ namespace SanTech.Controllers
             return View(dbProductService.GetAll());
         }
         [HttpPost]
-        public bool AdminPanel(Product product, IFormFile UploadedFile)
+        public void AddNewProduct(CreateProduct product)
         {
-            if (product.Title is null || product.Desc is null || product.Cost == 0 || UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
-                return true;
-            product.Image = fileService.FromImageToByte(UploadedFile);
-            dbProductService.Add(product);
-            return false;
+            /*if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
+                return true;*/
+            ///dbProductService.Add(product);
+            //return false;
         }
     }
 }

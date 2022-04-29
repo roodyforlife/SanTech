@@ -18,36 +18,39 @@ $(document).ready(function () {
                 }, 3000);
             }
         });
-        // Add New Product
-        $('.adminPanel__create__content__input__button').click(function () {
-            let uploadedFile = $('#myfile');
-            var formData = new FormData();
-            formData.append('UploadedFile', uploadedFile[0].files[0])
-            formData.append("Title", $('#Title').val());
-            formData.append("Desc", $('#Desc').val());
-            formData.append("SaleProcent", $('#SaleProcent').val());
-            formData.append("BonusNumber", $('#BonusNumber').val());
-            formData.append("Cost", $('#Cost').val());
-            $.ajax({
-                url: "AdminPanel/AdminPanel",
-                type: 'POST',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: formData,
-                success: function (response) {
-                    if (response) {
-                        console.log(response)
-                        alert("Ошибка при введении данных. Возможно вы не заполнили какое-то поле.")
-                    }
-                    else {
-                        console.log($('.admin__create__input').val(null));
-                        $('#myfile').prev().text('Выберите фотографию');
-                        alert("Товар добавлен");
-                    }
+    });
+    // Add New Product
+    $(".adminPanel__create__content__input__button").click(function () {
+        var formData = new FormData()
+        let uploadedFile = $('#myfile');
+        formData.append('UploadedFile', uploadedFile[0].files[0])
+
+        var product = {
+            Title: $('#Title').val(),
+            Desc: $('#Desc').val(),
+            SaleProcent: $('#SaleProcent').val(),
+            BonusNumber: $('#BonusNumber').val(),
+            Cost: $('#Cost').val(),
+            UploadedFile: formData
+        }
+
+        $.ajax({
+            url: "/AdminPanel/AddNewProduct",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: product,
+            success: function (response) {
+                if (response) {
+                    alert("Ошибка при введении данных. Возможно вы не заполнили какое-то поле.")
                 }
-            });
+                else {
+                    console.log($('.admin__create__input').val(null));
+                    $('#myfile').prev().text('Выберите фотографию');
+                    alert("Товар добавлен");
+                }
+            }
         });
     });
-    });
-    
+});

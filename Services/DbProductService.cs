@@ -10,12 +10,16 @@ namespace SanTech.Services
     public class DbProductService : IDbProductService
     {
         private readonly ApplicationContext db;
-        public DbProductService(ApplicationContext db)
+        private readonly IFileService fileService;
+        public DbProductService(ApplicationContext db, IFileService fileService)
         {
             this.db = db;
+            this.fileService = fileService;
         }
-        public void Add(Product product)
+        public void Add(CreateProduct createProduct)
         {
+            var image = fileService.FromImageToByte(createProduct.UploadedFile);
+            Product product = new Product(createProduct.Title, createProduct.Desc, createProduct.SaleProcent, createProduct.BonusNumber, createProduct.Cost, image);
             db.Products.Add(product);
             db.SaveChanges();
         }
