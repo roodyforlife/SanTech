@@ -30,7 +30,7 @@ namespace SanTech.Controllers
                 ViewBag.IsAdmin = isAdmin;
                 ViewBag.User = dbUserService.Get(user);
                 ViewBag.UserBase = dbUserService.GetAll();
-            return View(dbProductService.GetAll());
+            return View(dbProductService.GetProductsInRange(0, 20).ToList());
         }
         public bool AddNewProduct(CreateProduct product)
         {
@@ -38,6 +38,12 @@ namespace SanTech.Controllers
                 return true;
             dbProductService.Add(product);
             return false;
+        }
+        [HttpPost]
+        public ViewResult GetAdditionalProducts(int from, int count)
+        {
+            var products = dbProductService.GetProductsInRange(from, count).ToList();
+            return View(products);
         }
     }
 }
