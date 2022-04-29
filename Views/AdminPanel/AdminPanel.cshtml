@@ -1,0 +1,181 @@
+﻿@model SanTech.Models.Product
+@{ 
+    Layout = "_Layout";
+}
+<link href="~/css/adminPanel.css" rel="stylesheet" />
+<div class="content">
+    <div class="text2 adminPanel__title">Админ-панель</div>
+    <div class="adminPanel">
+        <div class="adminPanel__header">
+            <div class="adminPanel__header__menu">
+                <div admin-type="Products" class="adminPanel__header__menu__item _active__adminMenuItem">
+                    <span class="text1">Товары</span>
+                </div>
+                <div admin-type="Users" class="adminPanel__header__menu__item">
+                    <span class="text1">Пользователи</span>
+                </div>
+                <div admin-type="Applications" class="adminPanel__header__menu__item">
+                    <span class="text1">Заявки</span>
+                </div>
+                <div admin-type="Create" class="adminPanel__header__menu__item">
+                    <span class="text1">Создать</span>
+                </div>
+            </div>
+        </div>
+        <div class="adminPanel__products admin__toggleContent _active__adminPanel" id="Products">
+            <div class="admin__toggleContent__item">
+                <div class="admin__toggleContent__item__first">
+                    <div class="admin__toggleContent__item__image"><img src="img/3070.jpg" alt=""></div>
+                    <div class="admin__toggleContent__item__info">
+                        <div class="text1 admin__toggleContent__item__info__title">
+                            Какой-то текст с названием
+                            товара
+                        </div>
+                        <div class="text1 admin__toggleContent__item__info__code">Код: 32783248932</div>
+                        <div class="admin__toggleContent__item__info__bonus">
+                            <div class="admin__toggleContent__item__info__bonus__logo">
+                                <img src="img/bonus.svg"
+                                     alt="">
+                            </div>
+                            <div class="text1 admin__toggleContent__item__info__bonus__text">
+                                Бонусы: <span class="sale__style">15</span>
+                            </div>
+                        </div>
+                        <div class="text1 admin__toggleContent__item__info__sale">
+                            Скидка: <span class="sale__style">15%</span>
+                        </div>
+                        <div class="text1 admin__toggleContent__item__info__cost">3270 грн.</div>
+                    </div>
+                </div>
+                <div class="admin__toggleContent__item__buttons">
+                    <div class="admin__toggleContent__item__buttons__delete">
+                        <span class="text1">Удалить</span>
+                    </div>
+                    <div class="admin__toggleContent__item__buttons__redact">
+                        <span class="text1">Редактировать</span>
+                    </div>
+                    <div class="admin__toggleContent__item__buttons__view">
+                        <span class="text1">Просмотреть</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="adminPanel__users admin__toggleContent" id="Users">
+            <div class=" admin__toggleContent__item">
+                <div class="admin__toggleContent__item__first">
+                    <div class="admin__users__avatar"><img src="img/default_avatar.png" alt=""></div>
+                    <div class="admin__users__info">
+                        <div class="text1 admin__users__info__name">Владимир</div>
+                        <div class="text1 admin__users__info__login">Login: users10</div>
+                        <div class="text1 admin__users__info__email">Email: kolossmatveyka@gmail.com</div>
+                        <div class="text1 admin__users__info__phone">Телефон: 0665644969</div>
+                        <div class="admin__users__info__bonus">
+                            <div class="admin__users__info__bonus__logo"><img src="img/bonus.svg" alt=""></div>
+                            <div class="text1 admin__users__info__bonus__text">
+                                Количество бонусов: <span class="sale__style">1546</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin__toggleContent__item__buttons">
+                    <div class="admin__toggleContent__item__buttons__delete">
+                        <span class="text1">Удалить</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="adminPanel__applications admin__toggleContent" id="Applications">
+            <div class="admin__toggleContent__item">
+                <div class="admin__toggleContent__item__first">
+                    <div class="admin__users__avatar"><img src="img/default_avatar.png" alt=""></div>
+                    <div class="admin__users__info">
+                        <div class="text1 admin__users__info__name">Владимир</div>
+                        <div class="text1 admin__users__info__email">Email: kolossmatveyka@gmail.com</div>
+                        <div class="text1 admin__users__info__phone">Телефон: 0665644969</div>
+                        <div class="admin__users__info__bonus">
+                            <div class="admin__users__info__bonus__logo"><img src="img/bonus.svg" alt=""></div>
+                            <div class="text1 admin__users__info__bonus__text">
+                                Количество бонусов: <span class="sale__style">1546</span>
+                            </div>
+                        </div>
+                        <div class="text1 admin__users__info__erase">Списует бонусы</div>
+                        <div class="text1 sale__style admin__toggleContent__item__total">43578 грн.</div>
+                    </div>
+                    <div class="admin__applications__info _scroll">
+                        <div class="admin__applications__info__item">
+                            <div class="text1 admin__applications__info__item__title">
+                                Lorem ipsum dolor sit amet
+                                consectetur adipisicing elit. Voluptas, a!
+                            </div>
+                            <div class="text1 admin__applications__info__item__code">Код: 435435235</div>
+                            <div class="text1 admin__applications__info__item__cost">23434 грн</div>
+                        </div>
+                        <div class="admin__applications__info__item">
+                            <div class="text1 admin__applications__info__item__title">
+                                Lorem ipsum dolor sit amet
+                                consectetur adipisicing elit. Voluptas, a!
+                            </div>
+                            <div class="text1 admin__applications__info__item__code">Код: 435435235</div>
+                            <div class="text1 admin__applications__info__item__cost">23434 грн</div>
+                        </div>
+                        <div class="admin__applications__info__item">
+                            <div class="text1 admin__applications__info__item__title">
+                                Lorem ipsum dolor sit amet
+                                consectetur adipisicing elit. Voluptas, a!
+                            </div>
+                            <div class="text1 admin__applications__info__item__code">Код: 435435235</div>
+                            <div class="text1 admin__applications__info__item__cost">23434 грн</div>
+                        </div>
+                        <div class="admin__applications__info__item">
+                            <div class="text1 admin__applications__info__item__title">
+                                Lorem ipsum dolor sit amet
+                                consectetur adipisicing elit. Voluptas, a!
+                            </div>
+                            <div class="text1 admin__applications__info__item__code">Код: 435435235</div>
+                            <div class="text1 admin__applications__info__item__cost">23434 грн</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin__toggleContent__item__buttons">
+                    <div class="admin__toggleContent__item__buttons__delete">
+                        <span class="text1">Деактивировать</span>
+                    </div>
+                    <div class="admin__toggleContent__item__buttons__redact">
+                        <span class="text1">Подтвердить</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="adminPanel__create admin__toggleContent" id="Create">
+            <div class="adminPanel__create__content">
+                <div class="adminPanel__create__content__input">
+                    <label for="myfile" class="text1 chous">Выберите фотографию</label>
+                    <input type="file" name="uploadedFile" class="my admin__create__input" id="myfile" />
+                </div>
+                <div class="adminPanel__create__content__input">
+                    <p class="text1">Название товара</p>
+                    <input type="text" id="Title" class="text1 admin__create__input">
+                </div>
+                <div class="adminPanel__create__content__input">
+                    <p class="text1">Описание товара</p>
+                    <textarea id="Desc" class="text1 admin__create__input"></textarea>
+                </div>
+                <div class="adminPanel__create__content__input">
+                    <p class="text1">Процент скидки</p>
+                    <input type="number" id="SaleProcent" class="text1 admin__create__input">
+                </div>
+                <div class="adminPanel__create__content__input">
+                    <p class="text1">Количество бонусов за товар</p>
+                    <input type="number" id="BonusNumber" class="text1 admin__create__input">
+                </div>
+                <div class="adminPanel__create__content__input">
+                    <p class="text1">Цена товара</p>
+                    <input type="number" id="Cost" class="text1 admin__create__input">
+                </div>
+                <div class="adminPanel__create__content__input">
+                    <button type="submit" class="text1 adminPanel__create__content__input__button">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -44,9 +44,9 @@ $(document).ready(function () {
     $(`#${$(this).attr("admin-type")}`).addClass('_active__adminPanel');
   });
   // input file
-  $('.my').change(function () {
-    if ($(this).val() != '') $(this).prev().text('Выбрано фотографий: ' + $(this)[0].files.length);
-    else $(this).prev().text('Выберите фотографию');
+  $('input[type="file"]').change(function () {
+    if ($('#myfile').val() != '') $('#myfile').prev().text('Выбрано фотографий: ' + $('#myfile')[0].files.length);
+      else $('#myfile').prev().text('Выберите фотографию');
   });
 });
 function choice(evt, choice) {

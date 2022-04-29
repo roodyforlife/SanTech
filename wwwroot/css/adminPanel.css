@@ -11,6 +11,7 @@
     width: 100%;
 }
 
+
 .adminPanel__header__menu {
     display: flex;
     justify-content: space-between;
@@ -29,7 +30,7 @@
 .adminPanel__products,
 .adminPanel__applications,
 .adminPanel__users,
-.adminPanel__create{
+.adminPanel__create {
     display: none;
 }
 

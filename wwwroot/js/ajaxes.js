@@ -1,21 +1,45 @@
 ﻿$(document).ready(function () {
-  $('.exit__button').click(function(){
-      var formData = new FormData();
-      $.ajax({
-          url: "/Home/SignOutAccount",
-          type: 'POST',
-          cache: false,
-          contentType: false,
-          processData: false,
-          data: formData,
-          success: function (response) {
-$('.profile__pull__menu__logged').css("display", "none");
-$('.profile__pull__menu__list').html(response);
-    $('.exit__alert').addClass('_active__exit__alert');
-    setTimeout(function(){ 
-      $('.exit__alert').removeClass('_active__exit__alert');
-    }, 3000);
-          }
-      });
-   });
+    $('.exit__button').click(function () {
+        var formData = new FormData();
+        $.ajax({
+            url: "/Home/SignOutAccount",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (response) {
+                $('.profile__pull__menu__logged').css("display", "none");
+                $('.profile__pull__menu__list').html(response);
+                $('.exit__alert').addClass('_active__exit__alert');
+                setTimeout(function () {
+                    $('.exit__alert').removeClass('_active__exit__alert');
+                }, 3000);
+            }
+        });
+    });
+    $(".adminPanel__create__content__input__button").click(function () {
+        let uploadedFile = $('#myfile');
+        var formData = new FormData();
+        formData.append('uploadedFile', uploadedFile[0].files[0])
+        formData.append("title", $('#Title').val());
+        formData.append("Desc", $('#Desc').val());
+        formData.append("SaleProcent", $('#SaleProcent').val());
+        formData.append("BonusNumber", $('#BonusNumber').val());
+        formData.append("Cost", $('#Cost').val());
+        $.ajax({
+            url: "/AdminPanel/AdminPanel12",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (response) {
+                console.log($('.admin__create__input').val(null));
+                $('#myfile').prev().text('Выберите фотографию');
+                alert("Товар добавлен");
+            }
+        });
+    });
 });
+

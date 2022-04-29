@@ -1,4 +1,6 @@
-﻿@{
+﻿@using SanTech.Models
+@model IEnumerable<Product>
+@{
     Layout = "_Layout";
 }
 <div class="content__search">
@@ -138,20 +140,27 @@
 <div class="ads">
     <div class="text2 ads__title">Товары</div>
     <div class="ads__content">
+        @foreach (Product u in Model)
+        {
         <div class="ads__content__item">
             <div class="ads__content__item__image">
-                <img src="img/3070.jpg" alt="">
+                <img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt="">
             </div>
             <div class="text1 ads__content__item__title">
-                Lorem ipsum dolor sit, amet consectetur adipisicing
-                elit. Repudiandae, aspernatur.
+                @u.Title
             </div>
-            <div class="text1 ads__content__item__code">Код: 43768347657834</div>
-            <!--<div class="text1 ads__content__item__cost">10 000</div>-->
+            <div class="text1 ads__content__item__code">Код: @u.Id</div>
+            @if (u.SaleProcent == 0)
+            {
+            <div class="text1 ads__content__item__cost">@u.Cost.ToString("N") грн.</div>
+            }
+            else
+            {
             <div class="ads__content__item__sale">
-                <div class="text1 item__sale__old">3242</div>
-                <div class="text1 item__sale__new">33244</div>
+                <div class="text1 item__sale__old">@u.Cost</div>
+                <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent))/100;}@saleCost грн.</div>
             </div>
+            }
             <div class="ads__content__item__basket">
                 <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -168,7 +177,8 @@
                           fill="#000" />
                 </svg>
             </div>
-            <div class="ads__content__item__saleInfo"><span class="text1">-15%</span></div>
+            <div class="ads__content__item__saleInfo"><span class="text1">-@u.SaleProcent%</span></div>
         </div>
+        }
     </div>
 </div>

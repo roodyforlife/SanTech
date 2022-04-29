@@ -31,6 +31,8 @@ namespace SanTech
             services.AddSession();
             services.AddScoped<IDbUserService, DbUserService>();
             services.AddScoped<IAuthorizatService, AuthorizatService>();
+            services.AddScoped<IDbProductService, DbProductService>();
+            services.AddScoped<IFileService, FileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

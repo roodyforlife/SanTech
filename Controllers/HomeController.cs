@@ -11,9 +11,11 @@ namespace SanTech.Controllers
     public class HomeController : Controller
     {
         private readonly IDbUserService dbUserService;
-        public HomeController(IDbUserService dbUserService)
+        private readonly IDbProductService dbProductService;
+        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService)
         {
             this.dbUserService = dbUserService;
+            this.dbProductService = dbProductService;
         }
         public IActionResult Index()
         {
@@ -24,7 +26,8 @@ namespace SanTech.Controllers
                 ViewBag.IsAdmin = dbUserService.Get(user).IsAdmin;
                 ViewBag.User = dbUserService.Get(user);
             }
-            return View();
+            var products = dbProductService.GetAll();
+            return View(products);
         }
         public string SignOutAccount()
         {
