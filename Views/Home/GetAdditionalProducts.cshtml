@@ -21,7 +21,7 @@
             else
             {
                 <div class="ads__content__item__sale">
-                    <div class="text1 item__sale__old">@u.Cost</div>
+                    <div class="text1 item__sale__old">@u.Cost.ToString("N0") грн.</div>
                     <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
                 </div>
             }
