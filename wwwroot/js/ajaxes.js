@@ -13,6 +13,7 @@ $(document).ready(function () {
                 $('.profile__pull__menu__logged').css("display", "none");
                 $('.profile__pull__menu__list').html(response);
                 $('.exit__alert').addClass('_active__exit__alert');
+                $('.menu__item__count').remove();
                 setTimeout(function () {
                     $('.exit__alert').removeClass('_active__exit__alert');
                 }, 3000);
@@ -73,10 +74,7 @@ function AddToBasket(Id, userLogin) {
             data: formData,
             success: function (response) {
                 if (response) {
-                    console.log(response)
-                    if (response)
-                        if (response)
-                            $('.menu__item__count').html(parseInt($('.menu__item__count').html()) + 1);
+                    $('.menu__item__count').html(parseInt($('.menu__item__count').html()) + 1);
                 }
             }
         });
@@ -98,6 +96,7 @@ function DeleteFromBasket(basketId, userLogin) {
         processData: false,
         data: formData,
         success: function (response) {
+            LoadBasket();
         }
     });
 }

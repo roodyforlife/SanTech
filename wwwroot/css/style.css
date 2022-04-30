@@ -146,6 +146,7 @@ body._lock {
     top: -20%;
     right: -20%;
     overflow: hidden;
+    font-size: 14px;
 }
 
 .content {
@@ -540,7 +541,6 @@ input[type="range"]:active::-webkit-slider-thumb{
     height: 75%;
     background: #fff;
     border-radius: 5px;
-    overflow: auto;
 }
 
 ._scroll::-webkit-scrollbar {

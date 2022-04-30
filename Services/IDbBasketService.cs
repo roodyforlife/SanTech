@@ -27,7 +27,7 @@ namespace SanTech.Services
             var user = dbUserService.Get(login);
             if (GetByProductIdAndUserId(productId, user.Id) is null)
             {
-                Basket basket = new Basket { ProductId = productId, UserId = user.Id };
+                Basket basket = new Basket { ProductId = productId, UserId = user.Id, NumberOfProduct = 1};
                 Add(basket);
                 return true;
             }
@@ -49,6 +49,11 @@ namespace SanTech.Services
         public Basket GetByProductIdAndUserId(int productId, int userId)
         {
             return db.Baskets.Include(x => x.Product).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
+        }
+
+        public IEnumerable<Basket> GetByUserLogin(string userLogin)
+        {
+            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Login == userLogin);
         }
     }
 }

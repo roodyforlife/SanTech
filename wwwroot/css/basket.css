@@ -8,8 +8,7 @@
 .basket__content__orders {
     margin: 20px 0;
     overflow-y: auto;
-    height: 65%;
-    border-bottom: 1px solid var(--gray-color);
+    height: 90%;
 }
 
 .basket__content__item {
@@ -158,6 +157,21 @@
 }
 .basket__content__exit::after{
     transform: rotate(-45deg);
+}
+.basket__content__orders__error {
+    text-align: center;
+    height: 100%;
+    padding: 10% 0;
+}
+
+.basket__content__orders__error__button {
+    display: block;
+    margin: 20px auto 0 auto;
+    width: 100px;
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 1% 10px;
 }
 @media(max-width: 740px)
 {

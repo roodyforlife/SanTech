@@ -1,6 +1,9 @@
 $(document).ready(function () {
   //Открытие блока корзины
   $("#backet, #exit__basket").click(function () {
+    if (!$('.basket').hasClass('_active')) {
+      LoadBasket();
+    }
     $(".basket").toggleClass("_active");
     $("body").toggleClass("_lock");
   });
@@ -46,7 +49,7 @@ $(document).ready(function () {
   // input file
   $('input[type="file"]').change(function () {
     if ($('#myfile').val() != '') $('#myfile').prev().text('Выбрано фотографий: ' + $('#myfile')[0].files.length);
-      else $('#myfile').prev().text('Выберите фотографию');
+    else $('#myfile').prev().text('Выберите фотографию');
   });
 });
 function choice(evt, choice) {
@@ -77,4 +80,19 @@ function CountButton(int, id) {
     value += int;
     $(`#input__count${id}`).val(value);
   }
+}
+function LoadBasket()
+{
+  var formData = new FormData();
+      $.ajax({
+        url: "/Home/LoadBasket",
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+          $('.basket__content__orders').html(response);
+        }
+      });
 }

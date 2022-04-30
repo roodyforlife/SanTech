@@ -13,5 +13,6 @@ namespace SanTech.Models
         public Product Product { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }
+        public int NumberOfProduct { get; set; }
     }
 }
