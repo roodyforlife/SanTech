@@ -51,6 +51,51 @@ $(document).ready(function () {
     if ($('#myfile').val() != '') $('#myfile').prev().text('Выбрано фотографий: ' + $('#myfile')[0].files.length);
     else $('#myfile').prev().text('Выберите фотографию');
   });
+  //Количество товара
+  $('body').on('click', '.number-minus, .number-plus', function () {
+    var $row = $(this).closest('.number');
+    var $input = $row.find('.basket__content__item__amount__input');
+    var step = $row.data('step');
+    var val = parseFloat($input.val());
+    if ($(this).hasClass('number-minus')) {
+      val -= step;
+    } else {
+      val += step;
+    }
+    $input.val(val);
+    $input.change();
+    return false;
+  });
+  //Количество товара
+  $('body').on('change', '.basket__content__item__amount__input', function () {
+    var $input = $(this);
+    var $row = $input.closest('.number');
+    var step = $row.data('step');
+    var min = parseInt($row.data('min'));
+    var max = parseInt($row.data('max'));
+    var val = parseFloat($input.val());
+    if (isNaN(val)) {
+      val = step;
+    } else if (min && val < min) {
+      val = min;
+    } else if (max && val > max) {
+      val = max;
+    }
+    var formData = new FormData();
+    formData.append("basketId", $input.attr("id"));
+    formData.append("inputValue", val);
+    $.ajax({
+      url: "/Home/ChangeNumberOfBasket",
+      type: 'POST',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: formData,
+      success: function (response) {
+        $input.val(val);
+      }
+    });
+  });
 });
 function choice(evt, choice) {
   let tabcontent = document.querySelectorAll(".tabcontent");
@@ -79,20 +124,20 @@ function CountButton(int, id) {
   if (value == 1 && int > 0 || value > 1) {
     value += int;
     $(`#input__count${id}`).val(value);
+
   }
 }
-function LoadBasket()
-{
+function LoadBasket() {
   var formData = new FormData();
-      $.ajax({
-        url: "/Home/LoadBasket",
-        type: 'POST',
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: formData,
-        success: function (response) {
-          $('.basket__content__orders').html(response);
-        }
-      });
+  $.ajax({
+    url: "/Home/LoadBasket",
+    type: 'POST',
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: formData,
+    success: function (response) {
+      $('.basket__content__orders').html(response);
+    }
+  });
 }

@@ -10,7 +10,7 @@
 {
     <div class="basket__content__item" id="@u.Id">
         <div class="basket__content__item__first">
-            <div class="basket__content__item__trash" onclick="DeleteFromBasket(@u.Id, '@u.User.Login')">
+            <div class="basket__content__item__trash" onclick="DeleteFromBasket(@u.Id)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px"
                      viewBox="0 0 612.08 612.08" style="enable-background:new 0 0 612.08 612.08;"
@@ -35,11 +35,11 @@
         </div>
         <div class="basket__content__item__second">
             <div class="basket__content__item__amount">
-                <div class="basket__content__item__amount__count">
-                    <div class="text1 amount__count__button" onclick="CountButton(-1, 1)">-</div>
-                    <input readonly min="1" value="1" type="number" id="input__count1" class="text1 basket__content__item__amount__input">
-                    <div class="text1 amount__count__button" onclick="CountButton(1, 1)">+</div>
-                </div>
+               <div class="basket__content__item__amount__count number" data-step="1" data-min="1" data-max="100">
+                    <div class="text1 amount__count__button number-minus">-</div>
+                        <input name="count" value="@u.NumberOfProduct" type="number" id="@u.Id" class="text1 basket__content__item__amount__input">
+                    <div class="text1 amount__count__button number-plus">+</div>
+               </div>
                 <div class="text1 basket__content__item__amount__cost">@{var totalCost = u.NumberOfProduct * saleCost;}@totalCost.ToString("N0") грн.</div>
 
 </div>

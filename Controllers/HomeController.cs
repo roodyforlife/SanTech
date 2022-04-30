@@ -49,9 +49,9 @@ namespace SanTech.Controllers
             var user = ControllerContext.HttpContext.Session.GetString("Login");
             return dbBasketService.AddProductToBasket(user, Id);
         }
-        public void DeleteFromBasket(int basketId, string userLogin)
+        public void DeleteFromBasket(int basketId)
         {
-            dbBasketService.DeleteFromBasket(basketId, userLogin);
+            dbBasketService.DeleteFromBasket(basketId);
         }
         public ViewResult LoadBasket()
         {
@@ -59,8 +59,12 @@ namespace SanTech.Controllers
             ViewBag.User = user;
             var model = dbBasketService.GetByUserLogin(user);
             ViewBag.TotalCost = model.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent)) / 100);
-
             return View(model);
+        }
+        public void ChangeNumberOfBasket(int basketId, int inputValue)
+        {
+            var user = ControllerContext.HttpContext.Session.GetString("Login");
+            dbBasketService.ChangeNumberOfBasket(basketId, user, inputValue);
         }
     }
 }

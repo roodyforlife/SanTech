@@ -82,12 +82,11 @@ function AddToBasket(Id, userLogin) {
         alert('Вы не авторизованы!')
     }
 }
-function DeleteFromBasket(basketId, userLogin) {
+function DeleteFromBasket(basketId) {
     $(`#${basketId}`).remove();
     $('.menu__item__count').html(parseInt($('.menu__item__count').html()) - 1);
     var formData = new FormData();
     formData.append("basketId", basketId);
-    formData.append("userLogin", userLogin);
     $.ajax({
         url: "/Home/DeleteFromBasket",
         type: 'POST',
