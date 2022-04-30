@@ -62,5 +62,10 @@ namespace SanTech.Services
             basket.NumberOfProduct = inputValue;
             db.SaveChanges();
         }
+        public void DeleteAllBasket(string userLogin)
+        {
+            db.Baskets.RemoveRange(GetByUserLogin(userLogin));
+            db.SaveChanges();
+        }
     }
 }

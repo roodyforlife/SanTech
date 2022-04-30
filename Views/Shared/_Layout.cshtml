@@ -27,6 +27,10 @@
             </div>
             <div id="exit__basket" class="basket__content__exit"></div>
             <div class="text2 basket__content__title">Корзина</div>
+            @if (ViewBag.User is not null)
+            {
+                <div class="text1 basket__content__clear _unselectable">Очистить корзину</div>
+            }
             <div class="basket__content__orders _scroll">
             </div>
             

@@ -31,6 +31,7 @@ namespace SanTech.Controllers
                 ViewBag.User = dbUserService.Get(user);
             }
             var products = dbProductService.GetProductsInRange(0, 20).ToList();
+            ViewBag.MaxCost = dbProductService.GetAll().Max(x => x.Cost * (100 - x.SaleProcent) / 100);
             return View(products);
         }
         public string SignOutAccount()
@@ -63,8 +64,12 @@ namespace SanTech.Controllers
         }
         public void ChangeNumberOfBasket(int basketId, int inputValue)
         {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
             dbBasketService.ChangeNumberOfBasket(basketId, inputValue);
+        }
+        public void DeleteAllBasket()
+        {
+            var user = ControllerContext.HttpContext.Session.GetString("Login");
+            dbBasketService.DeleteAllBasket(user);
         }
     }
 }

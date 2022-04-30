@@ -5,6 +5,16 @@
 }
 .basket__content__title {
 }
+.basket__content__clear {
+    max-width: 150px;
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+    .basket__content__clear:hover {
+        color: var(--darkGray-color);
+    }
 .basket__content__orders {
     margin: 20px 0;
     overflow-y: auto;
@@ -88,7 +98,7 @@
 .basket__content__item__amount__count{
     display: flex;
 }
-.amount__count__button{
+.amount__count__button {
     width: 30px;
     height: 30px;
     display: flex;
@@ -97,6 +107,8 @@
     background: var(--gray-color);
     border: 1px solid var(--darkGray-color);
     cursor: pointer;
+    font-size: 25px;
+    font-weight: 700;
 }
 .amount__count__button:hover{
     background: var(--grayHover-color);

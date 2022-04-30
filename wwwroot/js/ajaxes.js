@@ -59,6 +59,21 @@ $(document).ready(function () {
             }
         });
     });
+    $('.basket__content__clear').click(function () {
+        console.log('sdf')
+        $.ajax({
+            url: "/Home/DeleteAllBasket",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: false,
+            success: function (response) {
+                $('.menu__item__count').html(0);
+                LoadBasket();
+            }
+        });
+    });
 });
 
 function AddToBasket(Id, userLogin) {
