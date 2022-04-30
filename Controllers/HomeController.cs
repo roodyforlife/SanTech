@@ -61,10 +61,11 @@ namespace SanTech.Controllers
             ViewBag.TotalCost = model.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent)) / 100);
             return View(model);
         }
-        public void ChangeNumberOfBasket(int basketId, int inputValue)
+        public int ChangeNumberOfBasket(int basketId, int inputValue)
         {
             var user = ControllerContext.HttpContext.Session.GetString("Login");
-            dbBasketService.ChangeNumberOfBasket(basketId, user, inputValue);
+            dbBasketService.ChangeNumberOfBasket(basketId, inputValue);
+            return dbBasketService.Get(basketId).Product.Cost * (100 - dbBasketService.Get(basketId).Product.SaleProcent) / 100;
         }
     }
 }
