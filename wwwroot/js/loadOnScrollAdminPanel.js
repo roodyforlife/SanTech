@@ -20,8 +20,8 @@ window.addEventListener('scroll', onScroll)
 
 function onScroll() {
     if ($('#Products').hasClass('_active__adminPanel')) {
-    let nowScroll = window.scrollY
-    let maxScroll = document.documentElement.scrollHeight - window.innerHeight
+        let nowScroll = window.scrollY
+        let maxScroll = document.documentElement.scrollHeight - window.innerHeight
         if (maxScroll - nowScroll < 200) {
             console.log("scrolled")
             window.removeEventListener('scroll', onScroll)
