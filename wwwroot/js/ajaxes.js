@@ -25,11 +25,11 @@ $(document).ready(function () {
         let uploadedFile = $('#myfile');
         //formData.append('UploadedFile', uploadedFile[0].files[0])
         formData.append('UploadedFile', uploadedFile[0].files[0])
-    formData.append("Title", $('#Title').val());
-    formData.append("Desc", $('#Desc').val());
-    formData.append("SaleProcent", $('#SaleProcent').val());
-    formData.append("BonusNumber", $('#BonusNumber').val());
-    formData.append("Cost", $('#Cost').val());
+        formData.append("Title", $('#Title').val());
+        formData.append("Desc", $('#Desc').val());
+        formData.append("SaleProcent", $('#SaleProcent').val());
+        formData.append("BonusNumber", $('#BonusNumber').val());
+        formData.append("Cost", $('#Cost').val());
         // var product = {
         //     Title: $('#Title').val(),
         //     Desc: $('#Desc').val(),
@@ -60,24 +60,44 @@ $(document).ready(function () {
     });
 });
 
-function AddToBasket(Id) {
+function AddToBasket(Id, userLogin) {
+    if (userLogin.length > 0) {
+        var formData = new FormData();
+        formData.append("Id", Id);
+        $.ajax({
+            url: "/Home/AddToBasket",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (response) {
+                if (response) {
+                    console.log(response)
+                    if (response)
+                        if (response)
+                            $('.menu__item__count').html(parseInt($('.menu__item__count').html()) + 1);
+                }
+            }
+        });
+    } else {
+        alert('Вы не авторизованы!')
+    }
+}
+function DeleteFromBasket(basketId, userLogin) {
+    $(`#${basketId}`).remove();
+    $('.menu__item__count').html(parseInt($('.menu__item__count').html()) - 1);
     var formData = new FormData();
-    formData.append("Id", Id);
+    formData.append("basketId", basketId);
+    formData.append("userLogin", userLogin);
     $.ajax({
-        url: "/Home/AddToBasket",
+        url: "/Home/DeleteFromBasket",
         type: 'POST',
         cache: false,
         contentType: false,
         processData: false,
         data: formData,
         success: function (response) {
-            console.log("added" + Id);
-            if (response) {
-                alert('Успешно')
-            }
-            else {
-                alert('Вы не авторизованы!')
-            }
         }
     });
 }

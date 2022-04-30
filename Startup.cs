@@ -33,6 +33,7 @@ namespace SanTech
             services.AddScoped<IAuthorizatService, AuthorizatService>();
             services.AddScoped<IDbProductService, DbProductService>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IDbBasketService, DbBasketService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -33,6 +33,11 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
+        public Product Get(int Id)
+        {
+            return db.Products.ToList().FirstOrDefault(x => x.Id == Id);
+        }
+
         public IEnumerable<Product> GetAll()
         {
             return db.Products.ToList();

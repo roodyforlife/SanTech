@@ -13,10 +13,12 @@ namespace SanTech.Controllers
     {
         private readonly IDbUserService dbUserService;
         private readonly IDbProductService dbProductService;
-        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService)
+        private readonly IDbBasketService dbBasketService;
+        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService, IDbBasketService dbBasketService)
         {
             this.dbUserService = dbUserService;
             this.dbProductService = dbProductService;
+            this.dbBasketService = dbBasketService;
         }
         public IActionResult Index()
         {
@@ -44,7 +46,12 @@ namespace SanTech.Controllers
         }
         public bool AddToBasket(int Id)
         {
-            return ControllerContext.HttpContext.Session.GetString("Login") is null ? false : true;
+            var user = ControllerContext.HttpContext.Session.GetString("Login");
+            return dbBasketService.AddProductToBasket(user, Id);
+        }
+        public void DeleteFromBasket(int basketId, string userLogin)
+        {
+            dbBasketService.DeleteFromBasket(basketId, userLogin);
         }
     }
 }

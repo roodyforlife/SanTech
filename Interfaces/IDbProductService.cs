@@ -11,6 +11,7 @@ namespace SanTech.Interfaces
         public void Add(CreateProduct product);
         public IEnumerable<Product> GetAll();
         public IEnumerable<Product> GetProductsInRange(int from, int count);
+        public Product Get(int Id);
         public void AddThereAre();
     }
 }

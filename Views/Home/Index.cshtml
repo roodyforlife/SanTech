@@ -162,7 +162,7 @@
                         <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
                     </div>
                 }
-                <div class="ads__content__item__basket" onclick="AddToBasket(@u.Id)">
+                <div class="ads__content__item__basket" onclick="AddToBasket(@u.Id, '@ViewBag.User')">
                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke="black" fill="black" fill-rule="evenodd" clip-rule="evenodd"

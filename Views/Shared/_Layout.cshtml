@@ -23,9 +23,13 @@
             <div id="exit__basket" class="basket__content__exit"></div>
             <div class="text2 basket__content__title">Корзина</div>
             <div class="basket__content__orders _scroll">
-                <div class="basket__content__item">
+                @if (ViewBag.User is not null)
+                {
+                @foreach (Basket u in ViewBag.User.Basket)
+                {
+                <div class="basket__content__item"  id="@u.Id">
                     <div class="basket__content__item__first">
-                        <div class="basket__content__item__trash">
+                        <div class="basket__content__item__trash" onclick="DeleteFromBasket(@u.Id, '@u.User.Login')">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px"
                                  viewBox="0 0 612.08 612.08" style="enable-background:new 0 0 612.08 612.08;"
@@ -39,10 +43,10 @@
 		s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z" />
                                 </g>
                         </div>
-                        <div class="basket__content__item__image"><img src="img/3070.jpg" alt=""></div>
+                        <div class="basket__content__item__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Product.Image))" alt=""></div>
                         <div class="basket__content__item__info">
                             <div class="text1 basket__content__item__info__title">
-                                Какой-то текст с названием товара
+                                @u.Product.Title
                             </div>
                             <div class="text1 basket__content__item__info__cost">3 034 грн.</div>
 
@@ -59,6 +63,8 @@
                         </div>
                     </div>
                 </div>
+                }
+                }
             </div>
             <div class="basket__content__total">
                 <div class="basket__content__total__info">
@@ -181,7 +187,10 @@ c346 -4 353 -5 429 -30z" />
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M2.91675 5.83337V11.6667H13.9511L17.1867 26.8887L17.1978 26.8864L18.5582 33.2883L18.5209 33.2961L22.0926 50.0993C19.4017 51.1721 17.5001 53.8015 17.5001 56.875C17.5001 60.9021 20.7647 64.1667 24.7917 64.1667C28.8188 64.1667 32.0834 60.9021 32.0834 56.875C32.0834 56.3757 32.0332 55.8881 31.9376 55.4167H49.7292C49.6336 55.8881 49.5834 56.3757 49.5834 56.875C49.5834 60.9021 52.848 64.1667 56.8751 64.1667C60.9021 64.1667 64.1667 60.9021 64.1667 56.875C64.1667 52.848 60.9021 49.5834 56.8751 49.5834H27.9466L26.7067 43.75H60.8855L67.0834 14.5834H20.5348L18.6959 5.93231V5.83337H2.91675ZM56.8751 55.4167C56.0698 55.4167 55.4167 56.0698 55.4167 56.875C55.4167 57.6803 56.0698 58.3334 56.8751 58.3334C57.6804 58.3334 58.3334 57.6803 58.3334 56.875C58.3334 56.0698 57.6804 55.4167 56.8751 55.4167ZM23.3334 56.875C23.3334 56.0698 23.9863 55.4167 24.7917 55.4167C25.5972 55.4167 26.2501 56.0698 26.2501 56.875C26.2501 57.6803 25.5972 58.3334 24.7917 58.3334C23.9863 58.3334 23.3334 57.6803 23.3334 56.875ZM21.7866 20.4167L25.5053 37.9167H56.1614L59.8801 20.4167H21.7866Z"
                                   fill="#fff" />
-                            <div class="menu__item__count"><span>3</span></div>
+                            @if (ViewBag.User is not null)
+                            {
+                            <div class="menu__item__count">@ViewBag.User.Basket.Count</div>
+                            }
                         </svg>
                         <p class="text1">Корзина</p>
                     </div>

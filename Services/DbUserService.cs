@@ -1,4 +1,5 @@
-﻿using SanTech.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using SanTech.Interfaces;
 using SanTech.Models;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace SanTech.Services
 
         public User Get(string user)
         {
-            return db.Users.ToList().FirstOrDefault(x => x.Login == user);
+            return db.Users.Include(x => x.Basket).ToList().FirstOrDefault(x => x.Login == user);
         }
 
         public IEnumerable<User> GetAll()
