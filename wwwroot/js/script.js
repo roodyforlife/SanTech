@@ -92,7 +92,11 @@ $(document).ready(function () {
       processData: false,
       data: formData,
       success: function (response) {
-        $input.val(val);
+        console.log(response)
+        LoadBasket();
+        // $input.closest('.basket__content__item__amount').children('.basket__content__item__amount__cost').html(`${(response * val).toLocaleString()} грн.`);
+        // $input.closest('.basket__content__orders').children('.basket__content__total__info__cost').html(`${(response * val).toLocaleString()} грн.`)
+        // $input.val(val);
       }
     });
   });
@@ -129,6 +133,10 @@ function CountButton(int, id) {
 }
 function LoadBasket() {
   var formData = new FormData();
+  $('.basket__content__orders__load').css('display', 'flex');
+  setTimeout(function () {
+    $('.basket__content__orders__load').css('display', 'none');
+  }, 700);
   $.ajax({
     url: "/Home/LoadBasket",
     type: 'POST',
