@@ -5,6 +5,8 @@ using SanTech.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace SanTech.Controllers
@@ -13,10 +15,12 @@ namespace SanTech.Controllers
     {
         private readonly IAuthorizatService authorizatService;
         private readonly IDbUserService dbUserService;
-        public RegistAccountController(IAuthorizatService authorizatService, IDbUserService dbUserService)
+        private readonly IEmailService emailService;
+        public RegistAccountController(IAuthorizatService authorizatService, IDbUserService dbUserService, IEmailService emailService)
         {
             this.authorizatService = authorizatService;
             this.dbUserService = dbUserService;
+            this.emailService = emailService;
         }
         [HttpGet]
         public IActionResult RegistAccount()
@@ -31,9 +35,8 @@ namespace SanTech.Controllers
         public IActionResult RegistAccount(User user)
         {
             if(authorizatService.IsRegistered(user.Login))
-            {
                 ModelState.AddModelError("Login", "Такой аккаунт уже существует");
-            }
+            emailService.RegisterSend(user.Email, user.Name + "! Вы успешно зарегистрировались. Удачных покупок!");
             if (ModelState.IsValid)
             {
                 dbUserService.Add(user);

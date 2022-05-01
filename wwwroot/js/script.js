@@ -100,6 +100,33 @@ $(document).ready(function () {
       }
     });
   });
+  $(document).ready(function()
+{
+//Verification
+$('.content__confirm__form__content__input').on("keydown", function(e)
+{
+  var inputs = $('.content__confirm__form__content__input');
+  if (e.key === "Backspace" && inputs[inputs.index(e.target) - 1] != undefined) {
+    $(this).val('');
+    inputs[inputs.index(e.target) - 1].focus();
+  }
+  if(Number.isInteger(parseInt(e.key)))
+  {
+  $(this).val(e.key)
+  if(inputs[inputs.index(e.target) + 1] == undefined)
+  {
+    let sum = '';
+    $.each(inputs, function(index, value){
+      sum += value.value;
+    })
+  }
+  else{
+  inputs[inputs.index(e.target) + 1].focus();
+  }
+  e.preventDefault();
+  }
+});
+});
 });
 function choice(evt, choice) {
   let tabcontent = document.querySelectorAll(".tabcontent");
@@ -134,9 +161,6 @@ function CountButton(int, id) {
 function LoadBasket() {
   var formData = new FormData();
   $('.basket__content__orders__load').css('display', 'flex');
-  setTimeout(function () {
-    $('.basket__content__orders__load').css('display', 'none');
-  }, 700);
   $.ajax({
     url: "/Home/LoadBasket",
     type: 'POST',
@@ -146,6 +170,9 @@ function LoadBasket() {
     data: formData,
     success: function (response) {
       $('.basket__content__orders').html(response);
+      setTimeout(function () {
+        $('.basket__content__orders__load').css('display', 'none');
+      }, 700);
     }
   });
 }
