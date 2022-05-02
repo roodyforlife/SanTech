@@ -7,6 +7,6 @@ namespace SanTech.Interfaces
 {
     public interface IEmailService
     {
-        public void RegisterSend(string email, string message, string filePath);
+        public void RegisterSend(string email, string userName);
     }
 }

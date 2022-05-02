@@ -1,0 +1,115 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/nullStyle.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link href="~/css/basket.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/createOrder.css">
+    <title>SanTech</title>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <div class="container">
+        <div class="confirm">
+            <div class="confirm__first">
+                <div class="text2 confirm__title__text">Контактные данные</div>
+                <div class="confirm__first__contacts">
+                    <div class="contacts__input__block">
+                        <p class="text1 confirm__input__text">Имя</p>
+                        <input type="text" class="text1 confirm__input" value="@ViewBag.User.Name" />
+                    </div>
+                    <div class="contacts__input__block">
+                        <p class="text1 confirm__input__text">Фамилия</p>
+                        <input type="text" class="text1 confirm__input" />
+                    </div>
+                    <div class="contacts__input__block">
+                        <p class="text1 confirm__input__text">Телефон</p>
+                        <input type="tel" class="text1 confirm__input" value="@ViewBag.User.Phone" />
+                    </div>
+                    <div class="contacts__input__block">
+                        <p class="text1 confirm__input__text">Населённый пункт</p>
+                        <input type="text" class="text1 confirm__input" />
+                    </div>
+                    <div class="contacts__input__block">
+                        <p class="text1 confirm__input__text">Email-адрес</p>
+                        <input type="email" class="text1 confirm__input" value="@ViewBag.User.Email" />
+                    </div>
+                </div>
+                <div class="text2 confirm__title__text">Доставка</div>
+                <div class="confirm__first__delivery">
+                    <div class="delivery__radio__block">
+                        <input type="radio" name="post" id="NP" class="text1 confirm__radio" value="NovaPoshta">
+                        <label for="NP">
+                            <svg width="14" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M11.219 3.849c.042-.012.098.013.153.081l2.518 2.31c.147.138.147.347 0 .45l-2.518 2.345c-.056.068-.111.085-.153.064-.043-.02-.07-.081-.07-.169V4c0-.086.027-.138.07-.15zM6.91 0h.179l.171.067L9.852 2.48c.111.138.073.242-.112.242H8.666c-.185 0-.332.138-.332.311v1.792c0 .174-.149.311-.372.311H6.075c-.185 0-.334-.137-.334-.31V3.033c0-.173-.147-.31-.335-.31H4.26c-.185 0-.223-.105-.112-.243L6.741.067 6.911 0zM2.851 3.797c.047.021.076.082.076.17v5.032c0 .088-.03.14-.076.157-.045.017-.11 0-.185-.052L.11 6.69c-.147-.103-.147-.312 0-.45l2.556-2.378c.076-.069.14-.086.185-.065zM6.075 7.758h1.887c.223 0 .372.137.372.31v1.897c0 .207.148.345.332.345h1.001c.185 0 .258.102.111.206L7.26 12.895a.385.385 0 0 1-.26.104.38.38 0 0 1-.259-.104l-2.518-2.379c-.149-.104-.075-.206.11-.206h1.074c.187 0 .334-.138.334-.345V8.069c0-.174.15-.311.334-.311z"
+                                      fill="#ED1C24" />
+                            </svg>
+                            <span class="text1">Отеделение Новой Почты</span>
+                        </label>
+                    </div>
+                    <div class="delivery__radio__block">
+                        <input type="radio" name="post" id="UKR" class="text1 confirm__radio" value="UkrPoshta">
+                        <label for="UKR">
+                            <svg width="11" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0)">
+                                    <path d="M10.547 9.17L5.231 7.987c-1.583-.367-2.573-1.92-2.206-3.5a2.92 2.92 0 0 1 3.507-2.2c1.583.366 2.573 1.918 2.206 3.498-.17.79-.65 1.44-1.301 1.835-.028 0-.028.028-.028.056s.028.057.056.085l2.375.536c.057 0 .114 0 .142-.057a5.048 5.048 0 0 0 1.046-3.075A5.115 5.115 0 0 0 6.193.056h-.227a5.61 5.61 0 0 0-3.45 1.072 5.839 5.839 0 0 0-1.442 8.156L5.797 16c.028.028.056.056.085.056.028 0 .056-.028.084-.056l4.638-6.604c0-.028.028-.028.028-.056 0-.113-.056-.141-.085-.17z"
+                                          fill="#FFC629" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0">
+                                        <path fill="#fff" d="M0 0h11v16H0z" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <span class="text1">Отделение Укрпочты</span>
+                        </label>
+                    </div>
+                    <p class="text1 confirm__input__text">Город доставки</p>
+                    <input type="text" class="text1 confirm__input" />
+                    <p class="text1 confirm__input__text">Адрес отделения</p>
+                    <input type="text" class="text1 confirm__input" />
+                </div>
+            </div>
+            <div class="confirm__second">
+                <div class="text2 confirm__title__text">Итого</div>
+                <div class="confirm__second__total">
+                    <div class="total__block">
+                        <span class="text1">Стоимость доставки:</span>
+                        <span class="text1 total__block__cost">60 грн.</span>
+                    </div>
+                    <div class="total__block">
+                        <span class="text1">К оплате:</span>
+                        <span class="text1 total__block__finalCost">@ViewBag.Basket.ToString("N0") грн.</span>
+                    </div>
+                    <div class="total__button">
+                        <a href="" class="button1 basket__content__total__info__button">
+                            <div class="basket__content__total__info__button__basket">
+                                <svg width="30" height="30" viewBox="0 0 70 70" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M2.91675 5.83337V11.6667H13.9511L17.1867 26.8887L17.1978 26.8864L18.5582 33.2883L18.5209 33.2961L22.0926 50.0993C19.4017 51.1721 17.5001 53.8015 17.5001 56.875C17.5001 60.9021 20.7647 64.1667 24.7917 64.1667C28.8188 64.1667 32.0834 60.9021 32.0834 56.875C32.0834 56.3757 32.0332 55.8881 31.9376 55.4167H49.7292C49.6336 55.8881 49.5834 56.3757 49.5834 56.875C49.5834 60.9021 52.848 64.1667 56.8751 64.1667C60.9021 64.1667 64.1667 60.9021 64.1667 56.875C64.1667 52.848 60.9021 49.5834 56.8751 49.5834H27.9466L26.7067 43.75H60.8855L67.0834 14.5834H20.5348L18.6959 5.93231V5.83337H2.91675ZM56.8751 55.4167C56.0698 55.4167 55.4167 56.0698 55.4167 56.875C55.4167 57.6803 56.0698 58.3334 56.8751 58.3334C57.6804 58.3334 58.3334 57.6803 58.3334 56.875C58.3334 56.0698 57.6804 55.4167 56.8751 55.4167ZM23.3334 56.875C23.3334 56.0698 23.9863 55.4167 24.7917 55.4167C25.5972 55.4167 26.2501 56.0698 26.2501 56.875C26.2501 57.6803 25.5972 58.3334 24.7917 58.3334C23.9863 58.3334 23.3334 57.6803 23.3334 56.875ZM21.7866 20.4167L25.5053 37.9167H56.1614L59.8801 20.4167H21.7866Z"
+                                          fill="#000" />
+                                </svg>
+                            </div>
+                            <span class="text1 basket__content__total__info__button__text">Оформить заказ</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

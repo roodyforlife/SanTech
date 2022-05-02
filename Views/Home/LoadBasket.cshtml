@@ -53,7 +53,7 @@
                     <div class="text2 basket__content__total__info__title">
                         Итог: <span class="basket__content__total__info__cost">@ViewBag.TotalCost.ToString("N0") грн.</span>
                     </div>
-                    <a href="" class="button1 basket__content__total__info__button">
+                    <a asp-controller="CreateOrder" asp-action="CreateOrder" class="button1 basket__content__total__info__button">
                         <div class="basket__content__total__info__button__basket">
                             <svg width="30" height="30" viewBox="0 0 70 70" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">

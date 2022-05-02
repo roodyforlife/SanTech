@@ -1,0 +1,153 @@
+
+<HTML>
+<head>
+    <title>
+        ПРивет всем
+    </title>
+    <body>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                border: 0;
+            }
+
+                *,
+                *:before,
+                *:after {
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                }
+
+            :focus,
+            :active {
+                outline: none;
+            }
+
+            a:focus,
+            a:active {
+                outline: none;
+            }
+
+            nav,
+            footer,
+            header,
+            aside {
+                display: block;
+            }
+
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                font-size: 100%;
+                line-height: 1;
+                font-size: 14px;
+                -ms-text-size-adjust: 100%;
+                -moz-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+            }
+
+            input,
+            button,
+            textarea {
+                font-family: inherit;
+            }
+
+                input::-ms-clear {
+                    display: none;
+                }
+
+            button {
+                cursor: pointer;
+            }
+
+                button::-moz-focus-inner {
+                    padding: 0;
+                    border: 0;
+                }
+
+            a,
+            a:visited {
+                text-decoration: none;
+            }
+
+                a:hover {
+                    text-decoration: none;
+                }
+
+            ul li {
+                list-style: none;
+            }
+
+            img {
+                vertical-align: top;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-size: inherit;
+                font-weight: 400;
+            }
+
+            input[type="number"]::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+            }
+
+            textarea {
+                resize: none;
+                /* Запрещаем изменять размер */
+            }
+
+            .container {
+                width: 700px;
+            }
+
+            .header {
+                width: 100%;
+                height: 75px;
+                background: #222;
+                padding: 10px 20px;
+            }
+
+            .header__menu__logo {
+                height: 60px;
+                width: auto;
+                font-size: 50px;
+                color: #ffc244;
+                font-weight: 800;
+                font-family: 'Mulish', sans-serif;
+            }
+
+                .header__menu__logo span {
+                    color: #fff;
+                }
+
+
+            .content {
+                width: 100%;
+                padding: 20px 10px;
+                font-family: 'Mulish', sans-serif;
+                font-size: 25px;
+                font-weight: 500;
+                color: black;
+                word-wrap: break-word;
+            }
+        </style>
+        <div class="container">
+            <div class="header">
+                <div class="header__menu__logo">
+                    San<span>T</span>ech
+                </div>
+            </div>
+            <div class="content">
+                Здравствуйте, {userName}! Вы успешно зарегистрировались на сайте
+                <span>SanTech</span>. Запишите ваш пароль, удачных покупок и хорошего настроения!<br /><br />Администрация
+            </div>
+        </div>

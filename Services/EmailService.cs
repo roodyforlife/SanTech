@@ -17,24 +17,24 @@ namespace SanTech.Services
     {
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly IConfiguration configuration;
-        private readonly IWebHostEnvironment webHostEnvironment;
-        public EmailService(IHostingEnvironment hostingEnvironment, IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
+        public EmailService(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
             this.hostingEnvironment = hostingEnvironment;
             this.configuration = configuration;
-            this.webHostEnvironment = webHostEnvironment;
         }
         //Email sender with file and html styles
-        public void RegisterSend(string email, string message, string filePath)
+        public void RegisterSend(string email, string userName)
         {
             try
             {
+                string path = Path.Combine(this.hostingEnvironment.WebRootPath, "Files", "emailSendRegistration.html");
                 string body = string.Empty;
-                using (StreamReader reader = new StreamReader("~/Files/test.docx"))
+                using (StreamReader reader = new StreamReader(path))
                 {
                     body = reader.ReadToEnd();
                 }
-                var senderEmail = new MailAddress(configuration["Smtp:FromAddress"], "SanTech");
+                body = body.Replace("{userName}", userName);
+                var senderEmail = new MailAddress(configuration["Smtp:FromAddress"], configuration["Smtp:Sender"]);
                 var receiverEmail = new MailAddress(email, "Receiver");
                 var smtp = new SmtpClient
                 {
@@ -46,13 +46,12 @@ namespace SanTech.Services
                     Credentials = new NetworkCredential(senderEmail.Address, configuration["Smtp:Password"])
                 };
                 var mess = new MailMessage(senderEmail, receiverEmail);
-                mess.Subject = "Administration";
+                mess.Subject = configuration["Smtp:Subject"];
                 //mess.Body = message;
-                string path = Path.Combine(this.hostingEnvironment.WebRootPath, "Files", $"{filePath}");
-                Attachment data = new Attachment(path, MediaTypeNames.Application.Octet);
-                mess.Attachments.Add(data);
+                //Attachment data = new Attachment(path, MediaTypeNames.Application.Octet);
+                //mess.Attachments.Add(data);
                 mess.IsBodyHtml = true;
-                mess.Body = message;
+                mess.Body = body;
                 {
                     smtp.Send(mess);
                 }
