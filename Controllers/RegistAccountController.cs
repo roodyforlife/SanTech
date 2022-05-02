@@ -36,7 +36,7 @@ namespace SanTech.Controllers
         {
             if(authorizatService.IsRegistered(user.Login))
                 ModelState.AddModelError("Login", "Такой аккаунт уже существует");
-            emailService.RegisterSend(user.Email, user.Name + "! Вы успешно зарегистрировались. Удачных покупок!");
+            emailService.RegisterSend(user.Email, user.Name + "! Вы успешно зарегистрировались. Удачных покупок!", "test.docx");
             if (ModelState.IsValid)
             {
                 dbUserService.Add(user);
