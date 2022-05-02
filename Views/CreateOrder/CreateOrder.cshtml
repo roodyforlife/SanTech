@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@model SanTech.Models.Application
+@{ 
     Layout = null;
 }
 <!DOCTYPE html>
@@ -13,42 +14,51 @@
     <link rel="stylesheet" href="~/css/style.css">
     <link href="~/css/basket.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/createOrder.css">
+    <link href="~/css/validation.css" rel="stylesheet" />
     <title>SanTech</title>
 </head>
 
 <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/script.js"></script>
+    
+    <script src="~/js/script.js"></script>
     <div class="container">
+            <form asp-controller="CreateOrder" asp-action="CreateOrder" method="post" enctype="multipart/form-data">
         <div class="confirm">
             <div class="confirm__first">
                 <div class="text2 confirm__title__text">Контактные данные</div>
                 <div class="confirm__first__contacts">
                     <div class="contacts__input__block">
                         <p class="text1 confirm__input__text">Имя</p>
-                        <input type="text" class="text1 confirm__input" value="@ViewBag.User.Name" />
+                        <input type="text" asp-for="Name" class="text1 confirm__input" value="@ViewBag.User.Name" />
+                         <span asp-validation-for="Name"></span>
                     </div>
                     <div class="contacts__input__block">
                         <p class="text1 confirm__input__text">Фамилия</p>
-                        <input type="text" class="text1 confirm__input" />
+                        <input type="text" asp-for="SecondName" class="text1 confirm__input" />
+                         <span asp-validation-for="SecondName"></span>
                     </div>
                     <div class="contacts__input__block">
                         <p class="text1 confirm__input__text">Телефон</p>
-                        <input type="tel" class="text1 confirm__input" value="@ViewBag.User.Phone" />
+                        <input type="tel" asp-for="Phone" class="text1 confirm__input" value="@ViewBag.User.Phone" />
+                         <span asp-validation-for="Phone"></span>
                     </div>
                     <div class="contacts__input__block">
                         <p class="text1 confirm__input__text">Населённый пункт</p>
-                        <input type="text" class="text1 confirm__input" />
+                        <input type="text" asp-for="City" class="text1 confirm__input" />
+                         <span asp-validation-for="City"></span>
                     </div>
                     <div class="contacts__input__block">
                         <p class="text1 confirm__input__text">Email-адрес</p>
-                        <input type="email" class="text1 confirm__input" value="@ViewBag.User.Email" />
+                        <input type="email" asp-for="Email" class="text1 confirm__input" value="@ViewBag.User.Email" />
+                         <span asp-validation-for="Email"></span>
                     </div>
                 </div>
                 <div class="text2 confirm__title__text">Доставка</div>
                 <div class="confirm__first__delivery">
+                         <span asp-validation-for="Delivery"></span>
                     <div class="delivery__radio__block">
-                        <input type="radio" name="post" id="NP" class="text1 confirm__radio" value="NovaPoshta">
+                        <input type="radio" asp-for="Delivery" name="Delivery" id="NP" class="text1 confirm__radio" value="NovaPoshta">
                         <label for="NP">
                             <svg width="14" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -59,7 +69,7 @@
                         </label>
                     </div>
                     <div class="delivery__radio__block">
-                        <input type="radio" name="post" id="UKR" class="text1 confirm__radio" value="UkrPoshta">
+                        <input type="radio" asp-for="Delivery" name="Delivery" id="UKR" class="text1 confirm__radio" value="UkrPoshta">
                         <label for="UKR">
                             <svg width="11" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0)">
@@ -75,10 +85,9 @@
                             <span class="text1">Отделение Укрпочты</span>
                         </label>
                     </div>
-                    <p class="text1 confirm__input__text">Город доставки</p>
-                    <input type="text" class="text1 confirm__input" />
                     <p class="text1 confirm__input__text">Адрес отделения</p>
-                    <input type="text" class="text1 confirm__input" />
+                    <input type="text" asp-for="Address" class="text1 confirm__input" />
+                         <span asp-validation-for="Address"></span>
                 </div>
             </div>
             <div class="confirm__second">
@@ -90,10 +99,36 @@
                     </div>
                     <div class="total__block">
                         <span class="text1">К оплате:</span>
-                        <span class="text1 total__block__finalCost">@ViewBag.Basket.ToString("N0") грн.</span>
+                        <span class="text1 total__block__finalCost _active__finalCost">@ViewBag.BasketCost.ToString("N0") грн.</span>
+                        <span class="text1 total__block__finalCost">@{var finalCostBonus = ViewBag.BasketCost - ViewBag.User.Bonus;} @finalCostBonus.ToString("N0") грн.</span>
                     </div>
+                    <div class="total__block" style="justify-content: left;">
+                        <div class="list__bonus__logo">
+                            <svg viewBox="0 0 350 350" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g transform="translate(0.000000,256.000000) scale(0.100000,-0.100000)"
+                                    stroke="none">
+                                    <path d="M1165 2549 c-373 -34 -730 -245 -936 -552 -79 -118 -120 -200 -157
+-317 -106 -330 -81 -672 69 -973 88 -176 254 -367 412 -475 433 -297 993 -304
+1429 -19 123 80 285 242 365 365 244 372 276 828 88 1247 -103 231 -341 473
+-583 594 -204 102 -460 151 -687 130z m427 -501 c192 -64 276 -168 286 -353 8
+-152 -38 -253 -148 -324 l-57 -37 46 -22 c118 -54 189 -160 198 -298 17 -258
+-118 -430 -376 -478 -65 -13 -154 -16 -407 -16 l-324 0 0 781 0 781 353 -4
+c346 -4 353 -5 429 -30z" />
+                                    <path d="M1080 1639 l0 -211 188 4 c183 3 188 4 234 31 57 33 83 68 99 131 16
+64 -2 145 -41 190 -48 54 -105 66 -306 66 l-174 0 0 -211z" />
+                                    <path d="M1082 983 l3 -238 175 0 c197 0 247 9 305 58 53 43 75 97 75 182 0
+85 -22 139 -75 182 -54 45 -102 53 -305 53 l-180 0 2 -237z" />
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="text1">Бонусы на вашем аккаунте: </span>
+                        <span class="text1 total__block__bonus">@ViewBag.User.Bonus.ToString("N0")</span>
+                    </div>
+                    <input type="checkbox" class="custom-checkbox" id="happy" asp-for="WriteOffBonuses" name="WriteOffBonuses">
+                    <label for="happy" class="text1">Списать бонусы?</label>
                     <div class="total__button">
-                        <a href="" class="button1 basket__content__total__info__button">
+                        <button type="submit" class="button1 basket__content__total__info__button">
                             <div class="basket__content__total__info__button__basket">
                                 <svg width="30" height="30" viewBox="0 0 70 70" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -103,13 +138,16 @@
                                 </svg>
                             </div>
                             <span class="text1 basket__content__total__info__button__text">Оформить заказ</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
 
             </div>
         </div>
+       </form>
     </div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </body>
 
 </html>

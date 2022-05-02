@@ -31,7 +31,9 @@ namespace SanTech.Controllers
                 ViewBag.User = dbUserService.Get(user);
             }
             var products = dbProductService.GetProductsInRange(0, 20).ToList();
-            ViewBag.MaxCost = dbProductService.GetAll().Max(x => x.Cost * (100 - x.SaleProcent) / 100);
+            var allProducts = dbProductService.GetAll();
+            if(allProducts.Count() > 0)
+            ViewBag.MaxCost = allProducts.Max(x => x.Cost * (100 - x.SaleProcent) / 100);
             return View(products);
         }
         public string SignOutAccount()
