@@ -100,7 +100,7 @@
                     <div class="total__block">
                         <span class="text1">К оплате:</span>
                         <span class="text1 total__block__finalCost _active__finalCost">@ViewBag.BasketCost.ToString("N0") грн.</span>
-                        <span class="text1 total__block__finalCost">@{var finalCostBonus = ViewBag.BasketCost - ViewBag.User.Bonus;} @finalCostBonus.ToString("N0") грн.</span>
+                        <span class="text1 total__block__finalCost">@{int finalCostBonus = ViewBag.BasketCost - ViewBag.User.Bonus; finalCostBonus = finalCostBonus < 0 ? 0 : finalCostBonus;} @finalCostBonus.ToString("N0") грн.</span>
                     </div>
                     <div class="total__block" style="justify-content: left;">
                         <div class="list__bonus__logo">

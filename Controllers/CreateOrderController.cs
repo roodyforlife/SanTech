@@ -26,9 +26,16 @@ namespace SanTech.Controllers
         public IActionResult CreateOrder()
         {
             var user = HttpContext.Session.GetString("Login");
-            ViewBag.BasketCost = dbBasketService.GetByUserLogin(user).Sum(x => (x.Product.Cost * x.NumberOfProduct * (100 - x.Product.SaleProcent) / 100));
-            ViewBag.User = dbUserService.Get(user);
-            return View();
+            if (user is not null)
+            {
+                if (dbUserService.Get(user).Basket.Count() != 0)
+                {
+                    ViewBag.BasketCost = dbBasketService.GetByUserLogin(user).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
+                    ViewBag.User = dbUserService.Get(user);
+                    return View();
+                }
+            }
+            return Redirect("../Home/Index");
         }
         [HttpPost]
         public IActionResult CreateOrder(Application application)
@@ -38,13 +45,11 @@ namespace SanTech.Controllers
             {
                 application.Basket = dbBasketService.GetByUserLogin(userName);
                 application.User = dbUserService.Get(userName);
-                int TotalCost = application.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
+                application.TotalCost = application.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
                 if (application.WriteOffBonuses)
                 {
-                   TotalCost -= application.User.Bonus;
-                    dbUserService.ClearBonuses(userName);
+                    application.TotalCost = dbUserService.ClearBonuses(application);
                 }
-                application.TotalCost = TotalCost;
                 emailService.SendCheckToEmail(application);
                 //dbApplicationService.Add(application);
                 dbUserService.AddBonuses(application);
@@ -53,6 +58,7 @@ namespace SanTech.Controllers
             }
             return View();
         }
+        [HttpPost]
         public IActionResult Created()
         {
             var user = ControllerContext.HttpContext.Session.GetString("Login");

@@ -28,11 +28,21 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
-        public void ClearBonuses(string userLogin)
+        public int ClearBonuses(Application application)
         {
-            var user = db.Users.ToList().FirstOrDefault(x => x.Login == userLogin);
-            user.Bonus = 0;
+            var user = db.Users.ToList().FirstOrDefault(x => x.Login == application.User.Login);
+            if(application.TotalCost >= application.User.Bonus)
+            {
+                application.TotalCost -= application.User.Bonus;
+                user.Bonus = 0;
+            }
+            else
+            {
+                user.Bonus -= application.TotalCost;
+                application.TotalCost = 0;
+            }
             db.SaveChanges();
+            return application.TotalCost;
         }
 
         public User Get(string user)

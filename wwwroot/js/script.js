@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    //Total Cost with clear bonus
   $('.custom-checkbox').change(function () {
     $('.total__block__finalCost').toggleClass("_active__finalCost");
   });
