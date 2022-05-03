@@ -47,6 +47,7 @@ namespace SanTech.Controllers
                 application.TotalCost = TotalCost;
                 emailService.SendCheckToEmail(application);
                 //dbApplicationService.Add(application);
+                dbUserService.AddBonuses(application);
                 dbBasketService.DeleteAllBasket(userName);
                 return View("../CreateOrder/Created", application);
             }
