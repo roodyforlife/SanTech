@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using IronPdf;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SanTech.Interfaces;
 using SanTech.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,12 +15,12 @@ namespace SanTech.Controllers
     {
         private readonly IDbUserService dbUserService;
         private readonly IDbBasketService dbBasketService;
-        private readonly IDbApplicationService dbApplicationService;
-        public CreateOrderController(IDbUserService dbUserService, IDbBasketService dbBasketService, IDbApplicationService dbApplicationService)
+        private readonly IEmailService emailService;
+        public CreateOrderController(IDbUserService dbUserService, IDbBasketService dbBasketService, IEmailService emailService)
         {
             this.dbUserService = dbUserService;
             this.dbBasketService = dbBasketService;
-            this.dbApplicationService = dbApplicationService;
+            this.emailService = emailService;
         }
         [HttpGet]
         public IActionResult CreateOrder()
@@ -31,12 +33,21 @@ namespace SanTech.Controllers
         [HttpPost]
         public IActionResult CreateOrder(Application application)
         {
-            var user = HttpContext.Session.GetString("Login");
-            application.Basket.AddRange(dbBasketService.GetByUserLogin(user));
-            if(ModelState.IsValid)
+            var userName = HttpContext.Session.GetString("Login");
+            if (ModelState.IsValid)
             {
-                dbApplicationService.Add(application);
-                dbBasketService.DeleteAllBasket(user);
+                application.Basket = dbBasketService.GetByUserLogin(userName);
+                application.User = dbUserService.Get(userName);
+                int TotalCost = application.Basket.Sum(x => (x.Product.Cost * x.NumberOfProduct * (100 - x.Product.SaleProcent) / 100));
+                if (application.WriteOffBonuses)
+                {
+                   TotalCost -= application.User.Bonus;
+                    dbUserService.ClearBonuses(userName);
+                }
+                application.TotalCost = TotalCost;
+                emailService.SendCheckToEmail(application);
+                //dbApplicationService.Add(application);
+                dbBasketService.DeleteAllBasket(userName);
                 return View("../CreateOrder/Created", application);
             }
             return View();

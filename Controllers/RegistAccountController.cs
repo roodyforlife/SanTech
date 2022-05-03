@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SanTech.Interfaces;
 using SanTech.Models;
 using System;
@@ -36,7 +37,7 @@ namespace SanTech.Controllers
         {
             if(authorizatService.IsRegistered(user.Login))
                 ModelState.AddModelError("Login", "Такой аккаунт уже существует");
-            emailService.RegisterSend(user.Email, user.Name);
+            emailService.SendEmail(user.Email, user.Name, "Вы успешно зарегистрировались на сайте SanTech. Запишите ваш пароль, удачных покупок и хорошего настроения!", "emailSend.html");
             if (ModelState.IsValid)
             {
                 dbUserService.Add(user);

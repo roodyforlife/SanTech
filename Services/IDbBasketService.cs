@@ -12,10 +12,12 @@ namespace SanTech.Services
     {
         private readonly ApplicationContext db;
         private readonly IDbUserService dbUserService;
-        public DbBasketService(ApplicationContext db, IDbUserService dbUserService)
+        private readonly IDbProductService dbProductService;
+        public DbBasketService(ApplicationContext db, IDbUserService dbUserService, IDbProductService dbProductService)
         {
             this.db = db;
             this.dbUserService = dbUserService;
+            this.dbProductService = dbProductService;
         }
         public void Add(Basket basket)
         {
@@ -25,9 +27,10 @@ namespace SanTech.Services
         public bool AddProductToBasket(string login, int productId)
         {
             var user = dbUserService.Get(login);
+            var product = dbProductService.Get(productId);
             if (GetByProductIdAndUserId(productId, user.Id) is null)
             {
-                Basket basket = new Basket { ProductId = productId, UserId = user.Id, NumberOfProduct = 1};
+                Basket basket = new Basket { ProductId = productId, Product = product, UserId = user.Id, NumberOfProduct = 1};
                 Add(basket);
                 return true;
             }
@@ -51,9 +54,9 @@ namespace SanTech.Services
             return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
         }
 
-        public IEnumerable<Basket> GetByUserLogin(string userLogin)
+        public List<Basket> GetByUserLogin(string userLogin)
         {
-            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Login == userLogin);
+            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Login == userLogin).ToList();
         }
 
         public void ChangeNumberOfBasket(int basketId, int inputValue)
@@ -67,5 +70,26 @@ namespace SanTech.Services
             db.Baskets.RemoveRange(GetByUserLogin(userLogin));
             db.SaveChanges();
         }
+
+       /* public BasketHistory GetBasketHistory(Basket basket, int applicationId)
+        {
+            return new BasketHistory()
+            {
+                ProductId = basket.ProductId,
+                UserId = basket.UserId,
+                NumberOfProduct = basket.NumberOfProduct,
+                ApplicationId = applicationId
+            };
+        }
+
+        public void SaveBasketHistory(List<Basket> basketsHistory, int applicationId)
+        {
+            List<BasketHistory> basketHistory = new List<BasketHistory>();
+            foreach(var basket in basketsHistory)
+            {
+                GetBasketHistory(basket, applicationId));
+            }
+            db.SaveChanges();
+        }*/
     }
 }

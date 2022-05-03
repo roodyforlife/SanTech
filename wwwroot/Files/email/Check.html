@@ -1,4 +1,4 @@
-
+﻿
 <HTML>
 <head>
     <title>
@@ -106,7 +106,6 @@
             }
 
             .container {
-                width: 700px;
             }
 
             .header {
@@ -129,15 +128,55 @@
                     color: #fff;
                 }
 
-
             .content {
+            }
+
+            .text1 {
                 width: 100%;
-                padding: 20px 10px;
                 font-family: 'Mulish', sans-serif;
-                font-size: 25px;
+                font-size: 18px;
                 font-weight: 500;
                 color: black;
                 word-wrap: break-word;
+                margin-bottom: 5px;
+            }
+            .content__order__info__orderNumber
+            {
+                font-size: 20px;
+            }
+
+
+            .content__order__info {
+                border-bottom: 1px solid #222;
+                padding: 20px 10px;
+            }
+
+            .content__total {
+                display: flex;
+                justify-content: right;
+                padding: 20px 10px;
+                border-bottom: 1px solid #222;
+            }
+
+            .content__basket {
+                padding: 20px 10px;
+            }
+
+            .content__basket__item {
+                margin-bottom: 20px;
+            }
+
+                .content__basket__item:not(:last-child) {
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                }
+
+            .content__basket__item__code {
+                font-size: 16px;
+                color: #999999;
+            }
+
+            .content__basket__item__cost {
+                font-size: 14px;
             }
         </style>
         <div class="container">
@@ -147,7 +186,17 @@
                 </div>
             </div>
             <div class="content">
-                Здравствуйте, {userName}! Вы успешно зарегистрировались на сайте
-                <span>SanTech</span>. Запишите ваш пароль, удачных покупок и хорошего настроения!<br /><br />Администрация
+                <div class="content__order__info">
+                    <div class="content__order__info__orderNumber">Заказ номер: {OrderNumber}</div>
+                    <p class="text1">Отправитель: SanTech</p>
+                    <p class="text1">Получатель: {UserName} {UserSecondName}</p>
+                    <p class="text1">Адрес: {City}, {Address} {Post}</p>
+                </div>
+                <div class="text1 content__total">
+                    <span>К оплате: {TotalCost} грн.</span>
+                </div>
+                <div class="content__basket">
+                    {BasketContent}
+                </div>
             </div>
         </div>

@@ -30,6 +30,7 @@ namespace SanTech.Controllers
                 ViewBag.IsAdmin = isAdmin;
                 ViewBag.User = dbUserService.Get(user);
                 ViewBag.UserBase = dbUserService.GetAll();
+               // ViewBag.ApplicationBase = dbApplicationService.GetAll();
             return View(dbProductService.GetProductsInRange(0, 20).ToList());
         }
         public bool AddNewProduct(CreateProduct product)

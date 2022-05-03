@@ -12,7 +12,6 @@ namespace SanTech.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Basket> Baskets { get; set; }
-        public DbSet<Application> Applications { get; set; }
         public ApplicationContext()
         {
             //Database.EnsureDeleted();

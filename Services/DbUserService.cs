@@ -21,6 +21,13 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
+        public void ClearBonuses(string userLogin)
+        {
+            var user = db.Users.ToList().FirstOrDefault(x => x.Login == userLogin);
+            user.Bonus = 0;
+            db.SaveChanges();
+        }
+
         public User Get(string user)
         {
             return db.Users.Include(x => x.Basket).ToList().FirstOrDefault(x => x.Login == user);

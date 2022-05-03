@@ -13,7 +13,7 @@ namespace SanTech.Interfaces
         public Basket GetByProductIdAndUserId(int productId, int userId);
         public void DeleteFromBasket(int basketId);
         public Basket Get(int basketId);
-        public IEnumerable<Basket> GetByUserLogin(string userLogin);
+        public List<Basket> GetByUserLogin(string userLogin);
         public void ChangeNumberOfBasket(int basketId, int inputValue);
         public void DeleteAllBasket(string userLogin);
     }
