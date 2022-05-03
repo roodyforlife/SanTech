@@ -38,7 +38,7 @@ namespace SanTech.Controllers
             {
                 application.Basket = dbBasketService.GetByUserLogin(userName);
                 application.User = dbUserService.Get(userName);
-                int TotalCost = application.Basket.Sum(x => (x.Product.Cost * x.NumberOfProduct * (100 - x.Product.SaleProcent) / 100));
+                int TotalCost = application.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
                 if (application.WriteOffBonuses)
                 {
                    TotalCost -= application.User.Bonus;

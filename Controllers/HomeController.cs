@@ -61,7 +61,7 @@ namespace SanTech.Controllers
             var user = ControllerContext.HttpContext.Session.GetString("Login");
             ViewBag.User = user;
             var model = dbBasketService.GetByUserLogin(user);
-            ViewBag.TotalCost = model.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent)) / 100);
+            ViewBag.TotalCost = model.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
             return View(model);
         }
         public void ChangeNumberOfBasket(int basketId, int inputValue)

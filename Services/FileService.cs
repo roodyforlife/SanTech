@@ -47,11 +47,10 @@ namespace SanTech.Services
             }
             body = body.Replace("{OrderNumber}", application.OrderNumber).Replace("{UserName}", application.Name).Replace("{UserSecondName}", application.SecondName).
                 Replace("{City}", application.City).Replace("{Address}", application.Address).Replace("{Post}", application.Delivery).
-                Replace("{TotalCost}", Convert.ToString(application.TotalCost));
+                Replace("{TotalCost}", application.TotalCost.ToString("N0"));
             foreach (var item in application.User.Basket)
             {
-                basket += $"<div class='content__basket__item'><div class='text1'>{item.Product.Title}</div><div class='text1 content__basket__item__code'>Код товара: {item.Product.Id}</div><div class='text1'>Количество: {item.NumberOfProduct}</div><div class='text1 content__basket__item__cost'>{(item.Product.Cost * item.NumberOfProduct * (100 - item.Product.SaleProcent) / 100).ToString("N0")} грн. </div></div>";
-                basket += $" <img src='data: image / jpeg; base64,{(Convert.ToBase64String(item.Product.Image))}'>";
+                basket += $"<div class='content__basket__item'><div class='text1'>{item.Product.Title}</div><div class='text1 content__basket__item__code'>Код товара: {item.Product.Id}</div><div class='text1'>Количество: {item.NumberOfProduct}</div><div class='text1 content__basket__item__cost'>{(item.NumberOfProduct * (item.Product.Cost * (100 - item.Product.SaleProcent) / 100)).ToString("N0")}</div></div>";
             }
             body = body.Replace("{BasketContent}", basket);
             return body;

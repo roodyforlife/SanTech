@@ -1,112 +1,13 @@
-﻿
-<HTML>
+﻿<HTML>
+
 <head>
     <title>
         ПРивет всем
     </title>
+
     <body>
         <style>
-            * {
-                padding: 0;
-                margin: 0;
-                border: 0;
-            }
 
-                *,
-                *:before,
-                *:after {
-                    -moz-box-sizing: border-box;
-                    -webkit-box-sizing: border-box;
-                    box-sizing: border-box;
-                }
-
-            :focus,
-            :active {
-                outline: none;
-            }
-
-            a:focus,
-            a:active {
-                outline: none;
-            }
-
-            nav,
-            footer,
-            header,
-            aside {
-                display: block;
-            }
-
-            html,
-            body {
-                height: 100%;
-                width: 100%;
-                font-size: 100%;
-                line-height: 1;
-                font-size: 14px;
-                -ms-text-size-adjust: 100%;
-                -moz-text-size-adjust: 100%;
-                -webkit-text-size-adjust: 100%;
-            }
-
-            input,
-            button,
-            textarea {
-                font-family: inherit;
-            }
-
-                input::-ms-clear {
-                    display: none;
-                }
-
-            button {
-                cursor: pointer;
-            }
-
-                button::-moz-focus-inner {
-                    padding: 0;
-                    border: 0;
-                }
-
-            a,
-            a:visited {
-                text-decoration: none;
-            }
-
-                a:hover {
-                    text-decoration: none;
-                }
-
-            ul li {
-                list-style: none;
-            }
-
-            img {
-                vertical-align: top;
-            }
-
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-size: inherit;
-                font-weight: 400;
-            }
-
-            input[type="number"]::-webkit-inner-spin-button,
-            input[type="number"]::-webkit-outer-spin-button {
-                -webkit-appearance: none;
-            }
-
-            textarea {
-                resize: none;
-                /* Запрещаем изменять размер */
-            }
-
-            .container {
-            }
 
             .header {
                 width: 100%;
@@ -128,27 +29,20 @@
                     color: #fff;
                 }
 
-            .content {
-            }
-
             .text1 {
                 width: 100%;
                 font-family: 'Mulish', sans-serif;
-                font-size: 18px;
+                font-size: 20px;
                 font-weight: 500;
                 color: black;
                 word-wrap: break-word;
                 margin-bottom: 5px;
-            }
-            .content__order__info__orderNumber
-            {
-                font-size: 20px;
+                word-wrap: break-word;
             }
 
-
-            .content__order__info {
+            .content__order__info, .content__basket {
                 border-bottom: 1px solid #222;
-                padding: 20px 10px;
+                padding: 20px 0;
             }
 
             .content__total {
@@ -158,17 +52,9 @@
                 border-bottom: 1px solid #222;
             }
 
-            .content__basket {
-                padding: 20px 10px;
+            .content__basket__item:not(:last-child) {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             }
-
-            .content__basket__item {
-                margin-bottom: 20px;
-            }
-
-                .content__basket__item:not(:last-child) {
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-                }
 
             .content__basket__item__code {
                 font-size: 16px;
@@ -176,7 +62,7 @@
             }
 
             .content__basket__item__cost {
-                font-size: 14px;
+                font-size: 16px;
             }
         </style>
         <div class="container">
@@ -187,7 +73,6 @@
             </div>
             <div class="content">
                 <div class="content__order__info">
-                    <div class="content__order__info__orderNumber">Заказ номер: {OrderNumber}</div>
                     <p class="text1">Отправитель: SanTech</p>
                     <p class="text1">Получатель: {UserName} {UserSecondName}</p>
                     <p class="text1">Адрес: {City}, {Address} {Post}</p>
