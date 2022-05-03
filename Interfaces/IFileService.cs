@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using SanTech.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace SanTech.Interfaces
     public interface IFileService
     {
         public byte[] FromImageToByte(IFormFile uploadedFile);
+        public string GetHTMLBodyForCheck(Application application);
+        public string GetCreatedPdfFile(Application application);
     }
 }

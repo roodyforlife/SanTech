@@ -1,5 +1,4 @@
-﻿using IronPdf;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using SanTech.Interfaces;
@@ -19,39 +18,19 @@ namespace SanTech.Services
     {
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly IConfiguration configuration;
-        public EmailService(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
+        private readonly IFileService fileService;
+        public EmailService(IHostingEnvironment hostingEnvironment, IConfiguration configuration, IFileService fileService)
         {
             this.hostingEnvironment = hostingEnvironment;
             this.configuration = configuration;
+            this.fileService = fileService;
         }
 
         public void SendCheckToEmail(Application application)
         {
             try
             {
-                string path = Path.Combine(this.hostingEnvironment.WebRootPath, "Files/email", "Check.html");
-                string body = string.Empty;
-                string basket = String.Empty;
-                //Get Structure of body
-                using (StreamReader reader = new StreamReader(path))
-                {
-                    body = reader.ReadToEnd();
-                }
-                body = body.Replace("{OrderNumber}", application.OrderNumber).Replace("{UserName}", application.Name).Replace("{UserSecondName}", application.SecondName).
-                    Replace("{City}", application.City).Replace("{Address}", application.Address).Replace("{Post}", application.Delivery).
-                    Replace("{TotalCost}", Convert.ToString(application.TotalCost));
-                foreach(var item in application.User.Basket)
-                {
-                    basket += $"<div class='content__basket__item'><div class='text1'>{item.Product.Title}</div><div class='text1 content__basket__item__code'>Код товара: {item.Product.Id}</div><div class='text1'>Количество: {item.NumberOfProduct}</div><div class='text1 content__basket__item__cost'>{(item.Product.Cost * item.NumberOfProduct * (100 - item.Product.SaleProcent) / 100).ToString("N0")} грн. </div></div>";
-                    basket += $" <img src='data: image / jpeg; base64,{(Convert.ToBase64String(item.Product.Image))}'>";
-                }
-                body = body.Replace("{BasketContent}", basket);
-                //End
-                //PDF save
-                var pdfDocument = new HtmlToPdf().RenderHtmlAsPdf(body);
-                string pdfPath = Path.Combine(this.hostingEnvironment.WebRootPath, $"Files/Orders/{application.OrderNumber}.pdf");
-                pdfDocument.SaveAs(pdfPath);
-                //End
+                var pdfPath = fileService.GetCreatedPdfFile(application);
                 var senderEmail = new MailAddress(configuration["Smtp:FromAddress"], configuration["Smtp:Sender"]);
                 var receiverEmail = new MailAddress(application.Email, "Receiver");
                 var smtp = new SmtpClient
@@ -103,8 +82,6 @@ namespace SanTech.Services
                 };
                 var mess = new MailMessage(senderEmail, receiverEmail);
                 mess.Subject = configuration["Smtp:Subject"];
-                //Attachment data = new Attachment(path, MediaTypeNames.Application.Octet);
-                //mess.Attachments.Add(data);
                 mess.IsBodyHtml = true;
                 mess.Body = body;
                 {
