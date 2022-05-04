@@ -25,7 +25,7 @@ namespace SanTech.Services
 
         public void AddBonuses(Application application)
         {
-            var user = db.Users.ToList().FirstOrDefault(x => x.Login == application.User.Login);
+            var user = db.Users.ToList().FirstOrDefault(x => x.Email == application.User.Email);
             user.Bonus += user.Basket.Sum(x => x.Product.BonusNumber);
             db.SaveChanges();
         }
@@ -40,7 +40,7 @@ namespace SanTech.Services
 
         public int ClearBonuses(Application application)
         {
-            var user = db.Users.ToList().FirstOrDefault(x => x.Login == application.User.Login);
+            var user = db.Users.ToList().FirstOrDefault(x => x.Email == application.User.Email);
             if(application.TotalCost >= application.User.Bonus)
             {
                 application.TotalCost -= application.User.Bonus;
@@ -55,9 +55,9 @@ namespace SanTech.Services
             return application.TotalCost;
         }
 
-        public User Get(string user)
+        public User Get(string email)
         {
-            return db.Users.Include(x => x.Basket).ToList().FirstOrDefault(x => x.Login == user);
+            return db.Users.Include(x => x.Basket).ToList().FirstOrDefault(x => x.Email == email);
         }
 
         public IEnumerable<User> GetAll()

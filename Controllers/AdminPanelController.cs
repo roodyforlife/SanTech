@@ -22,13 +22,13 @@ namespace SanTech.Controllers
         }
         public IActionResult AdminPanel()
             {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            if(user is null || !dbUserService.Get(user).IsAdmin)
+            var userEmail = HttpContext.Session.GetString("Email");
+            if(userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
                 return Redirect("../Home/Index");
-            var isAdmin = dbUserService.Get(user).IsAdmin;
-                ViewBag.LoggedAccount = user;
+            var isAdmin = dbUserService.Get(userEmail).IsAdmin;
+                ViewBag.LoggedAccount = userEmail;
                 ViewBag.IsAdmin = isAdmin;
-                ViewBag.User = dbUserService.Get(user);
+                ViewBag.User = dbUserService.Get(userEmail);
                 ViewBag.UserBase = dbUserService.GetAll();
                // ViewBag.ApplicationBase = dbApplicationService.GetAll();
             return View(dbProductService.GetProductsInRange(0, 20).ToList());

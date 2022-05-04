@@ -76,8 +76,8 @@ $(document).ready(function () {
     });
 });
 
-function AddToBasket(Id, userLogin) {
-    if (userLogin.length > 0) {
+function AddToBasket(Id, userEmail) {
+    if (userEmail.length > 0) {
         var formData = new FormData();
         formData.append("Id", Id);
         $.ajax({

@@ -25,24 +25,24 @@ namespace SanTech.Controllers
         [HttpGet]
         public IActionResult RegistAccount()
         {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.LoggedAccount = user;
-            if (user is not null)
+            var userEmail = HttpContext.Session.GetString("Email");
+            ViewBag.LoggedAccount = userEmail;
+            if (userEmail is not null)
                 return Redirect("../Home/Index");
             return View();
         }
         [HttpPost]
         public IActionResult RegistAccount(User user)
         {
-            if (authorizatService.IsRegistered(user.Login))
-                ModelState.AddModelError("Login", "Такой аккаунт уже существует");
+            if (authorizatService.IsRegistered(user.Email))
+                ModelState.AddModelError("Email", "Аккаунт с такой почтой уже существует");
             if (ModelState.IsValid)
             {
                 user.Password = dbUserService.HashData(user.Password);
                 user.PasswordConfirm = dbUserService.HashData(user.PasswordConfirm);
                 dbUserService.Add(user);
                 emailService.SendEmail(user.Email, user.Name, "Вы успешно зарегистрировались на сайте SanTech. Запишите ваш пароль, удачных покупок и хорошего настроения!", "emailSend.html");
-                ControllerContext.HttpContext.Session.SetString("Login", user.Login);
+                HttpContext.Session.SetString("Email", user.Email);
                 return RedirectPermanent("../Home/Index");
             }
             return View();

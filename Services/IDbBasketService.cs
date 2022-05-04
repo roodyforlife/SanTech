@@ -24,9 +24,9 @@ namespace SanTech.Services
             db.Baskets.Add(basket);
             db.SaveChanges();
         }
-        public bool AddProductToBasket(string login, int productId)
+        public bool AddProductToBasket(string email, int productId)
         {
-            var user = dbUserService.Get(login);
+            var user = dbUserService.Get(email);
             var product = dbProductService.Get(productId);
             if (GetByProductIdAndUserId(productId, user.Id) is null)
             {
@@ -54,9 +54,9 @@ namespace SanTech.Services
             return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
         }
 
-        public List<Basket> GetByUserLogin(string userLogin)
+        public List<Basket> GetByUserEmail(string userEmail)
         {
-            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Login == userLogin).ToList();
+            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Email == userEmail).ToList();
         }
 
         public void ChangeNumberOfBasket(int basketId, int inputValue)
@@ -65,9 +65,9 @@ namespace SanTech.Services
             basket.NumberOfProduct = inputValue;
             db.SaveChanges();
         }
-        public void DeleteAllBasket(string userLogin)
+        public void DeleteAllBasket(string userEmail)
         {
-            db.Baskets.RemoveRange(GetByUserLogin(userLogin));
+            db.Baskets.RemoveRange(GetByUserEmail(userEmail));
             db.SaveChanges();
         }
 

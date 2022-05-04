@@ -9,12 +9,12 @@ namespace SanTech.Interfaces
     public interface IDbBasketService
     {
         public void Add(Basket basket);
-        public bool AddProductToBasket(string login, int productId);
+        public bool AddProductToBasket(string email, int productId);
         public Basket GetByProductIdAndUserId(int productId, int userId);
         public void DeleteFromBasket(int basketId);
         public Basket Get(int basketId);
-        public List<Basket> GetByUserLogin(string userLogin);
+        public List<Basket> GetByUserEmail(string userEmail);
         public void ChangeNumberOfBasket(int basketId, int inputValue);
-        public void DeleteAllBasket(string userLogin);
+        public void DeleteAllBasket(string userEmail);
     }
 }

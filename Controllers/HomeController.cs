@@ -23,12 +23,12 @@ namespace SanTech.Controllers
         public IActionResult Index()
         {
             //dbProductService.AddThereAre();
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.LoggedAccount = user;
-            if (user is not null)
+            var userEmail = HttpContext.Session.GetString("Email");
+            ViewBag.LoggedAccount = userEmail;
+            if (userEmail is not null)
             {
-                ViewBag.IsAdmin = dbUserService.Get(user).IsAdmin;
-                ViewBag.User = dbUserService.Get(user);
+                ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
+                ViewBag.User = dbUserService.Get(userEmail);
             }
             var products = dbProductService.GetProductsInRange(0, 20).ToList();
             var allProducts = dbProductService.GetAll();
@@ -38,7 +38,7 @@ namespace SanTech.Controllers
         }
         public string SignOutAccount()
         {
-            ControllerContext.HttpContext.Session.Remove("Login");
+            ControllerContext.HttpContext.Session.Remove("Email");
             return "<li><a href='../SignInAccount/SignInAccount'><div class='text1 pull__menu__list__text login__button'>Вход/Регистрация</div></a></li>";
         }
         [HttpPost]
@@ -49,8 +49,8 @@ namespace SanTech.Controllers
         }
         public bool AddToBasket(int Id)
         {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            return dbBasketService.AddProductToBasket(user, Id);
+            var userEmail = HttpContext.Session.GetString("Email");
+            return dbBasketService.AddProductToBasket(userEmail, Id);
         }
         public void DeleteFromBasket(int basketId)
         {
@@ -58,9 +58,9 @@ namespace SanTech.Controllers
         }
         public ViewResult LoadBasket()
         {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.User = user;
-            var model = dbBasketService.GetByUserLogin(user);
+            var userEmail = HttpContext.Session.GetString("Email");
+            ViewBag.User = userEmail;
+            var model = dbBasketService.GetByUserEmail(userEmail);
             ViewBag.TotalCost = model.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
             return View(model);
         }
@@ -70,8 +70,8 @@ namespace SanTech.Controllers
         }
         public void DeleteAllBasket()
         {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            dbBasketService.DeleteAllBasket(user);
+            var userEmail = HttpContext.Session.GetString("Email");
+            dbBasketService.DeleteAllBasket(userEmail);
         }
     }
 }

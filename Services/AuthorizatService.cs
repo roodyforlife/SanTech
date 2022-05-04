@@ -18,16 +18,16 @@ namespace SanTech.Services
             this.db = db;
             this.dbUserService = dbUserService;
         }
-        public bool IsRegistered(string login)
+        public bool IsRegistered(string email)
         {
-            return dbUserService.Get(login) is not null;
+            return dbUserService.Get(email) is not null;
         }
 
-        public bool PasswordIsCorrect(string login, string password)
+        public bool PasswordIsCorrect(string email, string password)
         {
-            if (!IsRegistered(login))
+            if (!IsRegistered(email))
                 return false;
-            return dbUserService.Get(login).Password == dbUserService.HashData(password);
+            return dbUserService.Get(email).Password == dbUserService.HashData(password);
         }
     }
 }

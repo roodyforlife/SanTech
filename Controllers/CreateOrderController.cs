@@ -25,13 +25,13 @@ namespace SanTech.Controllers
         [HttpGet]
         public IActionResult CreateOrder()
         {
-            var user = HttpContext.Session.GetString("Login");
-            if (user is not null)
+            var userEmail = HttpContext.Session.GetString("Email");
+            if (userEmail is not null)
             {
-                if (dbUserService.Get(user).Basket.Count() != 0)
+                if (dbUserService.Get(userEmail).Basket.Count() != 0)
                 {
-                    ViewBag.BasketCost = dbBasketService.GetByUserLogin(user).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
-                    ViewBag.User = dbUserService.Get(user);
+                    ViewBag.BasketCost = dbBasketService.GetByUserEmail(userEmail).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
+                    ViewBag.User = dbUserService.Get(userEmail);
                     return View();
                 }
             }
@@ -40,11 +40,11 @@ namespace SanTech.Controllers
         [HttpPost]
         public IActionResult CreateOrder(Application application)
         {
-            var userLogin = HttpContext.Session.GetString("Login");
+            var userEmail = HttpContext.Session.GetString("Email");
             if (ModelState.IsValid)
             {
-                application.Basket = dbBasketService.GetByUserLogin(userLogin);
-                application.User = dbUserService.Get(userLogin);
+                application.Basket = dbBasketService.GetByUserEmail(userEmail);
+                application.User = dbUserService.Get(userEmail);
                 application.TotalCost = application.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
                 if (application.WriteOffBonuses)
                 {
@@ -53,7 +53,7 @@ namespace SanTech.Controllers
                 emailService.SendCheckToEmail(application);
                 //dbApplicationService.Add(application);
                 dbUserService.AddBonuses(application);
-                dbBasketService.DeleteAllBasket(userLogin);
+                dbBasketService.DeleteAllBasket(userEmail);
                 return View("../CreateOrder/Created", application);
             }
             return View();
@@ -61,12 +61,12 @@ namespace SanTech.Controllers
         [HttpPost]
         public IActionResult Created()
         {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.LoggedAccount = user;
-            if (user is not null)
+            var userEmail = HttpContext.Session.GetString("Email");
+            ViewBag.LoggedAccount = userEmail;
+            if (userEmail is not null)
             {
-                ViewBag.IsAdmin = dbUserService.Get(user).IsAdmin;
-                ViewBag.User = dbUserService.Get(user);
+                ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
+                ViewBag.User = dbUserService.Get(userEmail);
                 //ViewBag.Application = application;
             }
             return View();

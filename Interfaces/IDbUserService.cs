@@ -9,7 +9,7 @@ namespace SanTech.Interfaces
     public interface IDbUserService
     {
         public void Add(User user);
-        public User Get(string user);
+        public User Get(string email);
         public IEnumerable<User> GetAll();
         public int ClearBonuses(Application application);
         public void AddBonuses(Application application);

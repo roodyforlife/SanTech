@@ -21,20 +21,20 @@ namespace SanTech.Controllers
         [HttpGet]
         public IActionResult SignInAccount()
         {
-            var user = ControllerContext.HttpContext.Session.GetString("Login");
-            ViewBag.LoggedAccount = user;
-            if (user is not null)
+            var userEmail = HttpContext.Session.GetString("Email");
+            ViewBag.LoggedAccount = userEmail;
+            if (userEmail is not null)
                 return Redirect("../Home/Index");
             return View();
         }
         [HttpPost]
         public IActionResult SignInAccount(UserLogin user)
         {
-            if (!authorizatService.PasswordIsCorrect(user.Login, user.Password) || !authorizatService.IsRegistered(user.Login))
+            if (!authorizatService.PasswordIsCorrect(user.Email, user.Password) || !authorizatService.IsRegistered(user.Email))
                 ModelState.AddModelError("Password", "Неверный логин или пароль");
             if (ModelState.IsValid)
             {
-                ControllerContext.HttpContext.Session.SetString("Login", user.Login);
+                HttpContext.Session.SetString("Email", user.Email);
                 return RedirectPermanent("../Home/Index");            
             }
             return View();
