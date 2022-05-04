@@ -27,7 +27,7 @@ namespace SanTech.Services
         {
             if (!IsRegistered(login))
                 return false;
-            return dbUserService.Get(login).Password == password;
+            return dbUserService.Get(login).Password == dbUserService.HashData(password);
         }
     }
 }

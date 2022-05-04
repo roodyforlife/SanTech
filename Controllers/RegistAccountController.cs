@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace SanTech.Controllers
@@ -35,12 +34,14 @@ namespace SanTech.Controllers
         [HttpPost]
         public IActionResult RegistAccount(User user)
         {
-            if(authorizatService.IsRegistered(user.Login))
+            if (authorizatService.IsRegistered(user.Login))
                 ModelState.AddModelError("Login", "Такой аккаунт уже существует");
-            emailService.SendEmail(user.Email, user.Name, "Вы успешно зарегистрировались на сайте SanTech. Запишите ваш пароль, удачных покупок и хорошего настроения!", "emailSend.html");
             if (ModelState.IsValid)
             {
+                user.Password = dbUserService.HashData(user.Password);
+                user.PasswordConfirm = dbUserService.HashData(user.PasswordConfirm);
                 dbUserService.Add(user);
+                emailService.SendEmail(user.Email, user.Name, "Вы успешно зарегистрировались на сайте SanTech. Запишите ваш пароль, удачных покупок и хорошего настроения!", "emailSend.html");
                 ControllerContext.HttpContext.Session.SetString("Login", user.Login);
                 return RedirectPermanent("../Home/Index");
             }

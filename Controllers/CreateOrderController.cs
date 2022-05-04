@@ -40,11 +40,11 @@ namespace SanTech.Controllers
         [HttpPost]
         public IActionResult CreateOrder(Application application)
         {
-            var userName = HttpContext.Session.GetString("Login");
+            var userLogin = HttpContext.Session.GetString("Login");
             if (ModelState.IsValid)
             {
-                application.Basket = dbBasketService.GetByUserLogin(userName);
-                application.User = dbUserService.Get(userName);
+                application.Basket = dbBasketService.GetByUserLogin(userLogin);
+                application.User = dbUserService.Get(userLogin);
                 application.TotalCost = application.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
                 if (application.WriteOffBonuses)
                 {
@@ -53,7 +53,7 @@ namespace SanTech.Controllers
                 emailService.SendCheckToEmail(application);
                 //dbApplicationService.Add(application);
                 dbUserService.AddBonuses(application);
-                dbBasketService.DeleteAllBasket(userName);
+                dbBasketService.DeleteAllBasket(userLogin);
                 return View("../CreateOrder/Created", application);
             }
             return View();

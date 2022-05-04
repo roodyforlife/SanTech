@@ -31,20 +31,30 @@
     padding: 20px;
 }
 .input__display__text {
+    margin: 20px 0 0 0;
 }
 .form__input {
     width: 100%;
     height: 40px;
     background: var(--gray-color);
     border-radius: 5px;
-    margin: 0 0 20px 0;
     padding: 0 20px;
 }
-.form__button{
+.form__button {
     width: 100%;
     justify-content: center;
     font-weight: 500;
     font-size: 20px;
+    margin: 20px 0 0 0;
+}
+.forgot__link{
+    text-align: right;
+}
+.forgot__link a{
+    color: var(--blue-color);
+}
+.forgot__link a:hover{
+    color: var(--blueHover-color);
 }
 @media(max-width: 500px)
 {
