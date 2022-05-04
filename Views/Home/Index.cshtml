@@ -144,6 +144,7 @@
         @foreach (Product u in Model)
         {
             <div class="ads__content__item">
+                <a asp-controller="ViewProduct" asp-action="ViewProduct" asp-route-productId="@u.Id">
                 <div class="ads__content__item__image">
                     <img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt="">
                 </div>
@@ -162,6 +163,7 @@
                         <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
                     </div>
                 }
+                </a>
                 <div class="ads__content__item__basket" onclick="AddToBasket(@u.Id, '@ViewBag.User')">
                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                          xmlns="http://www.w3.org/2000/svg">

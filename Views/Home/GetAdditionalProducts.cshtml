@@ -3,48 +3,48 @@
 @{
     Layout = null;
 }
-@{
     @foreach (Product u in Model)
     {
-        <div class="ads__content__item">
-            <div class="ads__content__item__image">
-                <img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt="">
-            </div>
-            <div class="text1 ads__content__item__title">
-                @u.Title
-            </div>
-            <div class="text1 ads__content__item__code">Код: @u.Id</div>
-            @if (u.SaleProcent == 0)
-            {
-                <div class="text1 ads__content__item__cost">@u.Cost.ToString("N0") грн.</div>
-            }
-            else
-            {
-                <div class="ads__content__item__sale">
-                    <div class="text1 item__sale__old">@u.Cost.ToString("N0") грн.</div>
-                    <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
+            <div class="ads__content__item">
+                <a asp-controller="ViewProduct" asp-action="ViewProduct" asp-route-productId="@u.Id" >
+                <div class="ads__content__item__image">
+                    <img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt="">
                 </div>
-            }
-            <div class="ads__content__item__basket">
-                <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke="black" fill="black" fill-rule="evenodd" clip-rule="evenodd"
-                          d="M2.91675 5.83337V11.6667H13.9511L17.1867 26.8887L17.1978 26.8864L18.5582 33.2883L18.5209 33.2961L22.0926 50.0993C19.4017 51.1721 17.5001 53.8015 17.5001 56.875C17.5001 60.9021 20.7647 64.1667 24.7917 64.1667C28.8188 64.1667 32.0834 60.9021 32.0834 56.875C32.0834 56.3757 32.0332 55.8881 31.9376 55.4167H49.7292C49.6336 55.8881 49.5834 56.3757 49.5834 56.875C49.5834 60.9021 52.848 64.1667 56.8751 64.1667C60.9021 64.1667 64.1667 60.9021 64.1667 56.875C64.1667 52.848 60.9021 49.5834 56.8751 49.5834H27.9466L26.7067 43.75H60.8855L67.0834 14.5834H20.5348L18.6959 5.93231V5.83337H2.91675ZM56.8751 55.4167C56.0698 55.4167 55.4167 56.0698 55.4167 56.875C55.4167 57.6803 56.0698 58.3334 56.8751 58.3334C57.6804 58.3334 58.3334 57.6803 58.3334 56.875C58.3334 56.0698 57.6804 55.4167 56.8751 55.4167ZM23.3334 56.875C23.3334 56.0698 23.9863 55.4167 24.7917 55.4167C25.5972 55.4167 26.2501 56.0698 26.2501 56.875C26.2501 57.6803 25.5972 58.3334 24.7917 58.3334C23.9863 58.3334 23.3334 57.6803 23.3334 56.875ZM21.7866 20.4167L25.5053 37.9167H56.1614L59.8801 20.4167H21.7866Z"
-                          fill="#E7E7E7" />
-                </svg>
+                <div class="text1 ads__content__item__title">
+                    @u.Title
+                </div>
+                <div class="text1 ads__content__item__code">Код: @u.Id</div>
+                @if (u.SaleProcent == 0)
+                {
+                    <div class="text1 ads__content__item__cost">@u.Cost.ToString("N0") грн.</div>
+                }
+                else
+                {
+                    <div class="ads__content__item__sale">
+                        <div class="text1 item__sale__old">@u.Cost.ToString("N0") грн.</div>
+                        <div class="text1 item__sale__new">@{var saleCost = (u.Cost * (100 - u.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
+                    </div>
+                }
+                <div class="ads__content__item__basket">
+                    <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="black" fill="black" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M2.91675 5.83337V11.6667H13.9511L17.1867 26.8887L17.1978 26.8864L18.5582 33.2883L18.5209 33.2961L22.0926 50.0993C19.4017 51.1721 17.5001 53.8015 17.5001 56.875C17.5001 60.9021 20.7647 64.1667 24.7917 64.1667C28.8188 64.1667 32.0834 60.9021 32.0834 56.875C32.0834 56.3757 32.0332 55.8881 31.9376 55.4167H49.7292C49.6336 55.8881 49.5834 56.3757 49.5834 56.875C49.5834 60.9021 52.848 64.1667 56.8751 64.1667C60.9021 64.1667 64.1667 60.9021 64.1667 56.875C64.1667 52.848 60.9021 49.5834 56.8751 49.5834H27.9466L26.7067 43.75H60.8855L67.0834 14.5834H20.5348L18.6959 5.93231V5.83337H2.91675ZM56.8751 55.4167C56.0698 55.4167 55.4167 56.0698 55.4167 56.875C55.4167 57.6803 56.0698 58.3334 56.8751 58.3334C57.6804 58.3334 58.3334 57.6803 58.3334 56.875C58.3334 56.0698 57.6804 55.4167 56.8751 55.4167ZM23.3334 56.875C23.3334 56.0698 23.9863 55.4167 24.7917 55.4167C25.5972 55.4167 26.2501 56.0698 26.2501 56.875C26.2501 57.6803 25.5972 58.3334 24.7917 58.3334C23.9863 58.3334 23.3334 57.6803 23.3334 56.875ZM21.7866 20.4167L25.5053 37.9167H56.1614L59.8801 20.4167H21.7866Z"
+                              fill="#E7E7E7" />
+                    </svg>
+                </div>
+                <div class="ads__content__item__like">
+                    <svg width="40" height="40" viewBox="0 0 70 70" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M32.6904 16.7074L35.115 19.8633L37.3941 16.6006C41.8388 10.2374 48.8345 9.09819 54.6538 11.5013C60.5017 13.9164 64.9502 19.8392 64.0498 27.6634C63.5864 31.6933 61.6211 35.7503 58.7015 39.6651C55.7925 43.5656 52.0556 47.1633 48.3068 50.2491C44.5674 53.3273 40.8822 55.8421 38.1271 57.5892C36.8729 58.3843 35.8168 59.0169 35.0427 59.4681C34.2642 58.9909 33.1973 58.3207 31.9289 57.4816C29.168 55.6551 25.4749 53.0441 21.7266 49.8979C17.9682 46.7436 14.2204 43.1059 11.3016 39.2369C8.36501 35.3443 6.41437 31.4106 5.95383 27.6429C5.06378 20.3616 9.25707 14.4233 15.0171 11.8824C20.6891 9.38041 27.7261 10.2466 32.6904 16.7074Z"
+                              fill="#000" />
+                    </svg>
+                </div>
+                </a>
+                @if (u.SaleProcent != 0)
+                {
+                    <div class="ads__content__item__saleInfo"><span class="text1">-@u.SaleProcent%</span></div>
+                }
             </div>
-            <div class="ads__content__item__like">
-                <svg width="40" height="40" viewBox="0 0 70 70" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M32.6904 16.7074L35.115 19.8633L37.3941 16.6006C41.8388 10.2374 48.8345 9.09819 54.6538 11.5013C60.5017 13.9164 64.9502 19.8392 64.0498 27.6634C63.5864 31.6933 61.6211 35.7503 58.7015 39.6651C55.7925 43.5656 52.0556 47.1633 48.3068 50.2491C44.5674 53.3273 40.8822 55.8421 38.1271 57.5892C36.8729 58.3843 35.8168 59.0169 35.0427 59.4681C34.2642 58.9909 33.1973 58.3207 31.9289 57.4816C29.168 55.6551 25.4749 53.0441 21.7266 49.8979C17.9682 46.7436 14.2204 43.1059 11.3016 39.2369C8.36501 35.3443 6.41437 31.4106 5.95383 27.6429C5.06378 20.3616 9.25707 14.4233 15.0171 11.8824C20.6891 9.38041 27.7261 10.2466 32.6904 16.7074Z"
-                          fill="#000" />
-                </svg>
-            </div>
-            @if (u.SaleProcent != 0)
-            {
-                <div class="ads__content__item__saleInfo"><span class="text1">-@u.SaleProcent%</span></div>
             }
-        </div>
-    }
-}

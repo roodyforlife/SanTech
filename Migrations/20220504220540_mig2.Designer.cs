@@ -10,8 +10,8 @@ using SanTech.Models;
 namespace SanTech.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220502202434_test")]
-    partial class test
+    [Migration("20220504220540_mig2")]
+    partial class mig2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,58 +20,6 @@ namespace SanTech.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("SanTech.Models.Application", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Delivery")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SecondName")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
-                    b.Property<int>("TotalCost")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("WriteOffBonuses")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Applications");
-                });
 
             modelBuilder.Entity("SanTech.Models.Basket", b =>
                 {
@@ -95,7 +43,7 @@ namespace SanTech.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Basket");
+                    b.ToTable("Baskets");
                 });
 
             modelBuilder.Entity("SanTech.Models.Product", b =>
@@ -116,6 +64,9 @@ namespace SanTech.Migrations
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsNotAvailable")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SaleProcent")
                         .HasColumnType("int");
@@ -145,11 +96,6 @@ namespace SanTech.Migrations
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(12)
@@ -157,8 +103,7 @@ namespace SanTech.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordConfirm")
                         .IsRequired()
@@ -171,15 +116,6 @@ namespace SanTech.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("SanTech.Models.Application", b =>
-                {
-                    b.HasOne("SanTech.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SanTech.Models.Basket", b =>
