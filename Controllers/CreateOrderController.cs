@@ -38,7 +38,7 @@ namespace SanTech.Controllers
             return Redirect("../Home/Index");
         }
         [HttpPost]
-        public IActionResult CreateOrder(Application application)
+        public async Task<IActionResult> CreateOrder(Application application)
         {
             var userEmail = HttpContext.Session.GetString("Email");
             if (ModelState.IsValid)

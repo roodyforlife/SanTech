@@ -1,5 +1,18 @@
 $(document).ready(function () {
-    //Total Cost with clear bonus
+  $('.basket__content__total__info__button').click(function () {
+    const confirm__input = $('.confirm__input');
+    const confirm__radio = $('input[name="Delivery"]:checked').val()
+    let bool = true;
+    for (let i = 0; i < confirm__input.length; i++) {
+      if (confirm__input[i].value.length == 0)
+        bool = false;
+    }
+    if (confirm__radio == undefined)
+      bool = false;
+    if (bool == true)
+      $('.basket__content__orders__load').css('display', 'flex');
+  });
+  //Total Cost with clear bonus
   $('.custom-checkbox').change(function () {
     $('.total__block__finalCost').toggleClass("_active__finalCost");
   });
@@ -160,6 +173,7 @@ function CountButton(int, id) {
 
   }
 }
+
 function LoadBasket() {
   var formData = new FormData();
   $('.basket__content__orders__load').css('display', 'flex');
