@@ -38,6 +38,7 @@ namespace SanTech.Controllers
                 emailService.SendEmail(model.Email, user.Name, $"Вы пытаетесь сбросить пароль. Для сброса пароля перейдите по <a href='{callbackUrl}'>ссылке</a>", "emailSend.html");
                 return View("ForgotPasswordConfirmation");
             }
+            ModelState.AddModelError("Email", "Аккаунта с такой почтой не существует");
             return View(model);
         }
 
@@ -59,6 +60,7 @@ namespace SanTech.Controllers
                     return View("ResetPasswordConfirmation");
                 }
             }
+            ModelState.AddModelError("Email", "Неверно указана почта");
             return View(model);
         }
     }
