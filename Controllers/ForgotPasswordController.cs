@@ -25,6 +25,7 @@ namespace SanTech.Controllers
             var userEmail = HttpContext.Session.GetString("Email");
             if (userEmail is not null)
                 return Redirect("../Home/Index");
+            ViewBag.DisabledButton = "pointer-events: auto";
             return View();
         }
         [HttpPost]
@@ -39,6 +40,7 @@ namespace SanTech.Controllers
                 return View("ForgotPasswordConfirmation");
             }
             ModelState.AddModelError("Email", "Аккаунта с такой почтой не существует");
+            ViewBag.DisabledButton = "pointer-events: auto";
             return View(model);
         }
 

@@ -5,7 +5,7 @@
 @{string activeOrNotActiveButton = Model.IsNotAvailable ? "opacity: 0.5; pointer-events: none;" : "";}
 <link href="~/css/product.css" rel="stylesheet" />
 <div class="product">
-    <div class="text2 product__content__title">Какой-то текст с названием товара</div>
+    <div class="text2 product__content__title">@Model.Title</div>
     <div class="product__content">
         <div class="product__content__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Image))" alt=""></div>
         <div class="product__content__info">
@@ -34,7 +34,7 @@
                 <div class="product__content__info__bonus__image">
                     <img src="~/img/bonus.svg" alt="">
                 </div>
-                <div class="text1 product__content__info__bonus__text">@Model.BonusNumber</div>
+                <div class="text1 product__content__info__bonus__text">Бонус за товар: +@Model.BonusNumber</div>
             </div>
             }
             @if (Model.SaleProcent == 0)
@@ -203,12 +203,3 @@
         </div>
     </div>
 </div>
-<script>
-        let productBonus = $('.product__content__info__bonus__text').html();
-  let productBonusInt = parseInt(productBonus[productBonus.length - 1])
-  let bonusWord;
-  if(productBonusInt > 1 && productBonusInt <= 4) bonusWord = "бонуса";
-  else if(productBonusInt > 4 && productBonusInt <= 9 || productBonusInt == 0 || +productBonus >= 11 && +productBonus <= 20) bonusWord = "бонусов";
-  else if(productBonusInt == 1) bonusWord = "бонус";
-  $('.product__content__info__bonus__text').html(`+${productBonus} ${bonusWord}`)
-</script>
