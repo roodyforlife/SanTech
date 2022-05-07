@@ -19,16 +19,26 @@ namespace SanTech.Controllers
             this.dbCommentService = dbCommentService;
         }
         [HttpPost]
-        public void AddComment(string text, int Evaluation, int productId)
+        public bool AddComment(string text, int Evaluation, int productId)
         {
-
-            var userEmail = HttpContext.Session.GetString("Email");
-            Comment comment = new Comment() {
-                Text = text,
-                Evaluation = Evaluation,
-                User = dbUserService.Get(userEmail)
-            };
-            dbCommentService.Add(comment, productId);
+            if (text != null && Evaluation != 0)
+            {
+                var userEmail = HttpContext.Session.GetString("Email");
+                Comment comment = new Comment()
+                {
+                    Text = text,
+                    Evaluation = Evaluation,
+                    User = dbUserService.Get(userEmail)
+                };
+                dbCommentService.Add(comment, productId);
+                return true;
+            }
+            return false;
+        }
+        public ViewResult LoadComments(int productId)
+        {
+            var model = dbCommentService.Get(productId).OrderByDescending(x => x.Date);
+            return View(model);
         }
     }
 }

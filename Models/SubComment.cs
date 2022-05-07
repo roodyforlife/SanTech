@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SanTech.Models
 {
-    public class Comment
+    public class SubComment
     {
         public int Id { get; set; }
         public string Text { get; set; }
@@ -13,6 +13,5 @@ namespace SanTech.Models
         public int Evaluation { get; set; }
         public Product Product { get; set; }
         public DateTime Date = DateTime.Now;
-
     }
 }

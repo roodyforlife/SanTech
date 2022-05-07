@@ -9,5 +9,6 @@ namespace SanTech.Interfaces
     public interface IDbCommentService
     {
         public void Add(Comment comment, int productId);
+        public List<Comment> Get(int productId);
     }
 }

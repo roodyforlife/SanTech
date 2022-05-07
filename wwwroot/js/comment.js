@@ -55,7 +55,7 @@
       });
     }
   }
-  $('.reviews__content__item__answer').click(function (e) {
+    $('.reviews__content__item__answer').click(function () {
     $(this).parent().children('.reviews__content__item__answer__block').css('display', 'block');
   });
   $('.reviews__content__item__answer__input__cancel').click(function () {
@@ -74,7 +74,35 @@ function AddComment(productId) {
     contentType: false,
     processData: false,
     data: formData,
-    success: function (response) {
+      success: function (response) {
+          if (response) {
+              $('.write__comment__block').removeClass("_active__comment");
+              $("body").removeClass("_lock");
+              $('.rating__input__value').val(5);
+              $('.rating__value').html(5);
+              $('.comment__form__input input').val('');
+              $('.comment__form__input input').css("border", "0");
+              LoadComments(productId);
+          }
+          else {
+              $('.comment__form__input input').css("border", "1px solid #b94a48");
+          }
     }
   });
 }
+function LoadComments(productId) {
+    var formData = new FormData();
+    formData.append("productId", productId);
+    $.ajax({
+        url: "/Comment/LoadComments",
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+            $('.reviews__content').html(response);
+        }
+    });
+}
+

@@ -5,6 +5,7 @@
 @{string activeOrNotActiveButton = Model.IsNotAvailable ? "opacity: 0.5; pointer-events: none;" : "";}
 <link href="~/css/product.css" rel="stylesheet" />
 <script src="~/js/comment.js"></script>
+<script>LoadComments(@Model.Id)</script>
 <div class="write__comment__block">
         <div class="write__comment__content">
             <div class="write__comment__content__exit"></div>
@@ -154,114 +155,6 @@
             <div class="text2 product__reviews__title">Отзывы</div>
             <div class="text1 write__comment">Оставить отзыв</div>
             <div class="reviews__content _scroll">
-                <div class="reviews__content__item">
-                    <div class="reviews__content__item__logo"><img src="img/default_avatar.png" alt=""></div>
-                    <div class="reviews__content__item__text">
-                        <div class="text1 reviews__content__item__text__evaluation">Оценка: 4 <span>★</span></div>
-                        <div class="text1 reviews__content__item__text__title">Владимир</div>
-                        <div class="text1 reviews__content__item__text__review">Lorem ipsum, dolor sit amet
-                            consectetur adipisicing elit. Dolorem, ea.</div>
-                        <div class="text1 reviews__content__item__answer">Ответить</div>
-                        <div class="reviews__content__item__answer__block">
-                            <div class="reviews__content__item__answer__input">
-                                <input type="text" class="text1">
-                            </div>
-                            <div class="reviews__content__item__answer__buttons">
-                                <div class="text1 reviews__content__item__answer__input__cancel">Отмена</div>
-                                <div class="text1 reviews__content__item__answer__input__write">Оставить отзыв</div>
-                            </div>
-                        </div>
-                        <div class="reviews__content__subitem">
-                            <div class="reviews__content__subitem__logo"><img src="img/default_avatar.png" alt=""></div>
-                            <div class="reviews__content__subitem__text">
-                                <div class="text1 reviews__content__subitem__text__title">Владимир</div>
-                                <div class="text1 reviews__content__subitem__text__review">Lorem ipsum, dolor sit amet
-                                    consectetur adipisicing elit. Dolorem, ea.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviews__content__item">
-                    <div class="reviews__content__item__logo"><img src="img/default_avatar.png" alt=""></div>
-                    <div class="reviews__content__item__text">
-                        <div class="text1 reviews__content__item__text__evaluation">Оценка: 4 <span>★</span></div>
-                        <div class="text1 reviews__content__item__text__title">Владимир</div>
-                        <div class="text1 reviews__content__item__text__review">Lorem ipsum, dolor sit amet
-                            consectetur adipisicing elit. Dolorem, ea.</div>
-                        <div class="text1 reviews__content__item__answer">Ответить</div>
-                        <div class="reviews__content__item__answer__block">
-                            <div class="reviews__content__item__answer__input">
-                                <input type="text" class="text1">
-                            </div>
-                            <div class="reviews__content__item__answer__buttons">
-                                <div class="text1 reviews__content__item__answer__input__cancel">Отмена</div>
-                                <div class="text1 reviews__content__item__answer__input__write">Оставить отзыв</div>
-                            </div>
-                        </div>
-                        <div class="reviews__content__subitem">
-                            <div class="reviews__content__subitem__logo"><img src="img/default_avatar.png" alt=""></div>
-                            <div class="reviews__content__subitem__text">
-                                <div class="text1 reviews__content__subitem__text__title">Владимир</div>
-                                <div class="text1 reviews__content__subitem__text__review">Lorem ipsum, dolor sit amet
-                                    consectetur adipisicing elit. Dolorem, ea.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviews__content__item">
-                    <div class="reviews__content__item__logo"><img src="img/default_avatar.png" alt=""></div>
-                    <div class="reviews__content__item__text">
-                        <div class="text1 reviews__content__item__text__evaluation">Оценка: 4 <span>★</span></div>
-                        <div class="text1 reviews__content__item__text__title">Владимир</div>
-                        <div class="text1 reviews__content__item__text__review">Lorem ipsum, dolor sit amet
-                            consectetur adipisicing elit. Dolorem, ea.</div>
-                        <div class="text1 reviews__content__item__answer">Ответить</div>
-                        <div class="reviews__content__item__answer__block">
-                            <div class="reviews__content__item__answer__input">
-                                <input type="text" class="text1">
-                            </div>
-                            <div class="reviews__content__item__answer__buttons">
-                                <div class="text1 reviews__content__item__answer__input__cancel">Отмена</div>
-                                <div class="text1 reviews__content__item__answer__input__write">Оставить отзыв</div>
-                            </div>
-                        </div>
-                        <div class="reviews__content__subitem">
-                            <div class="reviews__content__subitem__logo"><img src="img/default_avatar.png" alt=""></div>
-                            <div class="reviews__content__subitem__text">
-                                <div class="text1 reviews__content__subitem__text__title">Владимир</div>
-                                <div class="text1 reviews__content__subitem__text__review">Lorem ipsum, dolor sit amet
-                                    consectetur adipisicing elit. Dolorem, ea.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="reviews__content__item">
-                    <div class="reviews__content__item__logo"><img src="img/default_avatar.png" alt=""></div>
-                    <div class="reviews__content__item__text">
-                        <div class="text1 reviews__content__item__text__evaluation">Оценка: 4 <span>★</span></div>
-                        <div class="text1 reviews__content__item__text__title">Владимир</div>
-                        <div class="text1 reviews__content__item__text__review">Lorem ipsum, dolor sit amet
-                            consectetur adipisicing elit. Dolorem, ea.</div>
-                        <div class="text1 reviews__content__item__answer">Ответить</div>
-                        <div class="reviews__content__item__answer__block">
-                            <div class="reviews__content__item__answer__input">
-                                <input type="text" class="text1">
-                            </div>
-                            <div class="reviews__content__item__answer__buttons">
-                                <div class="text1 reviews__content__item__answer__input__cancel">Отмена</div>
-                                <div class="text1 reviews__content__item__answer__input__write">Оставить отзыв</div>
-                            </div>
-                        </div>
-                        <div class="reviews__content__subitem">
-                            <div class="reviews__content__subitem__logo"><img src="img/default_avatar.png" alt=""></div>
-                            <div class="reviews__content__subitem__text">
-                                <div class="text1 reviews__content__subitem__text__title">Владимир</div>
-                                <div class="text1 reviews__content__subitem__text__review">Lorem ipsum, dolor sit amet
-                                    consectetur adipisicing elit. Dolorem, ea.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 </div>

@@ -1,4 +1,5 @@
-﻿using SanTech.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using SanTech.Interfaces;
 using SanTech.Models;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,11 @@ namespace SanTech.Services
             comment.Product = dbProductService.Get(productId);
             db.Comments.Add(comment);
             db.SaveChanges();
+        }
+
+        public List<Comment> Get(int productId)
+        {
+            return db.Comments.Include(x => x.Product).Include(x => x.User).Where(x => x.Product.Id == productId).ToList();
         }
     }
 }
