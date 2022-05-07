@@ -5,6 +5,7 @@ using SanTech.Interfaces;
 using SanTech.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -26,15 +27,15 @@ namespace SanTech.Services
         }
         public void Add(User user)
         {
-           /* string path = Path.Combine(this.hostingEnvironment.WebRootPath, "img", "default_avatar.png");
-            using (Stream fileStream = new FileStream(path, FileMode.Create))
+            //string path = Path.Combine(this.hostingEnvironment.WebRootPath,"img", "default_avatar.png");
+            string path = "wwwroot/img/default_avatar.png";
+            byte[] imageByteArray = null;
+            FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            using (BinaryReader reader = new BinaryReader(fileStream))
             {
-                await file.CopyToAsync(fileStream);
+                imageByteArray = reader.ReadBytes((int)fileStream.Length);
             }
-            using (IFormFile stream = new (path))
-            {
-                user.Avatar = fileService.FromImageToByte(stream);
-            }*/
+            //user.Avatar = fileService.FromImageToByte(file);
             db.Users.Add(user);
             db.SaveChanges();
         }
