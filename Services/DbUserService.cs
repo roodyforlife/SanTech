@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using SanTech.Interfaces;
 using SanTech.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,12 +16,25 @@ namespace SanTech.Services
     public class DbUserService : IDbUserService
     {
         private readonly ApplicationContext db;
-        public DbUserService(ApplicationContext db)
+        private readonly IFileService fileService;
+        private readonly IHostingEnvironment hostingEnvironment;
+        public DbUserService(ApplicationContext db, IFileService fileService, IHostingEnvironment hostingEnvironment)
         {
             this.db = db;
+            this.fileService = fileService;
+            this.hostingEnvironment = hostingEnvironment;
         }
         public void Add(User user)
         {
+           /* string path = Path.Combine(this.hostingEnvironment.WebRootPath, "img", "default_avatar.png");
+            using (Stream fileStream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            using (IFormFile stream = new (path))
+            {
+                user.Avatar = fileService.FromImageToByte(stream);
+            }*/
             db.Users.Add(user);
             db.SaveChanges();
         }
