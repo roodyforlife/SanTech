@@ -16,7 +16,7 @@ namespace SanTech.Services
             this.db = db;
             this.fileService = fileService;
         }
-        public void Add(CreateProduct createProduct)
+        public void Add(ProductViewModel createProduct)
         {
             var image = fileService.FromImageToByte(createProduct.UploadedFile);
             Product product = new Product(createProduct.Title, createProduct.Desc, createProduct.SaleProcent, createProduct.BonusNumber, createProduct.Cost, image);
@@ -57,7 +57,7 @@ namespace SanTech.Services
             db.Products.Remove(product);
             db.SaveChanges();
         }
-        public void RedactProduct(CreateProduct newProduct, int productId)
+        public void RedactProduct(ProductViewModel newProduct, int productId)
         {
             var product = db.Products.ToList().FirstOrDefault(x => x.Id == productId);
             if(newProduct.UploadedFile is not null)

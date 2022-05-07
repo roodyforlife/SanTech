@@ -27,15 +27,7 @@ namespace SanTech.Services
         }
         public void Add(User user)
         {
-            //string path = Path.Combine(this.hostingEnvironment.WebRootPath,"img", "default_avatar.png");
-            string path = "wwwroot/img/default_avatar.png";
-            byte[] imageByteArray = null;
-            FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            using (BinaryReader reader = new BinaryReader(fileStream))
-            {
-                imageByteArray = reader.ReadBytes((int)fileStream.Length);
-            }
-            //user.Avatar = fileService.FromImageToByte(file);
+            user.Avatar = fileService.FromImageToByte("avatar.png");
             db.Users.Add(user);
             db.SaveChanges();
         }
@@ -82,11 +74,6 @@ namespace SanTech.Services
             return db.Users.ToList();
         }
 
-        public User GetUserByEmail(string email)
-        {
-            return db.Users.ToList().FirstOrDefault(x => x.Email == email);
-        }
-
         public string HashData(string data)
         {
             using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
@@ -102,7 +89,7 @@ namespace SanTech.Services
             }
         }
 
-        public string HashTokenFromUser(User user)
+        public string HashData(User user)
         {
             string data = user.Email + user.Phone + user.Password;
             using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
@@ -116,6 +103,17 @@ namespace SanTech.Services
                 }
                 return stringBuilder.ToString();
             }
+        }
+
+        public void RedactUser(User newUser, string userEmail, IFormFile UploadedFile)
+        {
+            var user = db.Users.ToList().FirstOrDefault(x => x.Email == userEmail);
+            user.Name = newUser.Name;
+            user.Avatar = UploadedFile is null ? user.Avatar : fileService.FromImageToByte(UploadedFile);
+            user.Password = newUser.Password is null ? user.Password : HashData(newUser.Password) ;
+            user.PasswordConfirm = newUser.PasswordConfirm is null ? user.PasswordConfirm : HashData(newUser.PasswordConfirm);
+            user.Phone = newUser.Phone;
+            db.SaveChanges();
         }
     }
 }

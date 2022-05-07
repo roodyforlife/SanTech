@@ -31,10 +31,10 @@ namespace SanTech.Controllers
         [HttpPost]
         public IActionResult ForgotPassword(ForgotPassword model)
         {
-            var user = dbUserService.GetUserByEmail(model.Email);
+            var user = dbUserService.Get(model.Email);
             if(user is not null)
             {
-                var code = dbUserService.HashTokenFromUser(user);
+                var code = dbUserService.HashData(user);
                 var callbackUrl = Url.Action("ResetPassword", "ForgotPassword", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 emailService.SendEmail(model.Email, user.Name, $"Вы пытаетесь сбросить пароль. Для сброса пароля перейдите по <a href='{callbackUrl}'>ссылке</a>", "emailSend.html");
                 return View("ForgotPasswordConfirmation");
@@ -54,8 +54,8 @@ namespace SanTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = dbUserService.GetUserByEmail(model.Email);
-                if (user is not null && model.Code == dbUserService.HashTokenFromUser(user))
+                var user = dbUserService.Get(model.Email);
+                if (user is not null && model.Code == dbUserService.HashData(user))
                 {
                     model.Password = dbUserService.HashData(model.Password);
                     dbUserService.ChangePassword(user, model.Password);

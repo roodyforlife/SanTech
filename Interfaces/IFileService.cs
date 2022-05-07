@@ -10,6 +10,7 @@ namespace SanTech.Interfaces
     public interface IFileService
     {
         public byte[] FromImageToByte(IFormFile uploadedFile);
+        public byte[] FromImageToByte(string imageFileName);
         public string GetHTMLBodyForCheck(Application application);
         public string GetCreatedPdfFile(Application application);
     }

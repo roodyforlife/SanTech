@@ -1,0 +1,28 @@
+﻿@model SanTech.Models.User
+@{ 
+    Layout = "_Layout";
+}
+<link href="~/css/profileRedact.css" rel="stylesheet" />
+<div class="redact">
+    <form asp-controller="Home" asp-action="RedactProfile" method="post" enctype="multipart/form-data">
+        <div class="text2 redact__title">Редактирование продукта</div>
+        <div class="redact__content">
+            <div class="redact__content__flex__image">
+                <img src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.User.Avatar))" alt="">
+            </div>
+            <div class="redact__content__flex__newImage">
+                <label for="myfile" class="text1 chous">Выберите фотографию</label>
+                <input type="file" class="my" id="myfile" name="UploadedFile" />
+            </div>
+            <p class="text1 text__under__input">Имя</p>
+            <div class="text1 redact__content__flex__title"><input type="text" asp-for="Name" value="@ViewBag.User.Name"></div>
+            <p class="text1 text__under__input">Phone</p>
+            <div class="text1 redact__content__flex__saleProcent"><input type="tel" asp-for="Phone" value="@ViewBag.User.Phone"></div>
+            <p class="text1 text__under__input">Введите пароль, если хотите его сменить</p>
+            <div class="text1 redact__content__flex__saleProcent"><input type="password" asp-for="Password" value=""></div>
+            <p class="text1 text__under__input">Повторите пароль</p>
+            <div class="text1 redact__content__flex__saleProcent"><input type="password" asp-for="PasswordConfirm" value=""></div>
+        </div>
+        <button type="submit" class="text1 button1 redact__content__button">Редактировать</button>
+    </form>
+</div>

@@ -29,6 +29,14 @@ namespace SanTech.Services
             return imageData;
         }
 
+        public byte[] FromImageToByte(string imageFileName)
+        {
+            string path = Path.Combine(this.hostingEnvironment.WebRootPath, "img", imageFileName);
+            FileStream fileStream = File.OpenRead(path);
+            BinaryReader reader = new BinaryReader(fileStream);
+            return reader.ReadBytes((int)fileStream.Length);
+        }
+
         public string GetCreatedPdfFile(Application application)
         {
             var pdfDocument = new HtmlToPdf().RenderHtmlAsPdf(GetHTMLBodyForCheck(application));

@@ -33,7 +33,7 @@ namespace SanTech.Controllers
                // ViewBag.ApplicationBase = dbApplicationService.GetAll();
             return View(dbProductService.GetProductsInRange(0, 20).ToList());
         }
-        public bool AddNewProduct(CreateProduct product)
+        public bool AddNewProduct(ProductViewModel product)
         {
             if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
                 return true;
@@ -65,7 +65,7 @@ namespace SanTech.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult RedactProduct(CreateProduct newProduct, int productId)
+        public IActionResult RedactProduct(ProductViewModel newProduct, int productId)
         {
             dbProductService.RedactProduct(newProduct, productId);
             return RedirectToAction("AdminPanel");

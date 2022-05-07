@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SanTech.Models
 {
-    public class CreateProduct
+    public class ProductViewModel
     {
         public string Title { get; set; }
         public string Desc { get; set; }

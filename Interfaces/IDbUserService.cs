@@ -1,4 +1,5 @@
-﻿using SanTech.Models;
+﻿using Microsoft.AspNetCore.Http;
+using SanTech.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,8 @@ namespace SanTech.Interfaces
         public int ClearBonuses(Application application);
         public void AddBonuses(Application application);
         public string HashData(string data);
-        public string HashTokenFromUser(User user);
+        public string HashData(User user);
         public void ChangePassword(User user, string password);
-        public User GetUserByEmail(string email);
-        //public string GeneratePasswordResetToken();
+        public void RedactUser(User newUser, string userEmail, IFormFile UploadedFile);
     }
 }

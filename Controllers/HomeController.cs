@@ -73,5 +73,26 @@ namespace SanTech.Controllers
             var userEmail = HttpContext.Session.GetString("Email");
             dbBasketService.DeleteAllBasket(userEmail);
         }
+        [HttpGet]
+        public IActionResult RedactProfile()
+        {
+            var userEmail = HttpContext.Session.GetString("Email");
+            ViewBag.LoggedAccount = userEmail;
+            if (userEmail is not null)
+            {
+                ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
+                ViewBag.User = dbUserService.Get(userEmail);
+                return View();
+            }
+            else
+                return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult RedactProfile(User user, IFormFile UploadedFile)
+        {
+            var userEmail = HttpContext.Session.GetString("Email");
+            dbUserService.RedactUser(user, userEmail, UploadedFile);
+            return RedirectToAction("Index");
+        }
     }
 }
