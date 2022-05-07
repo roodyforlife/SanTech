@@ -12,7 +12,6 @@
             {
                 <div class="text2 write__comment__content__title">Написать комментарий</div>
             <div class="write__comment__content__form">
-                <form action="">
                     <p class="text1">Поставьте оценку</p>
                     <div class="comment__form__rating rating_set">
                         <div class="rating__body">
@@ -33,8 +32,7 @@
                         <p class="text1">Напишите комментарий</p>
                         <input type="text" class="text1">
                     </div>
-                    <button class="text1 comment__form__button">Отправить</button>
-                </form>
+                    <button onclick="AddComment(@Model.Id)" class="text1 comment__form__button">Отправить</button>
             </div>
             }
             else
