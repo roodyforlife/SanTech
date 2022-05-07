@@ -49,7 +49,7 @@
             </div>
                     }
             <div class="product__content__info__buttons" style='@activeOrNotActiveButton'>
-                <a href="" class="button1 product__content__info__button1">
+                <div onclick="AddToBasket(@Model.Id, '@ViewBag.User')" class="button1 product__content__info__button1">
                     <div class="product__content__info__button1__basket">
                         <svg width="30" height="30" viewBox="0 0 70 70" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -59,9 +59,9 @@
                         </svg>
                     </div>
                     <span class="text1 basket__content__total__info__button__text">Добавить в корзину</span>
-                </a>
+                </div>
                 <a href="" class="button1 product__content__info__button2">
-                    <span class="text1 product__content__info__button2__text">Оформить заказ</span>
+                    <span class="text1 product__content__info__button2__text">В "Избранные"</span>
                 </a>
             </div>
             <div class="text1 product__content__info__code">Код: @Model.Id</div>

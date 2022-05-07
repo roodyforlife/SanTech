@@ -46,5 +46,29 @@ namespace SanTech.Controllers
             var products = dbProductService.GetProductsInRange(from, count).ToList();
             return View(products);
         }
+        [HttpPost]
+        public void DeleteProduct(int productId)
+        {
+            dbProductService.DeleteProduct(productId);
+        }
+        [HttpGet]
+        public IActionResult RedactProduct(int productId)
+        {
+            var userEmail = HttpContext.Session.GetString("Email");
+            if (userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
+                return Redirect("../Home/Index");
+            ViewBag.LoggedAccount = userEmail;
+            ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
+            ViewBag.User = dbUserService.Get(userEmail);
+            ViewBag.UserBase = dbUserService.GetAll();
+            ViewBag.Product = dbProductService.Get(productId);
+            return View();
+        }
+        [HttpPost]
+        public IActionResult RedactProduct(CreateProduct newProduct, int productId)
+        {
+            dbProductService.RedactProduct(newProduct, productId);
+            return RedirectToAction("AdminPanel");
+        }
     }
 }

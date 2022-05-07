@@ -130,6 +130,7 @@
 .product__content__info__button1 {
     margin-bottom: 20px;
     margin: 0 20px 20px 0;
+    cursor: pointer;
 }
 
 .product__content__info__button2 {

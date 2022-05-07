@@ -1,0 +1,36 @@
+﻿@model SanTech.Models.CreateProduct
+@{ 
+    Layout = "_Layout";
+}
+<link href="~/css/productRedact.css" rel="stylesheet" />
+<div class="redact">
+    <form asp-controller="AdminPanel" asp-action="RedactProduct" asp-route-productId="@ViewBag.Product.Id" method="post" enctype="multipart/form-data">
+        <div class="text2 redact__title">Редактирование продукта</div>
+        <div class="redact__content">
+            <div class="redact__content__flex">
+                <div class="redact__content__flex__image">
+                    <img src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.Product.Image))" alt="">
+                </div>
+                <div class="redact__content__flex__newImage">
+                    <label for="myfile" class="text1 chous">Выберите фотографию</label>
+                    <input type="file" class="my" id="myfile" name="UploadedFile" />
+                </div>
+                <p class="text1 text__under__input">Название товара</p>
+                <div class="text1 redact__content__flex__title"><input type="text" asp-for="Title" value="@ViewBag.Product.Title"></div>
+                <input type="checkbox" class="custom-checkbox" asp-for="IsNotAvailable" id="happy" name="IsNotAvailable" checked="@ViewBag.Product.IsNotAvailable">
+                <label for="happy" class="text1">Нету в в наличии</label>
+                <p class="text1 text__under__input">Цена</p>
+                <div class="text1 redact__content__flex__cost"><input type="number" asp-for="Cost" value="@ViewBag.Product.Cost"></div>
+                <p class="text1 text__under__input">Процент скидки</p>
+                <div class="text1 redact__content__flex__saleProcent"><input type="number" asp-for="SaleProcent" value="@ViewBag.Product.SaleProcent"></div>
+                <p class="text1 text__under__input">Количество бонусов за товар</p>
+                <div class="text1 redact__content__flex__bonus"><input type="number" asp-for="BonusNumber" value="@ViewBag.Product.BonusNumber"></div>
+            </div>
+            <div class="redact__content__flex">
+                <p class="text1 text__under__input">Описание товара</p>
+                <textarea asp-for="Desc" class="text1 redact__content__flex__desc" placeholder="@ViewBag.Product.Desc"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="text1 button1 redact__content__button">Редактировать</button>
+    </form>
+</div>

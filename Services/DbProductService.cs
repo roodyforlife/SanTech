@@ -49,5 +49,26 @@ namespace SanTech.Services
                 throw new ArgumentOutOfRangeException();
             return db.Products.Skip(from).Take(count);
         }
+        public void DeleteProduct(int productId)
+        {
+            var product = db.Products.ToList().FirstOrDefault(x => x.Id == productId);
+            var basket = db.Baskets.ToList().Where(x => x.Product.Id == productId);
+            db.Baskets.RemoveRange(basket);
+            db.Products.Remove(product);
+            db.SaveChanges();
+        }
+        public void RedactProduct(CreateProduct newProduct, int productId)
+        {
+            var product = db.Products.ToList().FirstOrDefault(x => x.Id == productId);
+            if(newProduct.UploadedFile is not null)
+            product.Image = fileService.FromImageToByte(newProduct.UploadedFile);
+            product.Title = newProduct.Title;
+            product.Desc = newProduct.Desc ?? product.Desc;
+            product.Cost = newProduct.Cost;
+            product.SaleProcent = newProduct.SaleProcent;
+            product.BonusNumber = newProduct.BonusNumber;
+            product.IsNotAvailable = newProduct.IsNotAvailable;
+            db.SaveChanges();
+        }
     }
 }

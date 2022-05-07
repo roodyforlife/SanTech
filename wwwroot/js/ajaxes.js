@@ -89,6 +89,7 @@ function AddToBasket(Id, userEmail) {
             data: formData,
             success: function (response) {
                 if (response) {
+                    console.log('sdfsdf')
                     $('.menu__item__count').html(parseInt($('.menu__item__count').html()) + 1);
                 }
             }
@@ -98,7 +99,7 @@ function AddToBasket(Id, userEmail) {
     }
 }
 function DeleteFromBasket(basketId) {
-    $(`#${basketId}`).remove();
+    //$(`#${basketId}`).remove();
     $('.menu__item__count').html(parseInt($('.menu__item__count').html()) - 1);
     var formData = new FormData();
     formData.append("basketId", basketId);
@@ -111,6 +112,22 @@ function DeleteFromBasket(basketId) {
         data: formData,
         success: function (response) {
             LoadBasket();
+        }
+    });
+}
+function DeleteProduct(productId) {
+    var formData = new FormData();
+    formData.append("productId", productId);
+    $.ajax({
+        url: "/AdminPanel/DeleteProduct",
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+            $(`#productId_${productId}`).css("opacity", "0.3");
+            $(`#productId_${productId}`).css("pointer-events", "none");
         }
     });
 }

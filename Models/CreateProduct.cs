@@ -14,6 +14,7 @@ namespace SanTech.Models
         public int BonusNumber { get; set; }
         public int Cost { get; set; }
         public IFormFile UploadedFile { get; set; }
+        public bool IsNotAvailable { get; set; }
 
     }
 }

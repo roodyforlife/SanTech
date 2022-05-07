@@ -23,7 +23,7 @@
         <div class="adminPanel__products admin__toggleContent _active__adminPanel" id="Products">
             @foreach (Product u in Model)
             {
-            <div class="admin__toggleContent__item">
+            <div class="admin__toggleContent__item" id="productId_@u.Id">
                 <div class="admin__toggleContent__item__first">
                     <div class="admin__toggleContent__item__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt=""></div>
                     <div class="admin__toggleContent__item__info">
@@ -44,15 +44,15 @@
                     </div>
                 </div>
                 <div class="admin__toggleContent__item__buttons">
-                    <div class="admin__toggleContent__item__buttons__delete">
+                    <div class="admin__toggleContent__item__buttons__delete" onclick="DeleteProduct(@u.Id)">
                         <span class="text1">Удалить</span>
                     </div>
-                    <div class="admin__toggleContent__item__buttons__redact">
+                    <a asp-action="RedactProduct" asp-route-productId="@u.Id" class="admin__toggleContent__item__buttons__redact">
                         <span class="text1">Редактировать</span>
-                    </div>
-                    <div class="admin__toggleContent__item__buttons__view">
+                    </a>
+                    <a asp-controller="ViewProduct" asp-action="ViewProduct" asp-route-productId="@u.Id" class="admin__toggleContent__item__buttons__view">
                         <span class="text1">Просмотреть</span>
-                    </div>
+                    </a>
                 </div>
             </div>
             }
