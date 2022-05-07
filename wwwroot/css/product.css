@@ -1,4 +1,4 @@
-@import url('var.css');
+﻿@import url('var.css');
 
 .container {
     max-width: 1280px;
@@ -132,7 +132,9 @@
     margin: 0 20px 20px 0;
     cursor: pointer;
 }
-
+.product__desc__content{
+    margin: 20px 0 0 0;
+}
 .product__content__info__button2 {
     background-color: #fff;
     border: 1px solid var(--yellow-color);
@@ -173,9 +175,6 @@
 .product__content__info__maintenance__title {
     font-size: 16px;
     margin: 0 0 20px 0;
-}
-.product__desc__content{
-    margin: 20px 0;
 }
 
 .product__reviews {
@@ -220,13 +219,294 @@
     max-width: 80%;
 }
 
-.reviews__content__item__text__title {
+.reviews__content__item__text__evaluation {
+    margin: 0 0 5px 0;
+}
+
+    .reviews__content__item__text__evaluation span {
+        color: var(--yellow-color);
+        font-size: 20px;
+    }
+
+.reviews__content__item__answer {
+    margin: 10px 0;
+    font-weight: 700;
+    color: var(--darkGray-color);
+    cursor: pointer;
+}
+
+.reviews__content__item__answer__input {
+    width: 100%;
+    height: 40px;
+}
+
+    .reviews__content__item__answer__input input {
+        width: 100%;
+        height: 100%;
+        background: var(--gray-color);
+        padding: 0 10px;
+        border-radius: 5px;
+    }
+
+.reviews__content__item__answer__buttons {
+    display: flex;
+    justify-content: right;
+    margin: 5px 0 0 0;
+}
+
+.reviews__content__item__answer__block {
+    display: none;
+}
+
+.reviews__content__item__answer__input__cancel, .reviews__content__item__answer__input__write {
+    width: auto;
+    height: 35px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reviews__content__item__answer__input__cancel {
+    background: var(--gray-color);
+}
+
+.reviews__content__item__answer__input__write {
+    margin: 0 0 0 10px;
+    background: var(--yellow-color);
+}
+
+.reviews__content__item__answer:hover {
+    color: var(--darkGrayHover-color);
+}
+
+.reviews__content__subitem {
+    margin: 10px 0 0 0;
+    padding: 5px;
+    width: 100%;
+    border-left: 1px solid var(--darkGrayHover-color);
+    display: flex;
+}
+
+.reviews__content__subitem__logo {
+    width: 30px;
+    height: 30px;
+    background: var(--gray-color);
+    border-radius: 50%;
+    margin-right: 20px;
+    overflow: hidden;
+}
+
+    .reviews__content__subitem__logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.reviews__content__subitem__text {
+    width: 90%;
+}
+
+.reviews__content__subitem__text__title, .reviews__content__subitem__text__review {
+    font-size: 14px;
+}
+
+.reviews__content__item__text__title, .reviews__content__subitem__text__title {
     font-weight: 700;
 }
 
 .reviews__content__item__text__review {
     margin-top: 10px;
     word-wrap: break-word;
+}
+
+.write__comment {
+    color: var(--blue-color);
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+    .write__comment:hover {
+        color: var(--blueHover-color);
+    }
+
+.write__comment__block {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(34, 34, 34, .4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 105;
+}
+
+.write__comment__content {
+    max-width: 1000px;
+    width: 100%;
+    height: 70%;
+    background: #fff;
+    padding: 20px;
+    overflow: auto;
+    position: relative;
+}
+
+.write__comment__content__exit {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+    .write__comment__content__exit::after, .write__comment__content__exit::before {
+        content: '';
+        display: inline-block;
+        width: 100%;
+        height: 2px;
+        background: black;
+        top: 35%;
+        position: absolute;
+    }
+
+    .write__comment__content__exit::before {
+        transform: rotate(45deg);
+    }
+
+    .write__comment__content__exit::after {
+        transform: rotate(-45deg);
+    }
+
+._active__comment {
+    display: flex;
+}
+
+.comment__form__rating {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-end;
+    line-height: 0.75;
+    font-size: 40px;
+    color: rgb(194, 194, 194);
+}
+
+.write__comment__content__form {
+    margin: 50px auto;
+    max-width: 400px;
+}
+.write__comment__content__title {
+    text-align: center;
+}
+
+.write__comment__content__button {
+    margin: 20px auto;
+    cursor: pointer;
+    width: auto;
+    max-width: 100px;
+    height: 40px;
+    background: var(--yellow-color);
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .write__comment__content__button:hover {
+        background: var(--yellowHover-color);
+    }
+
+.rating__body {
+    display: inline-block;
+    position: relative;
+}
+
+    .rating__body::before {
+        content: '★★★★★';
+        display: block;
+    }
+
+.rating__active {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+    .rating__active:before {
+        content: '★★★★★';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        color: var(--yellow-color);
+    }
+
+.rating__items {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.rating__item {
+    cursor: pointer;
+    flex: 0 0 20%;
+    height: 100%;
+    opacity: 0;
+}
+
+.rating__value {
+    line-height: 1;
+    padding-left: 10px;
+    color: black;
+    font-size: 30px;
+}
+
+.rating__input__value {
+    opacity: 0;
+}
+
+.comment__form__input {
+    margin: 20px 0;
+}
+
+    .comment__form__input input {
+        background: var(--gray-color);
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        padding: 0 10px;
+    }
+
+.comment__form__button {
+    width: 100%;
+    height: 40px;
+    background: var(--yellow-color);
+    border-radius: 5px;
+}
+
+    .comment__form__button:hover {
+        background: var(--yellowHover-color);
+    }
+
+@media(max-width: 1000px) {
+    .write__comment__content {
+        padding: 20px;
+        margin: 20px;
+    }
 }
 
 @media(max-width: 700px) {
