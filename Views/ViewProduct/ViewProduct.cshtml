@@ -5,7 +5,6 @@
 @{string activeOrNotActiveButton = Model.IsNotAvailable ? "opacity: 0.5; pointer-events: none;" : "";}
 <link href="~/css/product.css" rel="stylesheet" />
 <script src="~/js/comment.js"></script>
-<script>LoadComments(@Model.Id)</script>
 <div class="write__comment__block">
         <div class="write__comment__content">
             <div class="write__comment__content__exit"></div>
@@ -40,7 +39,7 @@
             {
             <div class="write__comment__content__form">
                 <div class="text2 write__comment__content__title">Вы не авторизованы</div>
-            <a href="" class="text1 write__comment__content__button">Войти</a>
+            <a asp-controller="SignInAccount" asp-action="SignInAccount" class="text1 write__comment__content__button">Войти</a>
             </div>
                
             }
@@ -155,6 +154,41 @@
             <div class="text2 product__reviews__title">Отзывы</div>
             <div class="text1 write__comment">Оставить отзыв</div>
             <div class="reviews__content _scroll">
+                @foreach(Comment comment in Model.Comments)
+                {
+                <div class="reviews__content__item">
+                    <div class="reviews__content__item__logo"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(comment.User.Avatar))" alt=""></div>
+                    <div class="reviews__content__item__text">
+                        <div class="text1 reviews__content__item__text__evaluation">Оценка: @comment.Evaluation <span>★</span></div>
+                        <div class="text1 reviews__content__item__text__title">@comment.User.Name</div>
+                        <div class="text1 reviews__content__item__text__review">
+                            @comment.Text
+                        </div>
+                        <div class="text1 reviews__content__item__answer">Ответить</div>
+                        <div class="reviews__content__item__answer__block">
+                            <div class="reviews__content__item__answer__input">
+                                <input type="text" class="text1 subComment__input" id="subComment__input__@comment.Id">
+                            </div>
+                            <div class="reviews__content__item__answer__buttons">
+                                <div class="text1 reviews__content__item__answer__input__cancel">Отмена</div>
+                                <div onclick="AddSubComment(@comment.Id, @Model.Id)" class="text1 reviews__content__item__answer__input__write">Оставить отзыв</div>
+                            </div>
+                        </div>
+                        @foreach(SubComment subComment in comment.SubComments)
+                        {
+                        <div class="reviews__content__subitem">
+                        <div class="reviews__content__subitem__logo"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(subComment.User.Avatar))" alt=""></div>
+                        <div class="reviews__content__subitem__text">
+                            <div class="text1 reviews__content__subitem__text__title">@subComment.User.Name</div>
+                            <div class="text1 reviews__content__subitem__text__review">
+                                @subComment.Text
+                            </div>
+                        </div>
+                    </div>
+                        }
+                    </div>
+                </div>
+                }
             </div>
         </div>
 </div>

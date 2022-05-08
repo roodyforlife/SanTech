@@ -21,7 +21,7 @@ namespace SanTech.Controllers
         [HttpPost]
         public bool AddComment(string text, int Evaluation, int productId)
         {
-            if (text != null && Evaluation != 0)
+            if (text is not null && Evaluation != 0)
             {
                 var userEmail = HttpContext.Session.GetString("Email");
                 Comment comment = new Comment()
@@ -31,6 +31,22 @@ namespace SanTech.Controllers
                     User = dbUserService.Get(userEmail)
                 };
                 dbCommentService.Add(comment, productId);
+                return true;
+            }
+            return false;
+        }
+        public bool AddSubComment(string text, int commentId)
+        {
+            var userEmail = HttpContext.Session.GetString("Email");
+            if (text is not null && userEmail is not null)
+            {
+                SubComment subComment = new SubComment()
+                {
+                    Text = text,
+                    User = dbUserService.Get(userEmail),
+                    Comment = dbCommentService.GetOne(commentId)
+                };
+                dbCommentService.AddSub(subComment, commentId);
                 return true;
             }
             return false;

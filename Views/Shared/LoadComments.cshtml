@@ -1,35 +1,37 @@
 ﻿@model IEnumerable<Comment>
 <script src="~/js/comment.js"></script>
-@foreach (var u in Model)
+@foreach (Comment comment in Model)
 {
     <div class="reviews__content__item">
-        <div class="reviews__content__item__logo"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.User.Avatar))" alt=""></div>
+        <div class="reviews__content__item__logo"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(comment.User.Avatar))" alt=""></div>
         <div class="reviews__content__item__text">
-            <div class="text1 reviews__content__item__text__evaluation">Оценка: @u.Evaluation <span>★</span></div>
-            <div class="text1 reviews__content__item__text__title">@u.User.Name</div>
+            <div class="text1 reviews__content__item__text__evaluation">Оценка: @comment.Evaluation <span>★</span></div>
+            <div class="text1 reviews__content__item__text__title">@comment.User.Name</div>
             <div class="text1 reviews__content__item__text__review">
-                @u.Text
+                @comment.Text
             </div>
             <div class="text1 reviews__content__item__answer">Ответить</div>
             <div class="reviews__content__item__answer__block">
                 <div class="reviews__content__item__answer__input">
-                    <input type="text" class="text1">
+                    <input type="text" class="text1 subComment__input" id="subComment__input__@comment.Id">
                 </div>
                 <div class="reviews__content__item__answer__buttons">
                     <div class="text1 reviews__content__item__answer__input__cancel">Отмена</div>
-                    <div class="text1 reviews__content__item__answer__input__write">Оставить отзыв</div>
+                    <div onclick="AddSubComment(@comment.Id, @comment.Product.Id)" class="text1 reviews__content__item__answer__input__write">Оставить отзыв</div>
                 </div>
             </div>
-            <div class="reviews__content__subitem">
-                <div class="reviews__content__subitem__logo"><img src="img/default_avatar.png" alt=""></div>
-                <div class="reviews__content__subitem__text">
-                    <div class="text1 reviews__content__subitem__text__title">Владимир</div>
-                    <div class="text1 reviews__content__subitem__text__review">
-                        Lorem ipsum, dolor sit amet
-                        consectetur adipisicing elit. Dolorem, ea.
+            @foreach (SubComment subComment in comment.SubComments)
+            {
+                <div class="reviews__content__subitem">
+                    <div class="reviews__content__subitem__logo"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(subComment.User.Avatar))" alt=""></div>
+                    <div class="reviews__content__subitem__text">
+                        <div class="text1 reviews__content__subitem__text__title">@subComment.User.Name</div>
+                        <div class="text1 reviews__content__subitem__text__review">
+                            @subComment.Text
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 }

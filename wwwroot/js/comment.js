@@ -90,6 +90,30 @@ function AddComment(productId) {
     }
   });
 }
+function AddSubComment(commentId, productId) {
+    var formData = new FormData();
+    formData.append("commentId", commentId);
+    formData.append("text", $(`#subComment__input__${commentId}`).val());
+    $.ajax({
+        url: "/Comment/AddSubComment",
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+            if (response) {
+                $(`#subComment__input__${commentId}`).val('')
+                $(`#subComment__input__${commentId}`).css("border", "0");
+                $(`#subComment__input__${commentId}`).parents('.reviews__content__item__answer__block').css('display', 'none');
+                LoadComments(productId);
+            }
+            else {
+                $(`#subComment__input__${commentId}`).css("border", "1px solid #b94a48");
+            }
+        }
+    });
+}
 function LoadComments(productId) {
     var formData = new FormData();
     formData.append("productId", productId);

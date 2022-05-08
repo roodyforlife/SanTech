@@ -216,7 +216,8 @@
     }
 
 .reviews__content__item__text {
-    max-width: 80%;
+    max-width: 90%;
+    width: 90%;
 }
 
 .reviews__content__item__text__evaluation {

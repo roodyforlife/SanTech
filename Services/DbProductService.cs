@@ -1,4 +1,5 @@
-﻿using SanTech.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using SanTech.Interfaces;
 using SanTech.Models;
 using System;
 using System.Collections.Generic;
@@ -35,12 +36,12 @@ namespace SanTech.Services
 
         public Product Get(int Id)
         {
-            return db.Products.ToList().FirstOrDefault(x => x.Id == Id);
+            return db.Products.Include(x => x.Comments).ThenInclude(x => x.SubComments).ThenInclude(x => x.User).ToList().FirstOrDefault(x => x.Id == Id);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return db.Products.ToList();
+            return db.Products.Include(x => x.Comments).ToList();
         }
 
         public IEnumerable<Product> GetProductsInRange(int from, int count)

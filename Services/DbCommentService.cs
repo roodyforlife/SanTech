@@ -24,9 +24,20 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
+        public void AddSub(SubComment subComment, int commentId)
+        {
+            db.SubComments.Add(subComment);
+            db.SaveChanges();
+        }
+
         public List<Comment> Get(int productId)
         {
-            return db.Comments.Include(x => x.Product).Include(x => x.User).Where(x => x.Product.Id == productId).ToList();
+            return db.Comments.Include(x => x.Product).Include(x => x.User).Include(x => x.SubComments).Where(x => x.Product.Id == productId).ToList();
+        }
+
+        public Comment GetOne(int commentId)
+        {
+            return db.Comments.Include(x => x.SubComments).ToList().FirstOrDefault(x => x.Id == commentId);
         }
     }
 }
