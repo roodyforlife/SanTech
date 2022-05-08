@@ -111,9 +111,6 @@ $(document).ready(function () {
       success: function (response) {
         console.log(response)
         LoadBasket();
-        // $input.closest('.basket__content__item__amount').children('.basket__content__item__amount__cost').html(`${(response * val).toLocaleString()} грн.`);
-        // $input.closest('.basket__content__orders').children('.basket__content__total__info__cost').html(`${(response * val).toLocaleString()} грн.`)
-        // $input.val(val);
       }
     });
   });
