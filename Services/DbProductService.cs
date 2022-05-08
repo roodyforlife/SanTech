@@ -55,6 +55,11 @@ namespace SanTech.Services
             var product = db.Products.ToList().FirstOrDefault(x => x.Id == productId);
             var basket = db.Baskets.ToList().Where(x => x.Product.Id == productId);
             db.Baskets.RemoveRange(basket);
+            var subComments = db.SubComments.ToList().Where(x => x.Comment.Product.Id == productId);
+            var comments = db.Comments.ToList().Where(x => x.Product.Id == productId);
+            db.SubComments.RemoveRange(subComments);
+            db.Comments.RemoveRange(comments);
+            //dbCommentService.DeleteAllComments(productId);
             db.Products.Remove(product);
             db.SaveChanges();
         }

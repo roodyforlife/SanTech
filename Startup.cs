@@ -32,11 +32,11 @@ namespace SanTech
             services.AddSession();
             services.AddScoped<IDbUserService, DbUserService>();
             services.AddScoped<IAuthorizatService, AuthorizatService>();
+            services.AddScoped<IDbCommentService, DbCommentService>();
             services.AddScoped<IDbProductService, DbProductService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IDbBasketService, DbBasketService>();
             services.AddScoped<IEmailService, EmailService>();
-            services.AddScoped<IDbCommentService, DbCommentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
