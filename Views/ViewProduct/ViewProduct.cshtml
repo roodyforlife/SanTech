@@ -53,15 +53,15 @@
         <div class="product__content__info">
             @if (!Model.IsNotAvailable)
             {
-            <div class="product__content__info__available">
-                <div class="product__content__info__available__logo">
-                    <svg width="14" height="10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="#359D3F" d="M0 5.443l.907-.907L5.443 9.07l-.907.907z" />
-                        <path fill="#359D3F" d="M12.7 0l.906.907-9.07 9.07-.908-.906z" />
-                    </svg>
+                <div class="product__content__info__available">
+                    <div class="product__content__info__available__logo">
+                        <svg width="14" height="10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#359D3F" d="M0 5.443l.907-.907L5.443 9.07l-.907.907z" />
+                            <path fill="#359D3F" d="M12.7 0l.906.907-9.07 9.07-.908-.906z" />
+                        </svg>
+                    </div>
+                    <div class="text1 product__content__info__available__text">Есть в наличии</div>
                 </div>
-                <div class="text1 product__content__info__available__text">Есть в наличии</div>
-            </div>
             }
             else
             {
@@ -69,27 +69,36 @@
                     <div class="text1 product__content__info__not__available__text">Нет в наличии</div>
                 </div>
             }
-            
+            @if (Model.Comments.Sum(x => x.Evaluation) != 0)
+            {
+                double deltaEvaluation = Math.Round((double)Model.Comments.Sum(x => x.Evaluation) / (double)Model.Comments.Count(), 1);
+                int percent = ((int)deltaEvaluation * 100) / 5;
+                string style = $"linear-gradient(to right, #ffc244 0%, #ffc244 {percent}%, #999 {percent}%, #999 100%);";
+                <div class="star">
+                    <img src="~/img/star.png" alt="" style="background: @style">
+                    <div class="text1 star__evaluation">@deltaEvaluation</div>
+                </div>
+            }
             @if (Model.BonusNumber > 0)
             {
-            <div class="text1 product__content__info__bonus">
-                <div class="product__content__info__bonus__image">
-                    <img src="~/img/bonus.svg" alt="">
+                <div class="text1 product__content__info__bonus">
+                    <div class="product__content__info__bonus__image">
+                        <img src="~/img/bonus.svg" alt="">
+                    </div>
+                    <div class="text1 product__content__info__bonus__text">Бонус за товар: +@Model.BonusNumber</div>
                 </div>
-                <div class="text1 product__content__info__bonus__text">Бонус за товар: +@Model.BonusNumber</div>
-            </div>
             }
             @if (Model.SaleProcent == 0)
             {
-            <div class="text2 product__content__info__cost">@Model.Cost.ToString("N0") грн.</div>
+                <div class="text2 product__content__info__cost">@Model.Cost.ToString("N0") грн.</div>
             }
             else
             {
-            <div class="product__content__info__sale">
-                <div class="text2 product__content__info__sale__old">@Model.Cost.ToString("N0") грн.</div>
-                <div class="text2 product__content__info__sale__new">@{var saleCost = (Model.Cost * (100 - Model.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
-            </div>
-                    }
+                <div class="product__content__info__sale">
+                    <div class="text2 product__content__info__sale__old">@Model.Cost.ToString("N0") грн.</div>
+                    <div class="text2 product__content__info__sale__new">@{var saleCost = (Model.Cost * (100 - Model.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
+                </div>
+            }
             <div class="product__content__info__buttons" style='@activeOrNotActiveButton'>
                 <div onclick="AddToBasket(@Model.Id, '@ViewBag.User')" class="button1 product__content__info__button1">
                     <div class="product__content__info__button1__basket">

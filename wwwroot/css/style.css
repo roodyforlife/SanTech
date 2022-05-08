@@ -89,7 +89,7 @@ body._lock {
 }
 
 .profile__pull__menu {
-    padding: 10px;
+    padding: 10px 0;
     width: auto;
     min-width: 175px;
     height: auto;
@@ -111,10 +111,12 @@ body._lock {
 .profile__pull__menu__list li {
     display: block;
     height: auto;
-    padding: 10px 0;
+    padding: 10px;
     color: black;
 }
-
+.profile__pull__menu__list li:hover {
+    background: var(--yellow-color);
+}
 .profile__pull__menu__list li:last-child {
     border-top: 1px solid #ccc;
 }
@@ -215,6 +217,29 @@ body._lock {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.star {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    margin: 10px 0;
+}
+
+    .star img {
+        width: 100%;
+        height: 100%;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc244', endColorstr='#ffffff', GradientType=1);
+    }
+
+.star__evaluation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    position: absolute;
 }
 
 .content__search__category,
