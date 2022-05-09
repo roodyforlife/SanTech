@@ -40,7 +40,7 @@ namespace SanTech.Services
             return db.Products.Include(x => x.Comments).ThenInclude(x => x.User).Include(x => x.Comments).ThenInclude(x => x.SubComments).ToList().FirstOrDefault(x => x.Id == Id);
         }
 
-        public IEnumerable<Product> GetAll()
+        public List<Product> GetAll()
         {
             var products = db.Products.Include(x => x.Comments).ToList();
             return products;

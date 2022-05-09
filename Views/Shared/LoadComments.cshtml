@@ -1,14 +1,5 @@
 ﻿@model IEnumerable<Comment>
-<script>
-$(document).ready(function () {
-    $('.reviews__content__item__answer').click(function () {
-        $(this).parent().children('.reviews__content__item__answer__block').css('display', 'block');
-    });
-    $('.reviews__content__item__answer__input__cancel').click(function () {
-        $(this).parents('.reviews__content__item__answer__block').css('display', 'none');
-    });
-});
-</script>
+
 @foreach (Comment comment in Model)
 {
    <div class="reviews__content__item">
@@ -60,3 +51,11 @@ $(document).ready(function () {
                     </div>
                 </div>
 }
+<script>
+    $('.reviews__content__item__answer').click(function () {
+        $(this).parents('.reviews__content__item__text').children('.reviews__content__item__answer__block').css('display', 'block');
+    });
+    $('.reviews__content__item__answer__input__cancel').click(function () {
+        $(this).parents('.reviews__content__item__answer__block').css('display', 'none');
+    });
+</script>

@@ -3,6 +3,14 @@
 @{
     Layout = "_Layout";
 }
+@{
+    string sort = ViewBag.Search.Sort ?? "NewDesc";
+    string searchInput = ViewBag.Search.SearchInput ?? "";
+    int costTo = ViewBag.MaxCost;
+    if(ViewBag.Search.CostTo != ViewBag.MaxCost && ViewBag.Search.CostTo != 0)
+    costTo = ViewBag.Search.CostTo;
+   
+}
 <script src="~/js/loadOnScrollHomeIndex.js"></script>
 <form asp-controller="Home" asp-action="Index" method="get">
 <div class="content__search">
@@ -70,7 +78,7 @@
                 <div class="text1 category__list__li__text">Лестницы</div>
             </li>
         </ul>
-        <input type="number" value="0" class="content__search__category__number" name="Category" id="SearchCategory"/>
+        <input type="number" value="@ViewBag.Search.Category" class="content__search__category__number" name="Category" id="SearchCategory"/>
     </div>
     <div class="content__search__sort">
         <div class="text1 content__search__sort__button _unselectable">Сортировка товара</div>
@@ -100,10 +108,10 @@
                 <div class="text1 sort__list__li__text">Сначала старые</div>
             </li>
         </ul>
-        <input type="text" value="NewDesc" class="content__search__sort__number" name="Sort" id="SearchSort"/>
+        <input type="text" value="@sort" class="content__search__sort__number" name="Sort" id="SearchSort"/>
     </div>
     <div class="content__search__input">
-        <input class="text1" type="text" name="SearchInput" id="SearchInput" placeholder="Поиск..." />
+        <input class="text1" type="text" name="SearchInput" id="SearchInput" value="@searchInput" placeholder="Поиск..." />
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="612.08px" height="612.08px"
              viewBox="0 0 612.08 612.08" style="enable-background:new 0 0 612.08 612.08;"
@@ -128,8 +136,8 @@
         </div>
         <div class="content__search__rangeCost__container">
             <div class="slider-track"></div>
-            <input type="range" min="0" max="@ViewBag.MaxCost" name="CostFrom" value="0" id="slider-1" oninput="slideOne()">
-            <input type="range" min="0" max="@ViewBag.MaxCost" name="CostTo" value="@ViewBag.MaxCost" id="slider-2" oninput="slideTwo()">
+            <input type="range" min="0" max="@ViewBag.MaxCost" name="CostFrom" value="@ViewBag.Search.CostFrom" id="slider-1" oninput="slideOne()">
+            <input type="range" min="0" max="@ViewBag.MaxCost" name="CostTo" value="@costTo" id="slider-2" oninput="slideTwo()">
         </div>
     </div>
     <button type="submit" class="text1 button1 content__search__submit">Подтвердить поиск</button>

@@ -27,7 +27,7 @@ namespace SanTech.Controllers
                 ViewBag.User = dbUserService.Get(userEmail);
             }
             var model = dbProductService.Get(productId);
-            model.Comments = model.Comments.OrderByDescending(x => x.Date).ToList();
+            model.Comments = model.Comments.OrderByDescending(x => x.Id).ToList();
             return View(model);
         }
     }

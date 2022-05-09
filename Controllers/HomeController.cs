@@ -31,10 +31,11 @@ namespace SanTech.Controllers
                 ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
                 ViewBag.User = dbUserService.Get(userEmail);
             }
-            var allProducts = dbProductService.GetAll(search);
-            var products = dbProductService.GetProductsInRange(0, 20, allProducts).ToList();
+            var allProducts = dbProductService.GetAll();
+            var products = dbProductService.GetProductsInRange(0, 20, dbProductService.GetAll(search)).ToList();
             if(allProducts.Count() > 0)
-            ViewBag.MaxCost = dbProductService.GetAll().Max(x => x.Cost * (100 - x.SaleProcent) / 100);
+            ViewBag.MaxCost = dbProductService.GetAll().Max(x => (x.Cost * (100 - x.SaleProcent) / 100));
+            ViewBag.Search = search;
             return View(products);
         }
         public string SignOutAccount()
