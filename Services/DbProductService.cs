@@ -82,10 +82,36 @@ namespace SanTech.Services
         public IEnumerable<Product> GetAll(SearchViewModel search)
         {
             var products = db.Products.Include(x => x.Comments).AsEnumerable();
-            if (search.CategoryId != 0)
-                products = products.ToList().Where(x => x.CategoryId == search.CategoryId);
+            if (search.Category != 0)
+                products = products.ToList().Where(x => x.CategoryId == search.Category);
             if(search.CostTo != 0)
-            products = products.Where(x => x.Cost * (100 - x.SaleProcent) / 100 > search.CostFrom && x.Cost * (100 - x.SaleProcent) / 100 < search.CostTo);
+            products = products.Where(x => x.Cost * (100 - x.SaleProcent) / 100 >= search.CostFrom && x.Cost * (100 - x.SaleProcent) / 100 <= search.CostTo);
+            if (!String.IsNullOrEmpty(search.SearchInput))
+                products = products.Where(x => x.Title.Contains(search.SearchInput, StringComparison.OrdinalIgnoreCase));
+            switch (search.Sort)
+            {
+                case "CostDesc":
+                    products =  products.OrderByDescending(x => x.Cost * (100 - x.SaleProcent) / 100);
+                    break;
+                case "CostAsc":
+                    products = products.OrderBy(x => x.Cost * (100 - x.SaleProcent) / 100);
+                    break;
+                case "NameDesc":
+                    products = products.OrderByDescending(x => x.Title);
+                    break;
+                case "NameAsc":
+                    products = products.OrderBy(x => x.Title);
+                    break;
+                case "NewDesc":
+                    products = products.OrderByDescending(x => x.Id);
+                    break;
+                case "NewAsc":
+                    products = products.OrderBy(x => x.Id);
+                    break;
+                default:
+                    products = products.OrderByDescending(x => x.Id);
+                    break;
+            }
             return products;
         }
     }

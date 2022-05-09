@@ -189,22 +189,3 @@ function LoadBasket() {
     }
   });
 }
-function Search() {
-  var formData = new FormData();
-  formData.append('CategoryId', $('#SearchCategory').val());
-  formData.append('SortId', $('#SearchSort').val());
-  formData.append('SearchInput', $('#SearchInput').val());
-  formData.append('CostFrom', $('#content__search__rangeCost__range1').html());
-  formData.append('CostTo', $('#content__search__rangeCost__range2').html());
-  $.ajax({
-    url: "/Home/LoadBySearch",
-    type: 'POST',
-    cache: false,
-    contentType: false,
-    processData: false,
-    data: formData,
-    success: function (response) {
-      $('.ads__content').html(response);
-    }
-  });
-}

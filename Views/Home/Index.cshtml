@@ -70,37 +70,37 @@
                 <div class="text1 category__list__li__text">Лестницы</div>
             </li>
         </ul>
-        <input type="number" value="0" class="content__search__category__number" name="CategoryId" id="SearchCategory"/>
+        <input type="number" value="0" class="content__search__category__number" name="Category" id="SearchCategory"/>
     </div>
     <div class="content__search__sort">
         <div class="text1 content__search__sort__button _unselectable">Сортировка товара</div>
         <ul class="content__search__sort__list _scroll">
-            <li class="content__search__sort__list__li" id="1">
+            <li class="content__search__sort__list__li" id="CostDesc">
                 <div class="sort__list__li__logo"><img src="~/img/sort/sort_1.svg" alt=""></div>
                 <div class="text1 sort__list__li__text">Сначала дороже</div>
             </li>
-            <li class="content__search__sort__list__li" id="2">
+            <li class="content__search__sort__list__li" id="CostAsc">
                 <div class="sort__list__li__logo"><img src="~/img/sort/sort_2.svg" alt=""></div>
                 <div class="text1 sort__list__li__text">Сначала дешевле</div>
             </li>
-            <li class="content__search__sort__list__li" id="3">
+            <li class="content__search__sort__list__li" id="NameAsc">
                 <div class="sort__list__li__logo"><img src="~/img/sort/sort_3.svg" alt=""></div>
                 <div class="text1 sort__list__li__text">По алфавиту a-z</div>
             </li>
-            <li class="content__search__sort__list__li" id="4">
+            <li class="content__search__sort__list__li" id="NameDesc">
                 <div class="sort__list__li__logo"><img src="~/img/sort/sort_4.svg" alt=""></div>
                 <div class="text1 sort__list__li__text">По алфавиту z-a</div>
             </li>
-            <li class="content__search__sort__list__li" id="5">
+            <li class="content__search__sort__list__li" id="NewDesc">
                 <div class="sort__list__li__logo"><img src="~/img/sort/sort_5.svg" alt=""></div>
                 <div class="text1 sort__list__li__text">Сначала новые</div>
             </li>
-            <li class="content__search__sort__list__li" id="6">
+            <li class="content__search__sort__list__li" id="NewAsc">
                 <div class="sort__list__li__logo"><img src="~/img/sort/sort_6.svg" alt=""></div>
                 <div class="text1 sort__list__li__text">Сначала старые</div>
             </li>
         </ul>
-        <input type="number" value="5" class="content__search__sort__number" name="SortId" id="SearchSort"/>
+        <input type="text" value="NewDesc" class="content__search__sort__number" name="Sort" id="SearchSort"/>
     </div>
     <div class="content__search__input">
         <input class="text1" type="text" name="SearchInput" id="SearchInput" placeholder="Поиск..." />
@@ -127,18 +127,12 @@
             <span class="text1">грн.</span>
         </div>
         <div class="content__search__rangeCost__container">
-            <script>
-                var searchLink = window.location.search;
-                if (searchLink != "") {
-
-                }
-            </script>
             <div class="slider-track"></div>
             <input type="range" min="0" max="@ViewBag.MaxCost" name="CostFrom" value="0" id="slider-1" oninput="slideOne()">
             <input type="range" min="0" max="@ViewBag.MaxCost" name="CostTo" value="@ViewBag.MaxCost" id="slider-2" oninput="slideTwo()">
         </div>
     </div>
-    <button  type="submit" class="text1 button1 content__search__submit">Подтвердить поиск</button>
+    <button type="submit" class="text1 button1 content__search__submit">Подтвердить поиск</button>
 </div>
     </form>
 <div class="slider">
