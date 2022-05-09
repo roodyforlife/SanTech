@@ -23,7 +23,7 @@ namespace SanTech.Controllers
         }
         public IActionResult Index(SearchViewModel search)
         {
-            dbProductService.AddThereAre();
+            //dbProductService.AddThereAre();
             var userEmail = HttpContext.Session.GetString("Email");
             ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
