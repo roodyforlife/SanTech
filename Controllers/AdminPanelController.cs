@@ -30,12 +30,12 @@ namespace SanTech.Controllers
                 ViewBag.IsAdmin = isAdmin;
                 ViewBag.User = dbUserService.Get(userEmail);
                 ViewBag.UserBase = dbUserService.GetAll();
-               // ViewBag.ApplicationBase = dbApplicationService.GetAll();
-            return View(dbProductService.GetProductsInRange(0, 20).ToList());
+            var allProducts = dbProductService.GetAll();
+            return View(dbProductService.GetProductsInRange(0, 20, allProducts).ToList());
         }
         public bool AddNewProduct(ProductViewModel product)
         {
-            if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100)
+            if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100 || product.CategoryId == 0)
                 return true;
             dbProductService.Add(product);
             return false;
@@ -43,7 +43,8 @@ namespace SanTech.Controllers
         [HttpPost]
         public ViewResult GetAdditionalProducts(int from, int count)
         {
-            var products = dbProductService.GetProductsInRange(from, count).ToList();
+            var allProducts = dbProductService.GetAll();
+            var products = dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
         [HttpPost]

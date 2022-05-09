@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SanTech.Interfaces;
 using SanTech.Models;
+using SanTech.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace SanTech.Services
         public void Add(ProductViewModel createProduct)
         {
             var image = fileService.FromImageToByte(createProduct.UploadedFile);
-            Product product = new Product(createProduct.Title, createProduct.Desc, createProduct.SaleProcent, createProduct.BonusNumber, createProduct.Cost, image);
+            Product product = new Product(createProduct.Title, createProduct.Desc, createProduct.SaleProcent, createProduct.BonusNumber, createProduct.Cost, image, createProduct.CategoryId);
             db.Products.Add(product);
             db.SaveChanges();
         }
@@ -29,26 +30,27 @@ namespace SanTech.Services
         {
             for (int i = 0; i < 100; i++)
             {
-                db.Products.Add(new Product("Title" + i, "Описание", i, i, 400 + i, new byte[] { 1, 34, 2, 54, 3, 35, 45, }));
+                db.Products.Add(new Product("Title" + i, "Описание", i, i, 400 + i, new byte[] { 1, 34, 2, 54, 3, 35, 45, }, 2));
             }
             db.SaveChanges();
         }
 
         public Product Get(int Id)
         {
-            return db.Products.Include(x => x.Comments).ThenInclude(x => x.SubComments).ThenInclude(x => x.User).ToList().FirstOrDefault(x => x.Id == Id);
+            return db.Products.Include(x => x.Comments).ThenInclude(x => x.User).Include(x => x.Comments).ThenInclude(x => x.SubComments).ToList().FirstOrDefault(x => x.Id == Id);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return db.Products.Include(x => x.Comments).ToList();
+            var products = db.Products.Include(x => x.Comments).ToList();
+            return products;
         }
 
-        public IEnumerable<Product> GetProductsInRange(int from, int count)
+        public IEnumerable<Product> GetProductsInRange(int from, int count, IEnumerable<Product> products)
         {
             if (from < 0 || count <= 0)
                 throw new ArgumentOutOfRangeException();
-            return db.Products.Skip(from).Take(count);
+            return products.Skip(from).Take(count);
         }
         public void DeleteProduct(int productId)
         {
@@ -75,6 +77,16 @@ namespace SanTech.Services
             product.BonusNumber = newProduct.BonusNumber;
             product.IsNotAvailable = newProduct.IsNotAvailable;
             db.SaveChanges();
+        }
+
+        public IEnumerable<Product> GetAll(SearchViewModel search)
+        {
+            var products = db.Products.Include(x => x.Comments).AsEnumerable();
+            if (search.CategoryId != 0)
+                products = products.ToList().Where(x => x.CategoryId == search.CategoryId);
+            if(search.CostTo != 0)
+            products = products.Where(x => x.Cost * (100 - x.SaleProcent) / 100 > search.CostFrom && x.Cost * (100 - x.SaleProcent) / 100 < search.CostTo);
+            return products;
         }
     }
 }

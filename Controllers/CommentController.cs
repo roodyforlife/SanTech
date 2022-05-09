@@ -53,8 +53,18 @@ namespace SanTech.Controllers
         }
         public ViewResult LoadComments(int productId)
         {
+            var userEmail = HttpContext.Session.GetString("Email");
             var model = dbCommentService.Get(productId).OrderByDescending(x => x.Date);
+            ViewBag.User = dbUserService.Get(userEmail);
             return View(model);
+        }
+        public void DeleteComment(int commentId)
+        {
+            dbCommentService.DeleteComment(commentId);
+        }
+        public void DeleteSubComment(int subCommentId)
+        {
+            dbCommentService.DeleteSubComment(subCommentId);
         }
     }
 }

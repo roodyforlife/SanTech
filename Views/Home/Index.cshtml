@@ -4,6 +4,7 @@
     Layout = "_Layout";
 }
 <script src="~/js/loadOnScrollHomeIndex.js"></script>
+<form asp-controller="Home" asp-action="Index" method="post">
 <div class="content__search">
     <div class="content__search__category">
         <div class="text1 content__search__category__button _unselectable">Категория Товара</div>
@@ -69,7 +70,7 @@
                 <div class="text1 category__list__li__text">Лестницы</div>
             </li>
         </ul>
-        <input type="number" value="0" class="content__search__category__number" />
+        <input type="number" value="0" class="content__search__category__number" id="SearchCategory"/>
     </div>
     <div class="content__search__sort">
         <div class="text1 content__search__sort__button _unselectable">Сортировка товара</div>
@@ -99,10 +100,10 @@
                 <div class="text1 sort__list__li__text">Сначала старые</div>
             </li>
         </ul>
-        <input type="number" value="5" class="content__search__sort__number" />
+        <input type="number" value="5" class="content__search__sort__number" id="SearchSort"/>
     </div>
     <div class="content__search__input">
-        <input class="text1" type="text" placeholder="Поиск..." />
+        <input class="text1" type="text" id="SearchInput" placeholder="Поиск..." />
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="612.08px" height="612.08px"
              viewBox="0 0 612.08 612.08" style="enable-background:new 0 0 612.08 612.08;"
@@ -131,8 +132,9 @@
             <input type="range" min="0" max="@ViewBag.MaxCost" value="@ViewBag.MaxCost" id="slider-2" oninput="slideTwo()">
         </div>
     </div>
-    <button type="submit" class="text1 button1 content__search__submit">Подтвердить поиск</button>
+    <button onclick="Search()" type="submit" class="text1 button1 content__search__submit">Подтвердить поиск</button>
 </div>
+    </form>
 <div class="slider">
     <div class="slider__content">
         <img src="~/img/slider/photo_1.jpg" alt="">

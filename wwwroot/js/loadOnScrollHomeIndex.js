@@ -30,9 +30,13 @@ function onScroll() {
 }
 function GetAdditionalProducts(from, count) {
     var formdata = new FormData()
-    formdata.append('from', from)
-    formdata.append('count', count)
-
+    formdata.append('from', from);
+    formdata.append('count', count);
+    formdata.append('CategoryId', $('#SearchCategory').val());
+    formdata.append('SortId', $('#SearchSort').val());
+    formdata.append('SearchInput', $('#SearchInput').val());
+    formdata.append('CostFrom', $('#content__search__rangeCost__range1').html());
+    formdata.append('CostTo', $('#content__search__rangeCost__range2').html());
     $.ajax({
         url: "/Home/GetAdditionalProducts",
         data: formdata,

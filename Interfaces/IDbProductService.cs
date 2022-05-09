@@ -1,4 +1,5 @@
 ﻿using SanTech.Models;
+using SanTech.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace SanTech.Interfaces
     {
         public void Add(ProductViewModel product);
         public IEnumerable<Product> GetAll();
-        public IEnumerable<Product> GetProductsInRange(int from, int count);
+        public IEnumerable<Product> GetAll(SearchViewModel search);
+        public IEnumerable<Product> GetProductsInRange(int from, int count, IEnumerable<Product> products);
         public Product Get(int Id);
         public void AddThereAre();
         public void DeleteProduct(int productId);

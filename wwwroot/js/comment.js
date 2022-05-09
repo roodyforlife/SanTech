@@ -56,7 +56,7 @@
     }
   }
   $('.reviews__content__item__answer').click(function () {
-    $(this).parent().children('.reviews__content__item__answer__block').css('display', 'block');
+    $(this).parents('.reviews__content__item__text').children('.reviews__content__item__answer__block').css('display', 'block');
   });
   $('.reviews__content__item__answer__input__cancel').click(function () {
     $(this).parents('.reviews__content__item__answer__block').css('display', 'none');
@@ -80,7 +80,8 @@ function AddComment(productId) {
         $("body").toggleClass("_lock");
         $('.rating__input__value').val(5);
         $('.rating__value').html(5);
-        $('.comment__form__input input').val('');
+        //$('.comment__form__input input').val('');
+        $('.emojionearea-editor').html('');
         $('.comment__form__input input').css("border", "0");
         LoadComments(productId);
       }
@@ -129,4 +130,33 @@ function LoadComments(productId) {
     }
   });
 }
-
+function DeleteComment(commentId, productId) {
+  var formData = new FormData();
+  formData.append("commentId", commentId);
+  $.ajax({
+    url: "/Comment/DeleteComment",
+    type: 'POST',
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: formData,
+    success: function (response) {
+      LoadComments(productId);
+    }
+  });
+}
+function DeleteSubComment(subCommentId, productId) {
+  var formData = new FormData();
+  formData.append("subCommentId", subCommentId);
+  $.ajax({
+    url: "/Comment/DeleteSubComment",
+    type: 'POST',
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: formData,
+    success: function (response) {
+      LoadComments(productId);
+    }
+  });
+}

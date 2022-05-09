@@ -31,6 +31,7 @@ $(document).ready(function () {
         formData.append("SaleProcent", $('#SaleProcent').val());
         formData.append("BonusNumber", $('#BonusNumber').val());
         formData.append("Cost", $('#Cost').val());
+        formData.append('CategoryId', $('.adminPanel__category__number').val());
         // var product = {
         //     Title: $('#Title').val(),
         //     Desc: $('#Desc').val(),
@@ -52,7 +53,9 @@ $(document).ready(function () {
                     alert("Ошибка при введении данных. Возможно вы не заполнили какое-то поле.")
                 }
                 else {
-                    console.log($('.admin__create__input').val(null));
+                    $('.admin__create__input').val(null);
+                    $('.adminPanel__category__number').val(0);
+                    $('.adminPanel__category__button').html('Категория товара')
                     $('#myfile').prev().text('Выберите фотографию');
                     alert("Товар добавлен");
                 }

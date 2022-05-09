@@ -74,7 +74,7 @@
             @if (Model.Comments.Sum(x => x.Evaluation) != 0)
             {
                 double deltaEvaluation = Math.Round((double)Model.Comments.Sum(x => x.Evaluation) / (double)Model.Comments.Count(), 1);
-                int percent = ((int)deltaEvaluation * 100) / 5;
+                double percent = Math.Round((deltaEvaluation * 100) / 5, 1);
                 string style = $"linear-gradient(to right, #ffc244 0%, #ffc244 {percent}%, #999 {percent}%, #999 100%);";
                 <div class="star">
                     <img src="~/img/star.png" alt="" style="background: @style">
@@ -165,7 +165,7 @@
             <div class="text2 product__reviews__title">Отзывы</div>
             <div class="text1 write__comment">Оставить отзыв</div>
             <div class="reviews__content _scroll">
-                @foreach(Comment comment in Model.Comments)
+                @foreach (Comment comment in Model.Comments)
                 {
                 <div class="reviews__content__item">
                     <div class="reviews__content__item__logo"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(comment.User.Avatar))" alt=""></div>
@@ -175,7 +175,16 @@
                         <div class="text1 reviews__content__item__text__review">
                             @comment.Text
                         </div>
-                        <div class="text1 reviews__content__item__answer">Ответить</div>
+                        @if (ViewBag.User is not null)
+                        {
+                        <div class="reviews__content__item__buttons">
+                            <div class="text1 reviews__content__item__answer">Ответить</div>
+                            @if (comment.User.Email == ViewBag.User.Email || ViewBag.User.IsAdmin)
+                            {
+                            <div onclick="DeleteComment(@comment.Id, @comment.Product.Id)" class="text1 reviews__content__item__delete">Удалить</div>
+                            }
+                        </div>
+                        }
                         <div class="reviews__content__item__answer__block">
                             <div class="reviews__content__item__answer__input">
                                 <input type="text" class="text1 subComment__input" id="subComment__input__@comment.Id">
@@ -194,6 +203,13 @@
                             <div class="text1 reviews__content__subitem__text__review">
                                 @subComment.Text
                             </div>
+                             @if (ViewBag.User is not null)
+                             {
+                                 @if (subComment.User.Email == ViewBag.User.Email || ViewBag.User.IsAdmin)
+                                 {
+                            <div onclick="DeleteSubComment(@subComment.Id, @comment.Product.Id)" class="text1 reviews__content__subitem__delete">Удалить</div>
+                                 }
+                              }
                         </div>
                     </div>
                         }

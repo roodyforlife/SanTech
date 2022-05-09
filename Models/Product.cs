@@ -18,7 +18,8 @@ namespace SanTech.Models
         public byte[] Image { get; set; }
         public bool IsNotAvailable { get; set; }
         public List<Comment> Comments { get; set; }
-        public Product(string Title, string Desc, int SaleProcent, int BonusNumber, int Cost, byte[] Image)
+        public int CategoryId { get; set; }
+        public Product(string Title, string Desc, int SaleProcent, int BonusNumber, int Cost, byte[] Image, int CategoryId)
         {
             this.Title = Title;
             this.Desc = Desc;
@@ -26,6 +27,7 @@ namespace SanTech.Models
             this.BonusNumber = BonusNumber;
             this.Cost = Cost;
             this.Image = Image;
+            this.CategoryId = CategoryId;
         }
     }
 }

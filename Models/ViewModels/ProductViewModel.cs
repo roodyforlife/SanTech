@@ -15,6 +15,7 @@ namespace SanTech.Models
         public int Cost { get; set; }
         public IFormFile UploadedFile { get; set; }
         public bool IsNotAvailable { get; set; }
+        public int CategoryId { get; set; }
 
     }
 }

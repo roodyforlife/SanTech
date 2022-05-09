@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SanTech.Interfaces;
 using SanTech.Models;
+using SanTech.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,9 @@ namespace SanTech.Controllers
             this.dbProductService = dbProductService;
             this.dbBasketService = dbBasketService;
         }
-        public IActionResult Index()
+        public IActionResult Index(SearchViewModel search)
         {
-            //dbProductService.AddThereAre();
+            dbProductService.AddThereAre();
             var userEmail = HttpContext.Session.GetString("Email");
             ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
@@ -30,10 +31,16 @@ namespace SanTech.Controllers
                 ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
                 ViewBag.User = dbUserService.Get(userEmail);
             }
-            var products = dbProductService.GetProductsInRange(0, 20).ToList();
-            var allProducts = dbProductService.GetAll();
+            var allProducts = dbProductService.GetAll(search);
+            var products = dbProductService.GetProductsInRange(0, 20, allProducts).ToList();
             if(allProducts.Count() > 0)
             ViewBag.MaxCost = allProducts.Max(x => x.Cost * (100 - x.SaleProcent) / 100);
+            return View(products);
+        }
+        public ViewResult LoadBySearch(SearchViewModel search)
+        {
+            var allProducts = dbProductService.GetAll(search);
+            var products = dbProductService.GetProductsInRange(0, 20, allProducts).ToList();
             return View(products);
         }
         public string SignOutAccount()
@@ -42,9 +49,10 @@ namespace SanTech.Controllers
             return "<li><a href='../SignInAccount/SignInAccount'><div class='text1 pull__menu__list__text login__button'>Вход/Регистрация</div></a></li>";
         }
         [HttpPost]
-        public ViewResult GetAdditionalProducts(int from, int count)
+        public ViewResult GetAdditionalProducts(int from, int count, SearchViewModel search)
         {
-            var products = dbProductService.GetProductsInRange(from, count).ToList();
+            var allProducts = dbProductService.GetAll(search);
+            var products = dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
         public bool AddToBasket(int Id)

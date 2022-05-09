@@ -93,6 +93,86 @@
                         <p class="text1">Название товара</p>
                         <input type="text" id="Title" class="text1 admin__create__input" placeholder="Пример: Маска сварщика автозатемнение Dnipro-M WM-46">
                     </div>
+                <div class="adminPanel__create__content__input">
+                        <div class="adminPanel__create__content__category">
+                            <div class="text1 adminPanel__category__button">Категория Товара</div>
+                            <ul class="adminPanel__category__list  _scroll">
+                                <li class="adminPanel__category__list__li" id="1">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_1.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Электроинструменты</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="2">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_2.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Аккумуляторный инструмент</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="3">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_3.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Сварочное оборудование и аксессуары
+                                    </div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="4">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_4.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Компрессоры и пневмоинструменты</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="5">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_5.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Ручной инструмент</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="6">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_6.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Прочее оборудование и устройства</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="7">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_7.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Садовая техника и инструменты</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="8">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_8.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Станки по дереву и металлу</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="9">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_9.svg" alt="">
+                                    </div>
+                                    <div class="text1 category__list__li__text">Измерительный инструмент</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="10">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_10.svg"
+                                            alt=""></div>
+                                    <div class="text1 category__list__li__text">Расходные материалы</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="11">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_11.svg"
+                                            alt=""></div>
+                                    <div class="text1 category__list__li__text">Аксессуары и комплектующие для
+                                        инструментов</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="12">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_12.svg"
+                                            alt=""></div>
+                                    <div class="text1 category__list__li__text">Средства индивидуальной защиты</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="13">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_13.svg"
+                                            alt=""></div>
+                                    <div class="text1 category__list__li__text">Наборы инструментов</div>
+                                </li>
+                                <li class="adminPanel__category__list__li" id="14">
+                                    <div class="category__list__li__logo"><img src="~/img/category/category_14.svg"
+                                            alt=""></div>
+                                    <div class="text1 category__list__li__text">Лестницы</div>
+                                </li>
+                            </ul>
+                            <input type="number" value="0" class="adminPanel__category__number" />
+                        </div>
+                    </div>
                     <div class="adminPanel__create__content__input">
                         <p class="text1">Описание товара</p>
                         <textarea id="Desc" class="text1 admin__create__input _scroll" placeholder="Пример: Габаритные размеры: 230х230х320 мм"></textarea>
@@ -114,4 +194,13 @@
                     </div>
             </div>
         </div>
-    </div>
+    </div><script>
+        $('.adminPanel__category__button').click(function () {
+            $('.adminPanel__category__list').toggleClass('_active__category');
+        });
+        $('.adminPanel__category__list__li').click(function () {
+            $('.adminPanel__category__number').val(this.id);
+            $('.adminPanel__category__list').toggleClass('_active__category');
+            $('.adminPanel__category__button').html($(this).children('.category__list__li__text').html());
+        });
+    </script>

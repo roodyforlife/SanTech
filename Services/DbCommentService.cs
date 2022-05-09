@@ -30,6 +30,24 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
+        public void DeleteComment(int commentId)
+        {
+            var comment = GetOne(commentId);
+            if(comment.SubComments.Count() == 0)
+                db.Comments.Remove(comment);
+            else
+                comment.Text = "(Удалено)";
+            db.SaveChanges();
+            
+        }
+
+        public void DeleteSubComment(int subCommentId)
+        {
+            var subComment = db.SubComments.ToList().FirstOrDefault(x => x.Id == subCommentId);
+            db.SubComments.Remove(subComment);
+            db.SaveChanges();
+        }
+
         /*public void DeleteAllComments(int productId)
         {
             var subComments = db.SubComments.ToList().Where(x => x.Comment.Product.Id == productId);
