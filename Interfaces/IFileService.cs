@@ -11,7 +11,7 @@ namespace SanTech.Interfaces
     {
         public byte[] FromImageToByte(IFormFile uploadedFile);
         public byte[] FromImageToByte(string imageFileName);
-        public string GetHTMLBodyForCheck(Application application);
-        public string GetCreatedPdfFile(Application application);
+        public string GetHTMLBodyForCheck(Order application);
+        public string GetCreatedPdfFile(Order application);
     }
 }

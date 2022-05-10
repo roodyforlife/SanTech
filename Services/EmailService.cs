@@ -26,7 +26,7 @@ namespace SanTech.Services
             this.fileService = fileService;
         }
 
-        public void SendCheckToEmail(Application application)
+        public void SendCheckToEmail(Order application)
         {
             try
             {

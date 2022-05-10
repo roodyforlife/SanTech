@@ -16,11 +16,13 @@ namespace SanTech.Controllers
         private readonly IDbUserService dbUserService;
         private readonly IDbBasketService dbBasketService;
         private readonly IEmailService emailService;
-        public CreateOrderController(IDbUserService dbUserService, IDbBasketService dbBasketService, IEmailService emailService)
+        private readonly IOrderService orderService;
+        public CreateOrderController(IDbUserService dbUserService, IDbBasketService dbBasketService, IEmailService emailService, IOrderService orderService)
         {
             this.dbUserService = dbUserService;
             this.dbBasketService = dbBasketService;
             this.emailService = emailService;
+            this.orderService = orderService;
         }
         [HttpGet]
         public IActionResult CreateOrder()
@@ -38,23 +40,19 @@ namespace SanTech.Controllers
             return Redirect("../Home/Index");
         }
         [HttpPost]
-        public async Task<IActionResult> CreateOrder(Application application)
+        public async Task<IActionResult> CreateOrder(Order order)
         {
             var userEmail = HttpContext.Session.GetString("Email");
             if (ModelState.IsValid)
             {
-                application.Basket = dbBasketService.GetByUserEmail(userEmail);
-                application.User = dbUserService.Get(userEmail);
-                application.TotalCost = application.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
-                if (application.WriteOffBonuses)
-                {
-                    application.TotalCost = dbUserService.ClearBonuses(application);
-                }
-                emailService.SendCheckToEmail(application);
-                //dbApplicationService.Add(application);
-                dbUserService.AddBonuses(application);
+                order.Basket = dbBasketService.GetByUserEmail(userEmail);
+                order.User = dbUserService.Get(userEmail);
+                order.TotalCost = order.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
+                orderService.Add(order);
+                emailService.SendCheckToEmail(order);
+                //dbUserService.AddBonuses(order);
                 dbBasketService.DeleteAllBasket(userEmail);
-                return View("../CreateOrder/Created", application);
+                return View("../CreateOrder/Created", order);
             }
             return View();
         }

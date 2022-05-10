@@ -6,9 +6,7 @@
 @{
     string sort = ViewBag.Search.Sort ?? "NewDesc";
     string searchInput = ViewBag.Search.SearchInput ?? "";
-    int costTo = ViewBag.MaxCost;
-    if(ViewBag.Search.CostTo != ViewBag.MaxCost && ViewBag.Search.CostTo != 0)
-    costTo = ViewBag.Search.CostTo;
+    int costTo = ViewBag.MaxCost ?? 0;
    
 }
 <script src="~/js/loadOnScrollHomeIndex.js"></script>

@@ -37,7 +37,7 @@ namespace SanTech.Services
             return reader.ReadBytes((int)fileStream.Length);
         }
 
-        public string GetCreatedPdfFile(Application application)
+        public string GetCreatedPdfFile(Order application)
         {
             var pdfDocument = new HtmlToPdf().RenderHtmlAsPdf(GetHTMLBodyForCheck(application));
             string pdfPath = Path.Combine(this.hostingEnvironment.WebRootPath, $"Files/Orders/{application.OrderNumber}.pdf");
@@ -45,7 +45,7 @@ namespace SanTech.Services
             return pdfPath;
         }
 
-        public string GetHTMLBodyForCheck(Application application)
+        public string GetHTMLBodyForCheck(Order application)
         {
             string body = String.Empty;
             StringBuilder basket = new StringBuilder();

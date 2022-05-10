@@ -12,8 +12,8 @@ namespace SanTech.Interfaces
         public void Add(User user);
         public User Get(string email);
         public IEnumerable<User> GetAll();
-        public int ClearBonuses(Application application);
-        public void AddBonuses(Application application);
+        public int ClearBonuses(Order order);
+        public void AddBonuses(Order application);
         public string HashData(string data);
         public string HashData(User user);
         public void ChangePassword(User user, string password);

@@ -33,8 +33,8 @@ namespace SanTech.Controllers
             }
             var allProducts = dbProductService.GetAll();
             var products = dbProductService.GetProductsInRange(0, 20, dbProductService.GetAll(search)).ToList();
-            if(allProducts.Count() > 0)
-            ViewBag.MaxCost = dbProductService.GetAll().Max(x => (x.Cost * (100 - x.SaleProcent) / 100));
+            if (allProducts.Count() > 0)
+                ViewBag.MaxCost = dbProductService.GetAll().Max(x => (x.Cost * (100 - x.SaleProcent) / 100));
             ViewBag.Search = search;
             return View(products);
         }

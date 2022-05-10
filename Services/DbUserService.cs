@@ -32,7 +32,7 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
-        public void AddBonuses(Application application)
+        public void AddBonuses(Order application)
         {
             var user = db.Users.ToList().FirstOrDefault(x => x.Email == application.User.Email);
             user.Bonus += user.Basket.Sum(x => x.Product.BonusNumber);
@@ -47,21 +47,21 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
-        public int ClearBonuses(Application application)
+        public int ClearBonuses(Order order)
         {
-            var user = db.Users.ToList().FirstOrDefault(x => x.Email == application.User.Email);
-            if(application.TotalCost >= application.User.Bonus)
+            var user = db.Users.ToList().FirstOrDefault(x => x.Email == order.User.Email);
+            if(order.TotalCost >= order.User.Bonus)
             {
-                application.TotalCost -= application.User.Bonus;
+                order.TotalCost -= order.User.Bonus;
                 user.Bonus = 0;
             }
             else
             {
-                user.Bonus -= application.TotalCost;
-                application.TotalCost = 0;
+                user.Bonus -= order.TotalCost;
+                order.TotalCost = 0;
             }
             db.SaveChanges();
-            return application.TotalCost;
+            return order.TotalCost;
         }
 
         public User Get(string email)

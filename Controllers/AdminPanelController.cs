@@ -14,11 +14,13 @@ namespace SanTech.Controllers
         private readonly IDbProductService dbProductService;
         private readonly IFileService fileService;
         private readonly IDbUserService dbUserService;
-        public AdminPanelController(IDbProductService dbProductService, IFileService fileService, IDbUserService dbUserService)
+        private readonly IOrderService orderService;
+        public AdminPanelController(IDbProductService dbProductService, IFileService fileService, IDbUserService dbUserService, IOrderService orderService)
         {
             this.dbProductService = dbProductService;
             this.fileService = fileService;
             this.dbUserService = dbUserService;
+            this.orderService = orderService;
         }
         public IActionResult AdminPanel()
             {
@@ -26,10 +28,11 @@ namespace SanTech.Controllers
             if(userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
                 return Redirect("../Home/Index");
             var isAdmin = dbUserService.Get(userEmail).IsAdmin;
-                ViewBag.LoggedAccount = userEmail;
-                ViewBag.IsAdmin = isAdmin;
+                //ViewBag.LoggedAccount = userEmail;
+                //ViewBag.IsAdmin = isAdmin;
                 ViewBag.User = dbUserService.Get(userEmail);
                 ViewBag.UserBase = dbUserService.GetAll();
+            ViewBag.ApplicationsBase = orderService.Get();
             var allProducts = dbProductService.GetAll();
             return View(dbProductService.GetProductsInRange(0, 20, allProducts).ToList());
         }
@@ -70,6 +73,12 @@ namespace SanTech.Controllers
         {
             dbProductService.RedactProduct(newProduct, productId);
             return RedirectToAction("AdminPanel");
+        }
+        public FileContentResult Download(string path)
+        {
+            var doc = new byte[0];
+            doc = System.IO.File.ReadAllBytes(path);
+            return File(doc, "application/pdf");
         }
     }
 }

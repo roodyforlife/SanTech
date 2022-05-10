@@ -3,6 +3,7 @@
 @{ 
     Layout = "_Layout";
 }
+@{ var selected = "selected"}
 <link href="~/css/adminPanel.css" rel="stylesheet" />
 <script src="~/js/loadOnScrollAdminPanel.js"></script>
     <div class="text2 adminPanel__title">Админ-панель</div>
@@ -15,6 +16,9 @@
                 <div admin-type="Users" class="adminPanel__header__menu__item">
                     <span class="text1">Пользователи</span>
                 </div>
+                <div admin-type="Applications" class="adminPanel__header__menu__item">
+                            <span class="text1">Заявки</span>
+                        </div>
                 <div admin-type="Create" class="adminPanel__header__menu__item">
                     <span class="text1">Создать</span>
                 </div>
@@ -83,6 +87,38 @@
             </div>
             }
         </div>
+    <div class="adminPanel__applications admin__toggleContent" id="Applications">
+        @foreach (Application u in ViewBag.ApplicationsBase)
+        {
+                <div class="admin__toggleContent__item">
+                    <div class="admin__toggleContent__item__first">
+                        <div class="admin__users__avatar"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.User.Avatar))" alt=""></div>
+                        <div class="admin__users__info">
+                            <div class="text1 admin__users__info__name">@u.Name @u.SecondName</div>
+                            <div class="text1 admin__users__info__email">Email: @u.Email</div>
+                            <div class="text1 admin__users__info__phone">Телефон: @u.Phone</div>
+                            <a href="@Url.Action("Download", new { path = u.FilePath })" target="_blank" class="text1 admin__users__info__link">Просмотреть чек</a>
+                        </div>
+                        <div class="admin__applications__info">
+                            <div class="admin__applications__info__status">
+                                <select name="" application-id="@u.Id" class="text1">
+                                    
+                                    <option value="notConfirmed" class="text1 applications__info__status__notConfirmed">
+                                        Не подтверждено
+                                    </option>
+                                    <option value="confirmed" class="text1 applications__info__status__confirmed">
+                                        Подтверждено
+                                    </option>
+                                    <option value="delivered" class="text1 applications__info__status__delivered">
+                                        Доставлено
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
         <div class="adminPanel__create admin__toggleContent" id="Create">
             <div class="adminPanel__create__content">
                     <div class="adminPanel__create__content__input">
