@@ -46,5 +46,17 @@ namespace SanTech.Services
         {
             return db.Applications.Include(x => x.User).ToList();
         }
+
+        public void Update(int applicationId, string value)
+        {
+            var application = db.Applications.ToList().FirstOrDefault(x => x.Id == applicationId);
+            application.Status = value;
+            if(value == "delivered")
+            {
+                dbUserService.AddBonuses(application);
+                application.BonusCredit = 0;
+            }
+            db.SaveChanges();
+        }
     }
 }

@@ -7,6 +7,26 @@ $(window).resize(function () {
 });
 $(document).ready(function () {
     firstLoads();
+    $('select').change(function () {
+        var formdata = new FormData();
+        var value = $(this).val();
+        var applicationId = $(this).attr('id');
+        formdata.append('applicationId', applicationId);
+        formdata.append('value', value);
+        $.ajax({
+            url: "/AdminPanel/UpdateStatus",
+            data: formdata,
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: "POST",
+            success: function (response) {
+                if (value == "delivered") {
+                    $(`#${applicationId}`).attr('disabled', 'true');
+                }
+            }
+        })
+    });
 });
 function firstLoads() {
     let blockHeight = document.querySelector('.adminPanel__products').offsetHeight;

@@ -80,5 +80,9 @@ namespace SanTech.Controllers
             doc = System.IO.File.ReadAllBytes(path);
             return File(doc, "application/pdf");
         }
+        public void UpdateStatus(int applicationId, string value)
+        {
+            orderService.Update(applicationId, value);
+        }
     }
 }

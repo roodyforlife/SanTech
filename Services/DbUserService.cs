@@ -32,10 +32,10 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
-        public void AddBonuses(Order application)
+        public void AddBonuses(Application application)
         {
             var user = db.Users.ToList().FirstOrDefault(x => x.Email == application.User.Email);
-            user.Bonus += user.Basket.Sum(x => x.Product.BonusNumber);
+            user.Bonus += application.BonusCredit;
             db.SaveChanges();
         }
 

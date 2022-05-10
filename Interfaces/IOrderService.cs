@@ -10,5 +10,6 @@ namespace SanTech.Interfaces
     {
         public void Add(Order order);
         public List<Application> Get();
+        public void Update(int applicationId, string value);
     }
 }

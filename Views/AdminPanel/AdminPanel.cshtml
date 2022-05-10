@@ -3,7 +3,6 @@
 @{ 
     Layout = "_Layout";
 }
-@{ var selected = "selected"}
 <link href="~/css/adminPanel.css" rel="stylesheet" />
 <script src="~/js/loadOnScrollAdminPanel.js"></script>
     <div class="text2 adminPanel__title">Админ-панель</div>
@@ -101,7 +100,7 @@
                         </div>
                         <div class="admin__applications__info">
                             <div class="admin__applications__info__status">
-                                <select name="" application-id="@u.Id" class="text1">
+                                <select name="" id="@u.Id" class="text1">
                                     
                                     <option value="notConfirmed" class="text1 applications__info__status__notConfirmed">
                                         Не подтверждено
@@ -113,6 +112,17 @@
                                         Доставлено
                                     </option>
                                 </select>
+                                <script>
+                                        $(document).ready(function()
+                                        {
+                                            $(`#@u.Id option[value="@u.Status"]`).attr("selected", "selected");
+                                                if(`@u.Status` == "delivered")
+                                            {
+                                                $(`#@u.Id`).attr("disabled", true);
+                                            }
+
+                                        });
+                                    </script>
                             </div>
                         </div>
                     </div>
