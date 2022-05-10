@@ -22,7 +22,6 @@ namespace SanTech.Controllers
         public IActionResult SignInAccount()
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
                 return Redirect("../Home/Index");
             return View();

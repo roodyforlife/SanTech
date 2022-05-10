@@ -50,24 +50,12 @@ namespace SanTech.Controllers
                 order.TotalCost = order.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
                 orderService.Add(order);
                 emailService.SendCheckToEmail(order);
-                //dbUserService.AddBonuses(order);
                 dbBasketService.DeleteAllBasket(userEmail);
+                ViewBag.User = dbUserService.Get(userEmail);
                 return View("../CreateOrder/Created", order);
             }
             return View();
         }
-        [HttpPost]
-        public IActionResult Created()
-        {
-            var userEmail = HttpContext.Session.GetString("Email");
-            ViewBag.LoggedAccount = userEmail;
-            if (userEmail is not null)
-            {
-                ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
-                ViewBag.User = dbUserService.Get(userEmail);
-                //ViewBag.Application = application;
-            }
-            return View();
-        }
+       
     }
 }

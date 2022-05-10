@@ -28,7 +28,6 @@ namespace SanTech.Controllers
             ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
             {
-                ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
                 ViewBag.User = dbUserService.Get(userEmail);
             }
             var allProducts = dbProductService.GetAll();
@@ -80,10 +79,8 @@ namespace SanTech.Controllers
         public IActionResult RedactProfile()
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
             {
-                ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
                 ViewBag.User = dbUserService.Get(userEmail);
                 return View();
             }

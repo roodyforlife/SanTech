@@ -27,9 +27,6 @@ namespace SanTech.Controllers
             var userEmail = HttpContext.Session.GetString("Email");
             if(userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
                 return Redirect("../Home/Index");
-            var isAdmin = dbUserService.Get(userEmail).IsAdmin;
-                //ViewBag.LoggedAccount = userEmail;
-                //ViewBag.IsAdmin = isAdmin;
                 ViewBag.User = dbUserService.Get(userEmail);
                 ViewBag.UserBase = dbUserService.GetAll();
             ViewBag.ApplicationsBase = orderService.Get();
