@@ -21,7 +21,7 @@ body._lock {
 }
 
 .exit__alert {
-    position: absolute;
+    position: fixed;
     top: -50%;
     left: 0;
     display: flex;
@@ -553,7 +553,12 @@ input[type="range"]:active::-webkit-slider-thumb {
     align-items: center;
     flex-wrap: wrap-reverse;
 }
-
+.ads__content__item__notAvailable {
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--darkGray-color);
+}
 .item__sale__old {
     color: var(--darkGray-color);
     text-decoration: line-through var(--red-color);
@@ -612,11 +617,11 @@ input[type="range"]:active::-webkit-slider-thumb {
 }
 
 .ads__content__item__basket {
-    top: 3%;
+    top: 12%;
 }
 
 .ads__content__item__like {
-    top: 12%;
+    top: 3%;
 }
 
 .basket {

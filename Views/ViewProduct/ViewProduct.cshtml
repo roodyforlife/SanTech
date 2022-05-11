@@ -2,7 +2,6 @@
 @{ 
     Layout = "_Layout";
 }
-@{string activeOrNotActiveButton = Model.IsNotAvailable ? "opacity: 0.5; pointer-events: none;" : "";}
 <link href="~/css/product.css" rel="stylesheet" />
 <link href="~/css/jquery/emojionearea.min.css" rel="stylesheet" />
 <script src="~/js/comment.js"></script>
@@ -101,7 +100,9 @@
                     <div class="text2 product__content__info__sale__new">@{var saleCost = (Model.Cost * (100 - Model.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
                 </div>
             }
-            <div class="product__content__info__buttons" style='@activeOrNotActiveButton'>
+            <div class="product__content__info__buttons">
+            @if (!Model.IsNotAvailable)
+            {
                 <div onclick="AddToBasket(@Model.Id, '@ViewBag.User')" class="button1 product__content__info__button1">
                     <div class="product__content__info__button1__basket">
                         <svg width="30" height="30" viewBox="0 0 70 70" fill="none"
@@ -113,6 +114,7 @@
                     </div>
                     <span class="text1 basket__content__total__info__button__text">Добавить в корзину</span>
                 </div>
+            }
                 <a href="" class="button1 product__content__info__button2">
                     <span class="text1 product__content__info__button2__text">В "Избранные"</span>
                 </a>

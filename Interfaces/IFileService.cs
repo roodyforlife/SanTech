@@ -13,5 +13,7 @@ namespace SanTech.Interfaces
         public byte[] FromImageToByte(string imageFileName);
         public string GetHTMLBodyForCheck(Order application);
         public string GetCreatedPdfFile(Order application);
+        public string HashData(string data);
+        public string GenerateCode(User user);
     }
 }

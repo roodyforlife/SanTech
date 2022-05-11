@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -74,44 +73,13 @@ namespace SanTech.Services
             return db.Users.ToList();
         }
 
-        public string HashData(string data)
-        {
-            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(data);
-                bytes = md5.ComputeHash(bytes);
-                StringBuilder stringBuilder = new StringBuilder();
-                foreach(byte u in bytes)
-                {
-                    stringBuilder.Append(u.ToString("x2"));
-                }
-                return stringBuilder.ToString();
-            }
-        }
-
-        public string HashData(User user)
-        {
-            string data = user.Email + user.Phone + user.Password;
-            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(data);
-                bytes = md5.ComputeHash(bytes);
-                StringBuilder stringBuilder = new StringBuilder();
-                foreach (byte u in bytes)
-                {
-                    stringBuilder.Append(u.ToString("x2"));
-                }
-                return stringBuilder.ToString();
-            }
-        }
-
         public void RedactUser(User newUser, string userEmail, IFormFile UploadedFile)
         {
             var user = db.Users.ToList().FirstOrDefault(x => x.Email == userEmail);
             user.Name = newUser.Name;
             user.Avatar = UploadedFile is null ? user.Avatar : fileService.FromImageToByte(UploadedFile);
-            user.Password = newUser.Password is null ? user.Password : HashData(newUser.Password) ;
-            user.PasswordConfirm = newUser.PasswordConfirm is null ? user.PasswordConfirm : HashData(newUser.PasswordConfirm);
+            user.Password = newUser.Password is null ? user.Password : fileService.HashData(newUser.Password) ;
+            user.PasswordConfirm = newUser.PasswordConfirm is null ? user.PasswordConfirm : fileService.HashData(newUser.PasswordConfirm);
             user.Phone = newUser.Phone;
             db.SaveChanges();
         }

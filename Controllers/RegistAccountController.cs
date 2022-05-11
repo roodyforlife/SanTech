@@ -16,11 +16,13 @@ namespace SanTech.Controllers
         private readonly IAuthorizatService authorizatService;
         private readonly IDbUserService dbUserService;
         private readonly IEmailService emailService;
-        public RegistAccountController(IAuthorizatService authorizatService, IDbUserService dbUserService, IEmailService emailService)
+        private readonly IFileService fileService;
+        public RegistAccountController(IAuthorizatService authorizatService, IDbUserService dbUserService, IEmailService emailService, IFileService fileService)
         {
             this.authorizatService = authorizatService;
             this.dbUserService = dbUserService;
             this.emailService = emailService;
+            this.fileService = fileService;
         }
         [HttpGet]
         public IActionResult RegistAccount()
@@ -37,8 +39,8 @@ namespace SanTech.Controllers
                 ModelState.AddModelError("Email", "Аккаунт с такой почтой уже существует");
             if (ModelState.IsValid)
             {
-                user.Password = dbUserService.HashData(user.Password);
-                user.PasswordConfirm = dbUserService.HashData(user.PasswordConfirm);
+                user.Password = fileService.HashData(user.Password);
+                user.PasswordConfirm = fileService.HashData(user.PasswordConfirm);
                 dbUserService.Add(user);
                 emailService.SendEmail(user.Email, user.Name, "Вы успешно зарегистрировались на сайте SanTech. Запишите ваш пароль, удачных покупок и хорошего настроения!", "emailSend.html");
                 HttpContext.Session.SetString("Email", user.Email);

@@ -172,6 +172,10 @@
                 {
                     <div class="text1 ads__content__item__cost">@u.Cost.ToString("N0") грн.</div>
                 }
+                else if(u.IsNotAvailable)
+                {
+                    <div class="text1 ads__content__item__notAvailable">Нет в наличии</div>
+                }
                 else
                 {
                     <div class="ads__content__item__sale">
@@ -180,6 +184,8 @@
                     </div>
                 }
                 </a>
+                @if (!u.IsNotAvailable)
+                {
                 <div class="ads__content__item__basket" onclick="AddToBasket(@u.Id, '@ViewBag.User')">
                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -188,6 +194,7 @@
                               fill="#E7E7E7" />
                     </svg>
                 </div>
+                }
                 <div class="ads__content__item__like">
                     <svg width="40" height="40" viewBox="0 0 70 70" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -196,7 +203,7 @@
                               fill="#000" />
                     </svg>
                 </div>
-                @if (u.SaleProcent != 0)
+                @if (u.SaleProcent != 0 && !u.IsNotAvailable)
                 {
                     <div class="ads__content__item__saleInfo"><span class="text1">-@u.SaleProcent%</span></div>
                 }

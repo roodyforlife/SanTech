@@ -14,10 +14,12 @@ namespace SanTech.Controllers
     {
         private readonly IDbUserService dbUserService;
         private readonly IEmailService emailService;
-        public ForgotPasswordController(IDbUserService dbUserService, IEmailService emailService)
+        private readonly IFileService fileService;
+        public ForgotPasswordController(IDbUserService dbUserService, IEmailService emailService, IFileService fileService)
         {
             this.dbUserService = dbUserService;
             this.emailService = emailService;
+            this.fileService = fileService;
         }
         [HttpGet]
         public IActionResult ForgotPassword()
@@ -34,7 +36,7 @@ namespace SanTech.Controllers
             var user = dbUserService.Get(model.Email);
             if(user is not null)
             {
-                var code = dbUserService.HashData(user);
+                var code = fileService.GenerateCode(user);
                 var callbackUrl = Url.Action("ResetPassword", "ForgotPassword", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 emailService.SendEmail(model.Email, user.Name, $"Вы пытаетесь сбросить пароль. Для сброса пароля перейдите по <a href='{callbackUrl}'>ссылке</a>", "emailSend.html");
                 return View("ForgotPasswordConfirmation");
@@ -55,9 +57,10 @@ namespace SanTech.Controllers
             if (ModelState.IsValid)
             {
                 var user = dbUserService.Get(model.Email);
-                if (user is not null && model.Code == dbUserService.HashData(user))
+                var test = fileService.GenerateCode(user);
+                if (user is not null && model.Code == fileService.GenerateCode(user))
                 {
-                    model.Password = dbUserService.HashData(model.Password);
+                    model.Password = fileService.HashData(model.Password);
                     dbUserService.ChangePassword(user, model.Password);
                     return View("ResetPasswordConfirmation");
                 }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,6 +64,20 @@ namespace SanTech.Services
             }
             body = body.Replace("{BasketContent}", basket.ToString());
             return body;
+        }
+        public string HashData(string data)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(data));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
+
+        public string GenerateCode(User user)
+        {
+            string data = user.Email + user.Phone + user.Password;
+            return HashData(data);
         }
     }
 }
