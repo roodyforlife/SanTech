@@ -16,7 +16,7 @@
         </div>
         <div class="authorization__content__form">
             <div id="Registration">
-                <form asp-action="RegistAccount" asp-controller="RegistAccount">
+                <form asp-action="RegistAccount" asp-controller="RegistAccount" onsubmit="return submitUserForm();">
                     <p class="text1 input__display__text">Введите email-адрес <span asp-validation-for="Email"></span></p>
                     <input type="email" asp-for="Email" class="text1 form__input" />
                     <p class="text1 input__display__text">Введите пароль <span asp-validation-for="Password"></span></p>
@@ -27,8 +27,26 @@
                     <input type="text" asp-for="Name" class="text1 form__input" />
                     <p class="text1 input__display__text">Введите номер телефона <span asp-validation-for="Phone"></span></p>
                     <input type="tel" asp-for="Phone" class="text1 form__input" />
+                    <div class="g-recaptcha" data-sitekey="6LeQROEfAAAAAANcgXn0oQRg7k7iNIBOOs-gSiIA" data-callback="verifyCaptcha"></div>
+		                <div id="g-recaptcha-error"></div>
                     <button type="submit" class="button1 text1 form__button"><span>Регистрация</span></button>
                 </form>
+                <script src='https://www.google.com/recaptcha/api.js'></script>
+	<script>
+		var recaptcha_response = '';
+		function submitUserForm() {
+			if (recaptcha_response.length == 0) {
+				document.getElementById('g-recaptcha-error').innerHTML = '<span class="text1 field-validation-error">Это обязательное поле</span>';
+				return false;
+			}
+			return true;
+		}
+
+		function verifyCaptcha(token) {
+			recaptcha_response = token;
+			document.getElementById('g-recaptcha-error').innerHTML = '';
+		}
+	</script>
             </div>
         </div>
     </div>

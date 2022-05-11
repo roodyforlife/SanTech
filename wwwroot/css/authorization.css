@@ -13,10 +13,13 @@
     text-align: center;
     display: flex;
 }
+.g-recaptcha{
+    margin: 10px 0 0 0;
+}
 .tablinks {
     width: 50%;
     height: 50px;
-    padding: 10px 0; 
+    padding: 10px 0;
     cursor: pointer;
 }
 ._active__button{
