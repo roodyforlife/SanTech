@@ -29,7 +29,7 @@ namespace SanTech.Controllers
                 return Redirect("../Home/Index");
                 ViewBag.User = dbUserService.Get(userEmail);
                 ViewBag.UserBase = dbUserService.GetAll();
-            ViewBag.ApplicationsBase = orderService.Get();
+            ViewBag.ApplicationsBase = orderService.Get().OrderByDescending(x => x.Id);
             var allProducts = dbProductService.GetAll();
             return View(dbProductService.GetProductsInRange(0, 20, allProducts).ToList());
         }
