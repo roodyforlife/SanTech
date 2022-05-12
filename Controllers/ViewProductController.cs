@@ -19,14 +19,21 @@ namespace SanTech.Controllers
         }
         public IActionResult ViewProduct(int productId)
         {
-            var userEmail = HttpContext.Session.GetString("Email");
-            if (userEmail is not null)
+            try
             {
-                ViewBag.User = dbUserService.Get(userEmail);
+                var userEmail = HttpContext.Session.GetString("Email");
+                if (userEmail is not null)
+                {
+                    ViewBag.User = dbUserService.Get(userEmail);
+                }
+                var model = dbProductService.Get(productId);
+                model.Comments = model.Comments.OrderByDescending(x => x.Id).ToList();
+                return View(model);
             }
-            var model = dbProductService.Get(productId);
-            model.Comments = model.Comments.OrderByDescending(x => x.Id).ToList();
-            return View(model);
+            catch (Exception)
+            {
+                return Redirect("../Home/Index");
+            }
         }
     }
 }
