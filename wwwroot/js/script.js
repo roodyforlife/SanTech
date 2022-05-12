@@ -32,6 +32,20 @@ $(document).ready(function () {
       $("body").toggleClass("_lock");
     }
   });
+  //открытие блока избранных
+  $("#favourites, #exit__favourites").click(function () {
+    console.log('sdf')
+    $(".favourites").toggleClass("_active");
+    $("body").toggleClass("_lock");
+  });
+  //нажатие за блоком избранных
+  $(".favourites").mouseup(function (e) {
+    var div = $(".favourites__content");
+    if (!div.is(e.target) && div.has(e.target).length === 0) {
+      $(".favourites").toggleClass("_active");
+      $("body").toggleClass("_lock");
+    }
+  });
   //нажатие на кнопку профиля
   $("#Profile").click(function () {
     $(".profile__pull__menu").toggleClass("_active__profile");

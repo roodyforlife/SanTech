@@ -10,7 +10,6 @@ namespace SanTech.Interfaces
     {
         public void Add(Basket basket);
         public bool AddProductToBasket(string email, int productId);
-        public Basket GetByProductIdAndUserId(int productId, int userId);
         public void DeleteFromBasket(int basketId);
         public Basket Get(int basketId);
         public List<Basket> GetByUserEmail(string userEmail);

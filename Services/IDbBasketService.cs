@@ -28,9 +28,9 @@ namespace SanTech.Services
         {
             var user = dbUserService.Get(email);
             var product = dbProductService.Get(productId);
-            if (GetByProductIdAndUserId(productId, user.Id) is null)
+            if (dbProductService.Get(productId, user.Id) is null)
             {
-                Basket basket = new Basket { ProductId = productId, Product = product, UserId = user.Id, NumberOfProduct = 1};
+                Basket basket = new Basket { ProductId = productId, Product = product, UserId = user.Id, NumberOfProduct = 1 };
                 Add(basket);
                 return true;
             }
@@ -49,11 +49,6 @@ namespace SanTech.Services
             return db.Baskets.Include(x => x.User).Include(x => x.Product).ToList().FirstOrDefault(x => x.Id == basketId);
         }
 
-        public Basket GetByProductIdAndUserId(int productId, int userId)
-        {
-            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
-        }
-
         public List<Basket> GetByUserEmail(string userEmail)
         {
             return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Email == userEmail).ToList();
@@ -70,26 +65,5 @@ namespace SanTech.Services
             db.Baskets.RemoveRange(GetByUserEmail(userEmail));
             db.SaveChanges();
         }
-
-       /* public BasketHistory GetBasketHistory(Basket basket, int applicationId)
-        {
-            return new BasketHistory()
-            {
-                ProductId = basket.ProductId,
-                UserId = basket.UserId,
-                NumberOfProduct = basket.NumberOfProduct,
-                ApplicationId = applicationId
-            };
-        }
-
-        public void SaveBasketHistory(List<Basket> basketsHistory, int applicationId)
-        {
-            List<BasketHistory> basketHistory = new List<BasketHistory>();
-            foreach(var basket in basketsHistory)
-            {
-                GetBasketHistory(basket, applicationId));
-            }
-            db.SaveChanges();
-        }*/
     }
 }

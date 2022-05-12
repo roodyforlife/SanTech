@@ -92,8 +92,27 @@ function AddToBasket(Id, userEmail) {
             data: formData,
             success: function (response) {
                 if (response) {
-                    console.log('sdfsdf')
                     $('.menu__item__count').html(parseInt($('.menu__item__count').html()) + 1);
+                }
+            }
+        });
+    } else {
+        alert('Вы не авторизованы!')
+    }
+}
+function AddToFavourites(Id, userEmail) {
+    if (userEmail.length > 0) {
+        var formData = new FormData();
+        formData.append("Id", Id);
+        $.ajax({
+            url: "/Home/AddToFavourites",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (response) {
+                if (response) {
                 }
             }
         });

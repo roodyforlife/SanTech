@@ -15,11 +15,13 @@ namespace SanTech.Controllers
         private readonly IDbUserService dbUserService;
         private readonly IDbProductService dbProductService;
         private readonly IDbBasketService dbBasketService;
-        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService, IDbBasketService dbBasketService)
+        private readonly IDbFavoriteService dbFavoriteService;
+        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService, IDbBasketService dbBasketService, IDbFavoriteService dbFavoriteService)
         {
             this.dbUserService = dbUserService;
             this.dbProductService = dbProductService;
             this.dbBasketService = dbBasketService;
+            this.dbFavoriteService = dbFavoriteService;
         }
         public IActionResult Index(SearchViewModel search)
         {
@@ -53,6 +55,11 @@ namespace SanTech.Controllers
         {
             var userEmail = HttpContext.Session.GetString("Email");
             return dbBasketService.AddProductToBasket(userEmail, Id);
+        }
+        public bool AddToFavourites(int Id)
+        {
+            var userEmail = HttpContext.Session.GetString("Email");
+            return dbFavoriteService.Add(userEmail, Id);
         }
         public void DeleteFromBasket(int basketId)
         {

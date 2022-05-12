@@ -38,6 +38,7 @@ namespace SanTech
             services.AddScoped<IDbBasketService, DbBasketService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IDbFavoriteService, DbFavoriteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -34,7 +34,6 @@ namespace SanTech.Services
             }
             db.SaveChanges();
         }
-
         public Product Get(int Id)
         {
             return db.Products.Include(x => x.Comments).ThenInclude(x => x.User).Include(x => x.Comments).ThenInclude(x => x.SubComments).ToList().FirstOrDefault(x => x.Id == Id);
@@ -44,6 +43,11 @@ namespace SanTech.Services
         {
             var products = db.Products.Include(x => x.Comments).ToList();
             return products;
+        }
+
+        public Basket Get(int productId, int userId)
+        {
+            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
         }
 
         public IEnumerable<Product> GetProductsInRange(int from, int count, IEnumerable<Product> products)
