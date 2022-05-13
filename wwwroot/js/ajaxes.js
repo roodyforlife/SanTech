@@ -32,14 +32,6 @@ $(document).ready(function () {
         formData.append("BonusNumber", $('#BonusNumber').val());
         formData.append("Cost", $('#Cost').val());
         formData.append('CategoryId', $('.adminPanel__category__number').val());
-        // var product = {
-        //     Title: $('#Title').val(),
-        //     Desc: $('#Desc').val(),
-        //     SaleProcent: $('#SaleProcent').val(),
-        //     BonusNumber: $('#BonusNumber').val(),
-        //     Cost: $('#Cost').val(),
-        //     UploadedFile: formData
-        // }
 
         $.ajax({
             url: "/AdminPanel/AddNewProduct",
@@ -63,7 +55,6 @@ $(document).ready(function () {
         });
     });
     $('.basket__content__clear').click(function () {
-        console.log('sdf')
         $.ajax({
             url: "/Home/DeleteAllBasket",
             type: 'POST',
@@ -74,6 +65,19 @@ $(document).ready(function () {
             success: function (response) {
                 $('.menu__item__count').html(0);
                 LoadBasket();
+            }
+        });
+    });
+    $('.favorites__content__clear').click(function () {
+        $.ajax({
+            url: "/Home/DeleteAllFavorites",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: false,
+            success: function (response) {
+                LoadFavorites();
             }
         });
     });
@@ -134,6 +138,21 @@ function DeleteFromBasket(basketId) {
         data: formData,
         success: function (response) {
             LoadBasket();
+        }
+    });
+}
+function DeleteFromFavorites(favoriteId) {
+    var formData = new FormData();
+    formData.append("favoriteId", favoriteId);
+    $.ajax({
+        url: "/Home/DeleteFromFavorites",
+        type: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (response) {
+            LoadFavorites();
         }
     });
 }

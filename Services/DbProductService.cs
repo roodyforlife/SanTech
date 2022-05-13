@@ -45,11 +45,6 @@ namespace SanTech.Services
             return products;
         }
 
-        public Basket Get(int productId, int userId)
-        {
-            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
-        }
-
         public IEnumerable<Product> GetProductsInRange(int from, int count, IEnumerable<Product> products)
         {
             if (from < 0 || count <= 0)
@@ -60,7 +55,9 @@ namespace SanTech.Services
         {
             var product = db.Products.ToList().FirstOrDefault(x => x.Id == productId);
             var basket = db.Baskets.ToList().Where(x => x.Product.Id == productId);
+            var favorites = db.Favorites.ToList().Where(x => x.Product.Id == productId);
             db.Baskets.RemoveRange(basket);
+            db.Favorites.RemoveRange(favorites);
             var subComments = db.SubComments.ToList().Where(x => x.Comment.Product.Id == productId);
             var comments = db.Comments.ToList().Where(x => x.Product.Id == productId);
             db.SubComments.RemoveRange(subComments);

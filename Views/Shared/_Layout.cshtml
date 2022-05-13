@@ -39,91 +39,18 @@
     
     <div class="favourites">
         <div class="favourites__content">
-            <div class="favourites__content__orders__load" style="display: none;">
+            <div class="favourites__content__load">
                 <div class="cssload-box-loading">
                 </div>
             </div>
             <div id="exit__favourites" class="favourites__content__exit"></div>
             <div class="text2 favourites__content__title">Избранные</div>
+            @if (ViewBag.User is not null)
+            {
+                <div class="text1 favorites__content__clear _unselectable">Очистить избранные</div>
+            }
             <div class="favourites__content__items _scroll">
-                <div class="favourites__content__item">
-                    <div class="favourites__content__item__first">
-                        <div class="favourites__content__item__trash">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                x="0px" y="0px" width="30px" height="30px" viewBox="0 0 612.08 612.08"
-                                style="enable-background:new 0 0 612.08 612.08;" xml:space="preserve">
-                                <g>
-                                    <path d="M432,96h-48V32c0-17.672-14.328-32-32-32H160c-17.672,0-32,14.328-32,32v64H80c-17.672,0-32,14.328-32,32v32h416v-32
-    		C464,110.328,449.672,96,432,96z M192,96V64h128v32H192z" />
-                                    <path d="M80,480.004C80,497.676,94.324,512,111.996,512h288.012C417.676,512,432,497.676,432,480.008v-0.004V192H80V480.004z
-    		 M320,272c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M240,272
-    		c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M160,272c0-8.836,7.164-16,16-16
-    		s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z" />
-                                </g>
-                        </div>
-                        <div class="favourites__content__item__image"><img src="img/3070.jpg" alt=""></div>
-                        <div class="favourites__content__item__info">
-                            <div class="text1 favourites__content__item__info__title">Какой-то текст с названием товара
-                            </div>
-                            <div class="text1 favourites__content__item__info__cost">3 034 грн.</div>
-    
-                        </div>
-                    </div>
-                </div>
-                <div class="favourites__content__item">
-                    <div class="favourites__content__item__first">
-                        <div class="favourites__content__item__trash">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                x="0px" y="0px" width="30px" height="30px" viewBox="0 0 612.08 612.08"
-                                style="enable-background:new 0 0 612.08 612.08;" xml:space="preserve">
-                                <g>
-                                    <path d="M432,96h-48V32c0-17.672-14.328-32-32-32H160c-17.672,0-32,14.328-32,32v64H80c-17.672,0-32,14.328-32,32v32h416v-32
-    		C464,110.328,449.672,96,432,96z M192,96V64h128v32H192z" />
-                                    <path d="M80,480.004C80,497.676,94.324,512,111.996,512h288.012C417.676,512,432,497.676,432,480.008v-0.004V192H80V480.004z
-    		 M320,272c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M240,272
-    		c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M160,272c0-8.836,7.164-16,16-16
-    		s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z" />
-                                </g>
-                        </div>
-                        <div class="favourites__content__item__image"><img src="img/3070.jpg" alt=""></div>
-                        <div class="favourites__content__item__info">
-                            <div class="text1 favourites__content__item__info__title">Какой-то текст с названием товара
-                            </div>
-                            <div class="text1 favourites__content__item__info__cost">3 034 грн.</div>
-    
-                        </div>
-                    </div>
-                </div>
-                <div class="favourites__content__item">
-                    <div class="favourites__content__item__first">
-                        <div class="favourites__content__item__trash">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                x="0px" y="0px" width="30px" height="30px" viewBox="0 0 612.08 612.08"
-                                style="enable-background:new 0 0 612.08 612.08;" xml:space="preserve">
-                                <g>
-                                    <path d="M432,96h-48V32c0-17.672-14.328-32-32-32H160c-17.672,0-32,14.328-32,32v64H80c-17.672,0-32,14.328-32,32v32h416v-32
-    		C464,110.328,449.672,96,432,96z M192,96V64h128v32H192z" />
-                                    <path d="M80,480.004C80,497.676,94.324,512,111.996,512h288.012C417.676,512,432,497.676,432,480.008v-0.004V192H80V480.004z
-    		 M320,272c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M240,272
-    		c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M160,272c0-8.836,7.164-16,16-16
-    		s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z" />
-                                </g>
-                        </div>
-                        <div class="favourites__content__item__image"><img src="img/3070.jpg" alt=""></div>
-                        <div class="favourites__content__item__info">
-                            <div class="text1 favourites__content__item__info__title">Какой-то текст с названием товара
-                            </div>
-                            <div class="text1 favourites__content__item__info__cost">3 034 грн.</div>
-    
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="basket__content__orders__notLogged">
-                        <div class="text2 basket__content__orders__notLogged__text">
-                            Вы не авторизованы
-                        </div>
-                        <div class="text1 button1 basket__content__orders__notLogged__button">Войти</div>
-                    </div> -->
+                
             </div>
         </div>
     </div>

@@ -34,7 +34,9 @@ $(document).ready(function () {
   });
   //открытие блока избранных
   $("#favourites, #exit__favourites").click(function () {
-    console.log('sdf')
+    if (!$('.favourites').hasClass('_active')) {
+      LoadFavorites();
+    }
     $(".favourites").toggleClass("_active");
     $("body").toggleClass("_lock");
   });
@@ -128,29 +130,6 @@ $(document).ready(function () {
       }
     });
   });
-  // $(document).ready(function () {
-  //   //Verification
-  //   $('.content__confirm__form__content__input').on("keydown", function (e) {
-  //     var inputs = $('.content__confirm__form__content__input');
-  //     if (e.key === "Backspace" && inputs[inputs.index(e.target) - 1] != undefined) {
-  //       $(this).val('');
-  //       inputs[inputs.index(e.target) - 1].focus();
-  //     }
-  //     if (Number.isInteger(parseInt(e.key))) {
-  //       $(this).val(e.key)
-  //       if (inputs[inputs.index(e.target) + 1] == undefined) {
-  //         let sum = '';
-  //         $.each(inputs, function (index, value) {
-  //           sum += value.value;
-  //         })
-  //       }
-  //       else {
-  //         inputs[inputs.index(e.target) + 1].focus();
-  //       }
-  //       e.preventDefault();
-  //     }
-  //   });
-  // });
 
 
 });
@@ -199,6 +178,24 @@ function LoadBasket() {
       $('.basket__content__orders').html(response);
       setTimeout(function () {
         $('.basket__content__orders__load').css('display', 'none');
+      }, 700);
+    }
+  });
+}
+function LoadFavorites() {
+  var formData = new FormData();
+  $('.favourites__content__load').css('display', 'flex');
+  $.ajax({
+    url: "/Home/LoadFavorites",
+    type: 'POST',
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: formData,
+    success: function (response) {
+      $('.favourites__content__items').html(response);
+      setTimeout(function () {
+        $('.favourites__content__load').css('display', 'none');
       }, 700);
     }
   });

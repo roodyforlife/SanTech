@@ -17,6 +17,5 @@ namespace SanTech.Interfaces
         public void AddThereAre();
         public void DeleteProduct(int productId);
         public void RedactProduct(ProductViewModel newProduct, int productId);
-        public Basket Get(int productId, int userId);
     }
 }

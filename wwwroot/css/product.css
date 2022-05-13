@@ -139,6 +139,7 @@
 .product__content__info__button2 {
     background-color: #fff;
     border: 1px solid var(--yellow-color);
+    cursor: pointer;
 }
 
 .product__content__info__button2__text {

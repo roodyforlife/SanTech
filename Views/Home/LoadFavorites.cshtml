@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Favorite>
+@{
+    Layout = null;
+}
+@if (ViewBag.User is not null)
+{
+    if (Model.Any())
+    {
+        @foreach (Favorite u in Model)
+        {
+            <div class="favourites__content__item">
+                <div class="favourites__content__item__first">
+                    <div class="favourites__content__item__trash" onclick="DeleteFromFavorites(@u.Id)">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             x="0px" y="0px" width="30px" height="30px" viewBox="0 0 612.08 612.08"
+                             style="enable-background:new 0 0 612.08 612.08;" xml:space="preserve">
+                        <g>
+                        <path d="M432,96h-48V32c0-17.672-14.328-32-32-32H160c-17.672,0-32,14.328-32,32v64H80c-17.672,0-32,14.328-32,32v32h416v-32
+    		C464,110.328,449.672,96,432,96z M192,96V64h128v32H192z" />
+                        <path d="M80,480.004C80,497.676,94.324,512,111.996,512h288.012C417.676,512,432,497.676,432,480.008v-0.004V192H80V480.004z
+    		 M320,272c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M240,272
+    		c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M160,272c0-8.836,7.164-16,16-16
+    		s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z" />
+                                </g>
+                    </div>
+                    <div class="favourites__content__item__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Product.Image))" alt=""></div>
+                    <div class="favourites__content__item__info">
+                        <a asp-controller="ViewProduct" asp-action="ViewProduct" asp-route-productId="@u.Product.Id" class="text1 favourites__content__item__info__title">
+                            @u.Product.Title
+                        </a>
+                        <div class="text1 favourites__content__item__info__cost">@{var saleCost = (u.Product.Cost * (100 - u.Product.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="basket__content__orders__error">
+            <div class="text2 basket__content__orders__error__text">У нету избранных товаров</div>
+        </div>
+    }
+}
+else
+{
+    <div class="basket__content__orders__error">
+        <div class="text2 basket__content__orders__error__text">Вы не авторизованы</div>
+        <a asp-action="SignInAccount" asp-controller="SignInAccount" class="text1 button1 basket__content__orders__error__button"><span>Войти</span></a>
+    </div>
+}

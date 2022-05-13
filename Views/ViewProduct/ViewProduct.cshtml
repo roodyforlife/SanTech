@@ -115,9 +115,9 @@
                     <span class="text1 basket__content__total__info__button__text">Добавить в корзину</span>
                 </div>
             }
-                <a href="" class="button1 product__content__info__button2">
+                <div onclick="AddToFavourites(@Model.Id, '@ViewBag.User')" class="button1 product__content__info__button2">
                     <span class="text1 product__content__info__button2__text">В "Избранные"</span>
-                </a>
+                </div>
             </div>
             <div class="text1 product__content__info__code">Код: @Model.Id</div>
             <div class="product__content__info__delivery">

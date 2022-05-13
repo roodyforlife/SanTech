@@ -15,6 +15,7 @@ namespace SanTech.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<SubComment> SubComments { get; set; }
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
         public ApplicationContext()
         {
             //Database.EnsureDeleted();

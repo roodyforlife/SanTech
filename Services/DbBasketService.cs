@@ -28,7 +28,7 @@ namespace SanTech.Services
         {
             var user = dbUserService.Get(email);
             var product = dbProductService.Get(productId);
-            if (dbProductService.Get(productId, user.Id) is null)
+            if (Get(productId, user.Id) is null)
             {
                 Basket basket = new Basket { ProductId = productId, Product = product, UserId = user.Id, NumberOfProduct = 1 };
                 Add(basket);
@@ -37,7 +37,7 @@ namespace SanTech.Services
             return false;
         }
 
-        public void DeleteFromBasket(int basketId)
+        public void Delete(int basketId)
         {
             var basket = Get(basketId);
             db.Baskets.Remove(basket);
@@ -48,7 +48,10 @@ namespace SanTech.Services
         {
             return db.Baskets.Include(x => x.User).Include(x => x.Product).ToList().FirstOrDefault(x => x.Id == basketId);
         }
-
+        public Basket Get(int productId, int userId)
+        {
+            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
+        }
         public List<Basket> GetByUserEmail(string userEmail)
         {
             return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Email == userEmail).ToList();

@@ -23,12 +23,13 @@
 		c0-8.836,7.164-16,16-16s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z M160,272c0-8.836,7.164-16,16-16
 		s16,7.164,16,16v160c0,8.836-7.164,16-16,16s-16-7.164-16-16V272z" />
                                 </g>
+                    </svg>
             </div>
             <div class="basket__content__item__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Product.Image))" alt=""></div>
             <div class="basket__content__item__info">
-                <div class="text1 basket__content__item__info__title">
+                <a asp-controller="ViewProduct" asp-action="ViewProduct" asp-route-productId="@u.Product.Id" class="text1 basket__content__item__info__title">
                     @u.Product.Title
-                </div>
+                </a>
                 <div class="text1 basket__content__item__info__cost">@{var saleCost = (u.Product.Cost * (100 - u.Product.SaleProcent)) / 100;}@saleCost.ToString("N0") грн.</div>
 
             </div>
