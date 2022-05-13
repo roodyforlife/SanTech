@@ -1,5 +1,5 @@
-﻿using SanTech.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SanTech.Models;
 
 namespace SanTech.Interfaces
 {

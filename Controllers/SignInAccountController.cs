@@ -7,10 +7,10 @@ namespace SanTech.Controllers
 {
     public class SignInAccountController : Controller
     {
-        private readonly IAuthorizatService authorizatService;
+        private readonly IAuthorizatService _authorizatService;
         public SignInAccountController(IAuthorizatService authorizatService)
         {
-            this.authorizatService = authorizatService;
+            _authorizatService = authorizatService;
         }
 
         [HttpGet]
@@ -18,20 +18,27 @@ namespace SanTech.Controllers
         {
             var userEmail = HttpContext.Session.GetString("Email");
             if (userEmail is not null)
+            {
                 return Redirect("../Home/Index");
+            }
+
             return View();
         }
 
         [HttpPost]
         public IActionResult SignInAccount(UserLogin user)
         {
-            if (!authorizatService.PasswordIsCorrect(user.Email, user.Password) || !authorizatService.IsRegistered(user.Email))
+            if (!_authorizatService.PasswordIsCorrect(user.Email, user.Password) || !_authorizatService.IsRegistered(user.Email))
+            {
                 ModelState.AddModelError("Password", "Неверный логин или пароль");
+            }
+
             if (ModelState.IsValid)
             {
                 HttpContext.Session.SetString("Email", user.Email);
-                return RedirectPermanent("../Home/Index");            
+                return RedirectPermanent("../Home/Index");
             }
+
             return View();
         }
     }

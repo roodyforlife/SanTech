@@ -1,25 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SanTech.Interfaces;
 using SanTech.Models;
 using SanTech.Models.ViewModels;
-using System.Linq;
 
 namespace SanTech.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDbUserService dbUserService;
-        private readonly IDbProductService dbProductService;
-        private readonly IDbBasketService dbBasketService;
-        private readonly IDbFavoriteService dbFavoriteService;
-        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService, 
-            IDbBasketService dbBasketService, IDbFavoriteService dbFavoriteService)
+        private readonly IDbUserService _dbUserService;
+        private readonly IDbProductService _dbProductService;
+        private readonly IDbBasketService _dbBasketService;
+        private readonly IDbFavoriteService _dbFavoriteService;
+        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService, IDbBasketService dbBasketService, IDbFavoriteService dbFavoriteService)
         {
-            this.dbUserService = dbUserService;
-            this.dbProductService = dbProductService;
-            this.dbBasketService = dbBasketService;
-            this.dbFavoriteService = dbFavoriteService;
+            _dbUserService = dbUserService;
+            _dbProductService = dbProductService;
+            _dbBasketService = dbBasketService;
+            _dbFavoriteService = dbFavoriteService;
         }
 
         public IActionResult Index(SearchViewModel search)
@@ -28,12 +27,16 @@ namespace SanTech.Controllers
             ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
             {
-                ViewBag.User = dbUserService.Get(userEmail);
+                ViewBag.User = _dbUserService.Get(userEmail);
             }
-            var allProducts = dbProductService.GetAll();
-            var products = dbProductService.GetProductsInRange(0, 20, dbProductService.Get(search)).ToList();
+
+            var allProducts = _dbProductService.GetAll();
+            var products = _dbProductService.GetProductsInRange(0, 20, _dbProductService.Get(search)).ToList();
             if (allProducts.Count() > 0)
-                ViewBag.MaxCost = dbProductService.GetAll().Max(x => (x.Cost * (100 - x.SaleProcent) / 100));
+            {
+                ViewBag.MaxCost = _dbProductService.GetAll().Max(x => (x.Cost * (100 - x.SaleProcent) / 100));
+            }
+
             ViewBag.Search = search;
             return View(products);
         }
@@ -47,38 +50,38 @@ namespace SanTech.Controllers
         [HttpPost]
         public ViewResult GetAdditionalProducts(int from, int count, SearchViewModel search)
         {
-            var allProducts = dbProductService.Get(search);
-            var products = dbProductService.GetProductsInRange(from, count, allProducts).ToList();
+            var allProducts = _dbProductService.Get(search);
+            var products = _dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
 
-        public bool AddToBasket(int Id)
+        public bool AddToBasket(int id)
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            return dbBasketService.Add(userEmail, Id);
+            return _dbBasketService.Add(userEmail, id);
         }
 
-        public bool AddToFavourites(int Id)
+        public bool AddToFavourites(int id)
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            return dbFavoriteService.Add(userEmail, Id);
+            return _dbFavoriteService.Add(userEmail, id);
         }
 
         public void DeleteFromBasket(int basketId)
         {
-            dbBasketService.Delete(basketId);
+            _dbBasketService.Delete(basketId);
         }
 
         public void DeleteFromFavorites(int favoriteId)
         {
-            dbFavoriteService.Delete(favoriteId);
+            _dbFavoriteService.Delete(favoriteId);
         }
 
         public ViewResult LoadBasket()
         {
             var userEmail = HttpContext.Session.GetString("Email");
             ViewBag.User = userEmail;
-            var model = dbBasketService.Get(userEmail);
+            var model = _dbBasketService.Get(userEmail);
             ViewBag.TotalCost = model.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
             return View(model);
         }
@@ -87,25 +90,25 @@ namespace SanTech.Controllers
         {
             var userEmail = HttpContext.Session.GetString("Email");
             ViewBag.User = userEmail;
-            var model = dbFavoriteService.Get(userEmail);
+            var model = _dbFavoriteService.Get(userEmail);
             return View(model);
         }
 
         public void ChangeNumberOfBasket(int basketId, int inputValue)
         {
-            dbBasketService.ChangeNumberOfBasket(basketId, inputValue);
+            _dbBasketService.ChangeNumberOfBasket(basketId, inputValue);
         }
 
         public void DeleteAllBasket()
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            dbBasketService.DeleteAll(userEmail);
+            _dbBasketService.DeleteAll(userEmail);
         }
 
         public void DeleteAllFavorites()
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            dbFavoriteService.DeleteAll(userEmail);
+            _dbFavoriteService.DeleteAll(userEmail);
         }
 
         [HttpGet]
@@ -114,18 +117,20 @@ namespace SanTech.Controllers
             var userEmail = HttpContext.Session.GetString("Email");
             if (userEmail is not null)
             {
-                ViewBag.User = dbUserService.Get(userEmail);
+                ViewBag.User = _dbUserService.Get(userEmail);
                 return View();
             }
             else
+            {
                 return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
-        public IActionResult UpdateUser(User user, IFormFile UploadedFile)
+        public IActionResult UpdateUser(User user, IFormFile uploadedFile)
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            dbUserService.UpdateUser(user, userEmail, UploadedFile);
+            _dbUserService.UpdateUser(user, userEmail, uploadedFile);
             return RedirectToAction("Index");
         }
     }

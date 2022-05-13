@@ -1,82 +1,91 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SanTech.Interfaces;
 using SanTech.Models;
-using System.Linq;
 
 namespace SanTech.Controllers
 {
     public class AdminPanelController : Controller
     {
-        private readonly IDbProductService dbProductService;
-        private readonly IFileService fileService;
-        private readonly IDbUserService dbUserService;
-        private readonly IOrderService orderService;
-        public AdminPanelController(IDbProductService dbProductService, 
-            IFileService fileService, IDbUserService dbUserService, IOrderService orderService)
+        private readonly IDbProductService _dbProductService;
+        private readonly IFileService _fileService;
+        private readonly IDbUserService _dbUserService;
+        private readonly IOrderService _orderService;
+        public AdminPanelController(IDbProductService dbProductService, IFileService fileService, IDbUserService dbUserService, IOrderService orderService)
         {
-            this.dbProductService = dbProductService;
-            this.fileService = fileService;
-            this.dbUserService = dbUserService;
-            this.orderService = orderService;
+            _dbProductService = dbProductService;
+            _fileService = fileService;
+            _dbUserService = dbUserService;
+            _orderService = orderService;
         }
 
         public IActionResult AdminPanel()
             {
             var userEmail = HttpContext.Session.GetString("Email");
-            if (userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
+            if (userEmail is null || !_dbUserService.Get(userEmail).IsAdmin)
+            {
                 return Redirect("../Home/Index");
-                ViewBag.User = dbUserService.Get(userEmail);
-                ViewBag.UserBase = dbUserService.GetAll();
-            ViewBag.ApplicationsBase = orderService.Get().OrderByDescending(x => x.Id);
-            var allProducts = dbProductService.GetAll();
-            return View(dbProductService.GetProductsInRange(0, 20, allProducts).ToList());
+            }
+
+            ViewBag.User = _dbUserService.Get(userEmail);
+            ViewBag.UserBase = _dbUserService.GetAll();
+            ViewBag.ApplicationsBase = _orderService.Get().OrderByDescending(x => x.Id);
+            var allProducts = _dbProductService.GetAll();
+            return View(_dbProductService.GetProductsInRange(0, 20, allProducts).ToList());
         }
 
         public bool AddNewProduct(ProductViewModel product)
         {
-            if (product.Title is null || product.Desc is null || product.Cost == 0 || 
-                product.UploadedFile is null || product.SaleProcent < 0 || 
+            if (product.Title is null || product.Desc is null || product.Cost == 0 ||
+                product.UploadedFile is null || product.SaleProcent < 0 ||
                 product.SaleProcent > 100 || product.CategoryId == 0)
+            {
                 return true;
-            dbProductService.Add(product);
+            }
+
+            _dbProductService.Add(product);
             return false;
         }
 
         [HttpPost]
         public ViewResult GetAdditionalProducts(int from, int count)
         {
-            var allProducts = dbProductService.GetAll();
-            var products = dbProductService.GetProductsInRange(from, count, allProducts).ToList();
+            var allProducts = _dbProductService.GetAll();
+            var products = _dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
 
         [HttpPost]
         public void DeleteProduct(int productId)
         {
-            dbProductService.DeleteProduct(productId);
+            _dbProductService.DeleteProduct(productId);
         }
 
         [HttpGet]
         public IActionResult RedactProduct(int productId)
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            if (userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
+            if (userEmail is null || !_dbUserService.Get(userEmail).IsAdmin)
+            {
                 return Redirect("../Home/Index");
+            }
+
             ViewBag.LoggedAccount = userEmail;
-            ViewBag.IsAdmin = dbUserService.Get(userEmail).IsAdmin;
-            ViewBag.User = dbUserService.Get(userEmail);
-            ViewBag.UserBase = dbUserService.GetAll();
-            ViewBag.Product = dbProductService.Get(productId);
+            ViewBag.IsAdmin = _dbUserService.Get(userEmail).IsAdmin;
+            ViewBag.User = _dbUserService.Get(userEmail);
+            ViewBag.UserBase = _dbUserService.GetAll();
+            ViewBag.Product = _dbProductService.Get(productId);
             return View();
         }
 
         [HttpPost]
         public IActionResult RedactProduct(ProductViewModel newProduct, int productId)
         {
-            dbProductService.RedactProduct(newProduct, productId);
+            _dbProductService.RedactProduct(newProduct, productId);
             return RedirectToAction("AdminPanel");
         }
+
         public FileContentResult Download(string path)
         {
             var doc = new byte[0];
@@ -86,7 +95,7 @@ namespace SanTech.Controllers
 
         public void UpdateStatus(int applicationId, string value)
         {
-            orderService.Update(applicationId, value);
+            _orderService.Update(applicationId, value);
         }
     }
 }

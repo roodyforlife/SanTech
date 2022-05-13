@@ -1,21 +1,21 @@
-﻿using IronPdf;
+﻿using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using IronPdf;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using SanTech.Interfaces;
 using SanTech.Models;
-using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace SanTech.Services
 {
     public class FileService : IFileService
     {
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IHostingEnvironment _hostingEnvironment;
         public FileService(IHostingEnvironment hostingEnvironment)
         {
-            this.hostingEnvironment = hostingEnvironment;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public byte[] FromImageToByte(IFormFile uploadedFile)
@@ -25,36 +25,38 @@ namespace SanTech.Services
                 {
                     imageData = binaryReader.ReadBytes((int)uploadedFile.Length);
                 }
-            return imageData;
+
+                return imageData;
         }
-        
+
         public byte[] FromImageToByte(string imageFileName)
         {
-            string path = Path.Combine(this.hostingEnvironment.WebRootPath, "img", imageFileName);
+            string path = Path.Combine(_hostingEnvironment.WebRootPath, "img", imageFileName);
             FileStream fileStream = File.OpenRead(path);
             BinaryReader reader = new BinaryReader(fileStream);
             return reader.ReadBytes((int)fileStream.Length);
         }
 
-        //Create Pdf file for created order
+        // Create Pdf file for created order
         public string GetCreatedPdfFile(Order application)
         {
             var pdfDocument = new HtmlToPdf().RenderHtmlAsPdf(GetHTMLBodyForCheck(application));
-            string pdfPath = Path.Combine(this.hostingEnvironment.WebRootPath, $"Files/Orders/{application.OrderNumber}.pdf");
+            string pdfPath = Path.Combine(_hostingEnvironment.WebRootPath, $"Files/Orders/{application.OrderNumber}.pdf");
             pdfDocument.SaveAs(pdfPath);
             return pdfPath;
         }
 
-        //Make a check for Pdf file
+        // Make a check for Pdf file
         public string GetHTMLBodyForCheck(Order application)
         {
-            string body = String.Empty;
+            string body = string.Empty;
             StringBuilder basket = new StringBuilder();
-            string path = Path.Combine(this.hostingEnvironment.WebRootPath, "Files/email", "Check.html");
+            string path = Path.Combine(_hostingEnvironment.WebRootPath, "Files/email", "Check.html");
             using (StreamReader reader = new StreamReader(path))
             {
                 body = reader.ReadToEnd();
             }
+
             body = body.Replace("{OrderNumber}", application.OrderNumber).Replace("{UserName}", application.Name).Replace("{UserSecondName}", application.SecondName).
                 Replace("{City}", application.City).Replace("{Address}", application.Address).Replace("{Post}", application.Delivery).
                 Replace("{TotalCost}", application.TotalCost.ToString("N0"));
@@ -65,17 +67,18 @@ namespace SanTech.Services
                     $"<div class='text1'>Количество: {item.NumberOfProduct}</div>" +
                     $"<div class='text1 content__basket__item__cost'>{(item.NumberOfProduct * (item.Product.Cost * (100 - item.Product.SaleProcent) / 100)).ToString("N0")} грн.</div></div>");
             }
+
             body = body.Replace("{BasketContent}", basket.ToString());
             return body;
         }
 
-        //Data hashing
+        // Data hashing
         public string HashData(string data)
         {
             using (var sha256 = SHA256.Create())
             {
                 var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(data));
-                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower();
             }
         }
 

@@ -16,15 +16,15 @@ namespace SanTech.Models
         public bool IsNotAvailable { get; set; }
         public List<Comment> Comments { get; set; }
         public int CategoryId { get; set; }
-        public Product(string Title, string Desc, int SaleProcent, int BonusNumber, int Cost, byte[] Image, int CategoryId)
+        public Product(string title, string desc, int saleProcent, int bonusNumber, int cost, byte[] image, int categoryId)
         {
-            this.Title = Title;
-            this.Desc = Desc;
-            this.SaleProcent = SaleProcent;
-            this.BonusNumber = BonusNumber;
-            this.Cost = Cost;
-            this.Image = Image;
-            this.CategoryId = CategoryId;
+            Title = title;
+            Desc = desc;
+            SaleProcent = saleProcent;
+            BonusNumber = bonusNumber;
+            Cost = cost;
+            Image = image;
+            CategoryId = categoryId;
         }
     }
 }

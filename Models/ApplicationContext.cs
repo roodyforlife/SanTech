@@ -13,7 +13,7 @@ namespace SanTech.Models
         public DbSet<Favorite> Favorites { get; set; }
         public ApplicationContext()
         {
-            //Database.EnsureDeleted();
+            // Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

@@ -10,7 +10,7 @@
                         <div class="text1 reviews__content__item__text__review">
                             @comment.Text
                         </div>
-                        @(ViewBag.User is not null)
+                        @if (ViewBag.User is not null)
                         {
                         <div class="reviews__content__item__buttons">
                             <div class="text1 reviews__content__item__answer">Ответить</div>

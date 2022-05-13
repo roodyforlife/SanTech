@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using SanTech.Models;
-using System.Collections.Generic;
 
 namespace SanTech.Interfaces
 {
@@ -12,6 +12,6 @@ namespace SanTech.Interfaces
         public int ClearBonuses(Order order);
         public void AddBonuses(Application application);
         public void ChangePassword(User user, string password);
-        public void UpdateUser(User newUser, string userEmail, IFormFile UploadedFile);
+        public void UpdateUser(User newUser, string userEmail, IFormFile uploadedFile);
     }
 }

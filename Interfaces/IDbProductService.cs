@@ -1,6 +1,6 @@
-﻿using SanTech.Models;
+﻿using System.Collections.Generic;
+using SanTech.Models;
 using SanTech.Models.ViewModels;
-using System.Collections.Generic;
 
 namespace SanTech.Interfaces
 {
@@ -10,7 +10,7 @@ namespace SanTech.Interfaces
         public List<Product> GetAll();
         public IEnumerable<Product> Get(SearchViewModel search);
         public IEnumerable<Product> GetProductsInRange(int from, int count, IEnumerable<Product> products);
-        public Product Get(int Id);
+        public Product Get(int id);
         public void DeleteProduct(int productId);
         public void RedactProduct(ProductViewModel newProduct, int productId);
     }

@@ -1,61 +1,65 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using SanTech.Interfaces;
 using SanTech.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SanTech.Services
 {
     public class DbCommentService : IDbCommentService
     {
-        private readonly IDbProductService dbProductService;
-        private readonly ApplicationContext db;
+        private readonly IDbProductService _dbProductService;
+        private readonly ApplicationContext _db;
         public DbCommentService(IDbProductService dbProductService, ApplicationContext db)
         {
-            this.dbProductService = dbProductService;
-            this.db = db;
+            _dbProductService = dbProductService;
+            _db = db;
         }
 
         public void Add(Comment comment, int productId)
         {
-            comment.Product = dbProductService.Get(productId);
-            db.Comments.Add(comment);
-            db.SaveChanges();
+            comment.Product = _dbProductService.Get(productId);
+            _db.Comments.Add(comment);
+            _db.SaveChanges();
         }
 
         public void AddSub(SubComment subComment, int commentId)
         {
-            db.SubComments.Add(subComment);
-            db.SaveChanges();
+            _db.SubComments.Add(subComment);
+            _db.SaveChanges();
         }
 
         public void DeleteComment(int commentId)
         {
             var comment = GetOne(commentId);
             if (comment.SubComments.Count() == 0)
-                db.Comments.Remove(comment);
+            {
+                _db.Comments.Remove(comment);
+            }
             else
+            {
                 comment.Text = "(Удалено)";
-            db.SaveChanges();
-            
+            }
+
+            _db.SaveChanges();
         }
 
         public void DeleteSubComment(int subCommentId)
         {
-            var subComment = db.SubComments.ToList().FirstOrDefault(x => x.Id == subCommentId);
-            db.SubComments.Remove(subComment);
-            db.SaveChanges();
+            var subComment = _db.SubComments.ToList().FirstOrDefault(x => x.Id == subCommentId);
+            _db.SubComments.Remove(subComment);
+            _db.SaveChanges();
         }
 
         public List<Comment> Get(int productId)
         {
-            return db.Comments.Include(x => x.Product).Include(x => x.User).
+            return _db.Comments.Include(x => x.Product).Include(x => x.User).
                 Include(x => x.SubComments).Where(x => x.Product.Id == productId).ToList();
         }
 
         public Comment GetOne(int commentId)
         {
-            return db.Comments.Include(x => x.SubComments).ToList().FirstOrDefault(x => x.Id == commentId);
+            return _db.Comments.Include(x => x.SubComments).ToList().FirstOrDefault(x => x.Id == commentId);
         }
     }
 }

@@ -1,25 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SanTech.Interfaces;
 using SanTech.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SanTech.Controllers
 {
     public class CreateOrderController : Controller
     {
-        private readonly IDbUserService dbUserService;
-        private readonly IDbBasketService dbBasketService;
-        private readonly IEmailService emailService;
-        private readonly IOrderService orderService;
-        public CreateOrderController(IDbUserService dbUserService, IDbBasketService dbBasketService, 
-            IEmailService emailService, IOrderService orderService)
+        private readonly IDbUserService _dbUserService;
+        private readonly IDbBasketService _dbBasketService;
+        private readonly IEmailService _emailService;
+        private readonly IOrderService _orderService;
+        public CreateOrderController(IDbUserService dbUserService, IDbBasketService dbBasketService, IEmailService emailService, IOrderService orderService)
         {
-            this.dbUserService = dbUserService;
-            this.dbBasketService = dbBasketService;
-            this.emailService = emailService;
-            this.orderService = orderService;
+            _dbUserService = dbUserService;
+            _dbBasketService = dbBasketService;
+            _emailService = emailService;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -28,13 +27,14 @@ namespace SanTech.Controllers
             var userEmail = HttpContext.Session.GetString("Email");
             if (userEmail is not null)
             {
-                if (dbUserService.Get(userEmail).Basket.Count() != 0)
+                if (_dbUserService.Get(userEmail).Basket.Count() != 0)
                 {
-                    ViewBag.BasketCost = dbBasketService.Get(userEmail).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
-                    ViewBag.User = dbUserService.Get(userEmail);
+                    ViewBag.BasketCost = _dbBasketService.Get(userEmail).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
+                    ViewBag.User = _dbUserService.Get(userEmail);
                     return View();
                 }
             }
+
             return Redirect("../Home/Index");
         }
 
@@ -44,17 +44,17 @@ namespace SanTech.Controllers
             var userEmail = HttpContext.Session.GetString("Email");
             if (ModelState.IsValid)
             {
-                order.Basket = dbBasketService.Get(userEmail);
-                order.User = dbUserService.Get(userEmail);
+                order.Basket = _dbBasketService.Get(userEmail);
+                order.User = _dbUserService.Get(userEmail);
                 order.TotalCost = order.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
-                orderService.Add(order);
-                emailService.SendCheckToEmail(order);
-                dbBasketService.DeleteAll(userEmail);
-                ViewBag.User = dbUserService.Get(userEmail);
+                _orderService.Add(order);
+                _emailService.SendCheckToEmail(order);
+                _dbBasketService.DeleteAll(userEmail);
+                ViewBag.User = _dbUserService.Get(userEmail);
                 return View("../CreateOrder/Created", order);
             }
+
             return View();
         }
-       
     }
 }

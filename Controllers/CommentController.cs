@@ -1,36 +1,37 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SanTech.Interfaces;
 using SanTech.Models;
-using System.Linq;
 
 namespace SanTech.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly IDbUserService dbUserService;
-        private readonly IDbCommentService dbCommentService;
+        private readonly IDbUserService _dbUserService;
+        private readonly IDbCommentService _dbCommentService;
         public CommentController(IDbUserService dbUserService, IDbCommentService dbCommentService)
         {
-            this.dbUserService = dbUserService;
-            this.dbCommentService = dbCommentService;
+            _dbUserService = dbUserService;
+            _dbCommentService = dbCommentService;
         }
 
         [HttpPost]
-        public bool AddComment(string text, int Evaluation, int productId)
+        public bool AddComment(string text, int evaluation, int productId)
         {
-            if (text is not null && Evaluation != 0)
+            if (text is not null && evaluation != 0)
             {
                 var userEmail = HttpContext.Session.GetString("Email");
                 Comment comment = new Comment()
                 {
                     Text = text,
-                    Evaluation = Evaluation,
-                    User = dbUserService.Get(userEmail)
+                    Evaluation = evaluation,
+                    User = _dbUserService.Get(userEmail)
                 };
-                dbCommentService.Add(comment, productId);
+                _dbCommentService.Add(comment, productId);
                 return true;
             }
+
             return false;
         }
 
@@ -42,31 +43,32 @@ namespace SanTech.Controllers
                 SubComment subComment = new SubComment()
                 {
                     Text = text,
-                    User = dbUserService.Get(userEmail),
-                    Comment = dbCommentService.GetOne(commentId)
+                    User = _dbUserService.Get(userEmail),
+                    Comment = _dbCommentService.GetOne(commentId)
                 };
-                dbCommentService.AddSub(subComment, commentId);
+                _dbCommentService.AddSub(subComment, commentId);
                 return true;
             }
+
             return false;
         }
 
         public ViewResult LoadComments(int productId)
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            var model = dbCommentService.Get(productId).OrderByDescending(x => x.Date);
-            ViewBag.User = dbUserService.Get(userEmail);
+            var model = _dbCommentService.Get(productId).OrderByDescending(x => x.Date);
+            ViewBag.User = _dbUserService.Get(userEmail);
             return View(model);
         }
 
         public void DeleteComment(int commentId)
         {
-            dbCommentService.DeleteComment(commentId);
+            _dbCommentService.DeleteComment(commentId);
         }
 
         public void DeleteSubComment(int subCommentId)
         {
-            dbCommentService.DeleteSubComment(subCommentId);
+            _dbCommentService.DeleteSubComment(subCommentId);
         }
     }
 }

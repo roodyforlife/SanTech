@@ -8,6 +8,6 @@ namespace SanTech.Models
         public string Text { get; set; }
         public User User { get; set; }
         public Comment Comment { get; set; }
-        public DateTime Date = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }

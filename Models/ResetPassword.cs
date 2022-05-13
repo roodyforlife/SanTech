@@ -13,6 +13,5 @@ namespace SanTech.Models
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
         public string Code { get; set; }
-
     }
 }

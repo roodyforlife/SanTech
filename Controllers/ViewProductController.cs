@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SanTech.Interfaces;
-using System.Linq;
 
 namespace SanTech.Controllers
 {
     public class ViewProductController : Controller
     {
-        private readonly IDbUserService dbUserService;
-        private readonly IDbProductService dbProductService;
+        private readonly IDbUserService _dbUserService;
+        private readonly IDbProductService _dbProductService;
         public ViewProductController(IDbUserService dbUserService, IDbProductService dbProductService)
         {
-            this.dbUserService = dbUserService;
-            this.dbProductService = dbProductService;
+            _dbUserService = dbUserService;
+            _dbProductService = dbProductService;
         }
 
         public IActionResult ViewProduct(int productId)
@@ -22,9 +22,10 @@ namespace SanTech.Controllers
                 var userEmail = HttpContext.Session.GetString("Email");
                 if (userEmail is not null)
                 {
-                    ViewBag.User = dbUserService.Get(userEmail);
+                    ViewBag.User = _dbUserService.Get(userEmail);
                 }
-                var model = dbProductService.Get(productId);
+
+                var model = _dbProductService.Get(productId);
                 model.Comments = model.Comments.OrderByDescending(x => x.Id).ToList();
                 return View(model);
             }

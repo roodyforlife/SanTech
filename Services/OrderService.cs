@@ -1,31 +1,34 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using SanTech.Interfaces;
 using SanTech.Models;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace SanTech.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IDbUserService dbUserService;
-        private readonly IHostingEnvironment hostingEnvironment;
-        private readonly ApplicationContext db;
+        private readonly IDbUserService _dbUserService;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly ApplicationContext _db;
         public OrderService(IDbUserService dbUserService, IHostingEnvironment hostingEnvironment, ApplicationContext db)
         {
-            this.dbUserService = dbUserService;
-            this.hostingEnvironment = hostingEnvironment;
-            this.db = db;
+            _dbUserService = dbUserService;
+            _hostingEnvironment = hostingEnvironment;
+            _db = db;
         }
 
         public void Add(Order order)
         {
             if (order.WriteOffBonuses)
-                order.TotalCost = dbUserService.ClearBonuses(order);
-            int BonusCredit = order.Basket.Sum(x => x.Product.BonusNumber);
-            string pdfPath = Path.Combine(this.hostingEnvironment.WebRootPath, $"Files/Orders/{order.OrderNumber}.pdf");
+            {
+                order.TotalCost = _dbUserService.ClearBonuses(order);
+            }
+
+            int bonusCredit = order.Basket.Sum(x => x.Product.BonusNumber);
+            string pdfPath = Path.Combine(_hostingEnvironment.WebRootPath, $"Files/Orders/{order.OrderNumber}.pdf");
             Application application = new Application()
             {
                 Name = order.Name,
@@ -34,28 +37,29 @@ namespace SanTech.Services
                 Email = order.Email,
                 FilePath = pdfPath,
                 User = order.User,
-                BonusCredit = BonusCredit,
+                BonusCredit = bonusCredit,
                 Status = "notConfirmed"
             };
-            db.Applications.Add(application);
-            db.SaveChanges();
+            _db.Applications.Add(application);
+            _db.SaveChanges();
         }
 
         public List<Application> Get()
         {
-            return db.Applications.Include(x => x.User).ToList();
+            return _db.Applications.Include(x => x.User).ToList();
         }
 
         public void Update(int applicationId, string value)
         {
-            var application = db.Applications.ToList().FirstOrDefault(x => x.Id == applicationId);
+            var application = _db.Applications.ToList().FirstOrDefault(x => x.Id == applicationId);
             application.Status = value;
             if (value == "delivered")
             {
-                dbUserService.AddBonuses(application);
+                _dbUserService.AddBonuses(application);
                 application.BonusCredit = 0;
             }
-            db.SaveChanges();
+
+            _db.SaveChanges();
         }
     }
 }

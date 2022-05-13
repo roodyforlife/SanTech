@@ -26,9 +26,9 @@ namespace SanTech.Models
         [Required(ErrorMessage = "Это обязательное поле")]
         public string Address { get; set; }
         public bool WriteOffBonuses { get; set; }
-        public List<Basket> Basket = new List<Basket>();
+        public List<Basket> Basket { get; set; } = new List<Basket>();
         public User User { get; set; }
         public int TotalCost { get; set; }
-        public string OrderNumber = DateTime.Now.ToString("ddMMyyyyHHmmss");
+        public string OrderNumber { get; set; } = DateTime.Now.ToString("ddMMyyyyHHmmss");
     }
 }

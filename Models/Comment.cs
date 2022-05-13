@@ -11,7 +11,6 @@ namespace SanTech.Models
         public int Evaluation { get; set; }
         public Product Product { get; set; }
         public List<SubComment> SubComments { get; set; }
-        public DateTime Date = DateTime.Now;
-
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }
