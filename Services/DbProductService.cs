@@ -62,7 +62,6 @@ namespace SanTech.Services
             var comments = db.Comments.ToList().Where(x => x.Product.Id == productId);
             db.SubComments.RemoveRange(subComments);
             db.Comments.RemoveRange(comments);
-            //dbCommentService.DeleteAllComments(productId);
             db.Products.Remove(product);
             db.SaveChanges();
         }
@@ -80,7 +79,7 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
-        public IEnumerable<Product> GetAll(SearchViewModel search)
+        public IEnumerable<Product> Get(SearchViewModel search)
         {
             var products = db.Products.Include(x => x.Comments).AsEnumerable();
             if (search.Category != 0)

@@ -11,7 +11,7 @@ namespace SanTech.Interfaces
     {
         public void Add(ProductViewModel product);
         public List<Product> GetAll();
-        public IEnumerable<Product> GetAll(SearchViewModel search);
+        public IEnumerable<Product> Get(SearchViewModel search);
         public IEnumerable<Product> GetProductsInRange(int from, int count, IEnumerable<Product> products);
         public Product Get(int Id);
         public void AddThereAre();

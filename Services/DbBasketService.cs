@@ -19,19 +19,15 @@ namespace SanTech.Services
             this.dbUserService = dbUserService;
             this.dbProductService = dbProductService;
         }
-        public void Add(Basket basket)
-        {
-            db.Baskets.Add(basket);
-            db.SaveChanges();
-        }
-        public bool AddProductToBasket(string email, int productId)
+        public bool Add(string email, int productId)
         {
             var user = dbUserService.Get(email);
             var product = dbProductService.Get(productId);
             if (Get(productId, user.Id) is null)
             {
                 Basket basket = new Basket { ProductId = productId, Product = product, UserId = user.Id, NumberOfProduct = 1 };
-                Add(basket);
+                db.Baskets.Add(basket);
+                db.SaveChanges();
                 return true;
             }
             return false;
@@ -52,7 +48,7 @@ namespace SanTech.Services
         {
             return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
         }
-        public List<Basket> GetByUserEmail(string userEmail)
+        public List<Basket> Get(string userEmail)
         {
             return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().Where(x => x.User.Email == userEmail).ToList();
         }
@@ -63,9 +59,9 @@ namespace SanTech.Services
             basket.NumberOfProduct = inputValue;
             db.SaveChanges();
         }
-        public void DeleteAllBasket(string userEmail)
+        public void DeleteAll(string userEmail)
         {
-            db.Baskets.RemoveRange(GetByUserEmail(userEmail));
+            db.Baskets.RemoveRange(Get(userEmail));
             db.SaveChanges();
         }
     }

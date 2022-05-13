@@ -40,7 +40,7 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
-        public void DeleteAllFavorites(string userEmail)
+        public void DeleteAll(string userEmail)
         {
             db.Favorites.RemoveRange(Get(userEmail));
             db.SaveChanges();

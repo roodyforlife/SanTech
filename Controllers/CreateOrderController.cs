@@ -32,7 +32,7 @@ namespace SanTech.Controllers
             {
                 if (dbUserService.Get(userEmail).Basket.Count() != 0)
                 {
-                    ViewBag.BasketCost = dbBasketService.GetByUserEmail(userEmail).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
+                    ViewBag.BasketCost = dbBasketService.Get(userEmail).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
                     ViewBag.User = dbUserService.Get(userEmail);
                     return View();
                 }
@@ -45,12 +45,12 @@ namespace SanTech.Controllers
             var userEmail = HttpContext.Session.GetString("Email");
             if (ModelState.IsValid)
             {
-                order.Basket = dbBasketService.GetByUserEmail(userEmail);
+                order.Basket = dbBasketService.Get(userEmail);
                 order.User = dbUserService.Get(userEmail);
                 order.TotalCost = order.Basket.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
                 orderService.Add(order);
                 emailService.SendCheckToEmail(order);
-                dbBasketService.DeleteAllBasket(userEmail);
+                dbBasketService.DeleteAll(userEmail);
                 ViewBag.User = dbUserService.Get(userEmail);
                 return View("../CreateOrder/Created", order);
             }

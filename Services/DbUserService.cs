@@ -73,7 +73,7 @@ namespace SanTech.Services
             return db.Users.ToList();
         }
 
-        public void RedactUser(User newUser, string userEmail, IFormFile UploadedFile)
+        public void UpdateUser(User newUser, string userEmail, IFormFile UploadedFile)
         {
             var user = db.Users.ToList().FirstOrDefault(x => x.Email == userEmail);
             user.Name = newUser.Name;

@@ -13,6 +13,6 @@ namespace SanTech.Interfaces
         public List<Favorite> Get(string userEmail);
         public void Delete(int favoriteId);
         public Favorite Get(int favoriteId);
-        public void DeleteAllFavorites(string userEmail);
+        public void DeleteAll(string userEmail);
     }
 }

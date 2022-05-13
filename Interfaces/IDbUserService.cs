@@ -15,6 +15,6 @@ namespace SanTech.Interfaces
         public int ClearBonuses(Order order);
         public void AddBonuses(Application application);
         public void ChangePassword(User user, string password);
-        public void RedactUser(User newUser, string userEmail, IFormFile UploadedFile);
+        public void UpdateUser(User newUser, string userEmail, IFormFile UploadedFile);
     }
 }

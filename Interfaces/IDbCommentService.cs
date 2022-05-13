@@ -12,7 +12,6 @@ namespace SanTech.Interfaces
         public void AddSub(SubComment subComment, int commentId);
         public List<Comment> Get(int productId);
         public Comment GetOne(int commentId);
-        /*public void DeleteAllComments(int productId);*/
         public void DeleteComment(int commentId);
         public void DeleteSubComment(int subCommentId);
     }
