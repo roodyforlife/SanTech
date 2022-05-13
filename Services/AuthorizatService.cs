@@ -1,11 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
-using SanTech.Interfaces;
-using SanTech.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SanTech.Interfaces;
 
 namespace SanTech.Services
 {
