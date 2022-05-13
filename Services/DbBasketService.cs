@@ -47,7 +47,8 @@ namespace SanTech.Services
 
         public Basket Get(int productId, int userId)
         {
-            return db.Baskets.Include(x => x.Product).Include(x => x.User).ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
+            return db.Baskets.Include(x => x.Product).Include(x => x.User).
+                ToList().FirstOrDefault(x => x.Product.Id == productId && x.User.Id == userId);
         }
 
         public List<Basket> Get(string userEmail)

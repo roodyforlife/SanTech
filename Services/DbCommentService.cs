@@ -49,7 +49,8 @@ namespace SanTech.Services
 
         public List<Comment> Get(int productId)
         {
-            return db.Comments.Include(x => x.Product).Include(x => x.User).Include(x => x.SubComments).Where(x => x.Product.Id == productId).ToList();
+            return db.Comments.Include(x => x.Product).Include(x => x.User).
+                Include(x => x.SubComments).Where(x => x.Product.Id == productId).ToList();
         }
 
         public Comment GetOne(int commentId)

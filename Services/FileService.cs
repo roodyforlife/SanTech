@@ -60,7 +60,10 @@ namespace SanTech.Services
                 Replace("{TotalCost}", application.TotalCost.ToString("N0"));
             foreach (var item in application.User.Basket)
             {
-                basket.Append($"<div class='content__basket__item'><div class='text1'>{item.Product.Title}</div><div class='text1 content__basket__item__code'>Код товара: {item.Product.Id}</div><div class='text1'>Количество: {item.NumberOfProduct}</div><div class='text1 content__basket__item__cost'>{(item.NumberOfProduct * (item.Product.Cost * (100 - item.Product.SaleProcent) / 100)).ToString("N0")} грн.</div></div>");
+                basket.Append($"<div class='content__basket__item'><div class='text1'>{item.Product.Title}</div>" +
+                    $"<div class='text1 content__basket__item__code'>Код товара: {item.Product.Id}</div>" +
+                    $"<div class='text1'>Количество: {item.NumberOfProduct}</div>" +
+                    $"<div class='text1 content__basket__item__cost'>{(item.NumberOfProduct * (item.Product.Cost * (100 - item.Product.SaleProcent) / 100)).ToString("N0")} грн.</div></div>");
             }
             body = body.Replace("{BasketContent}", basket.ToString());
             return body;

@@ -35,7 +35,8 @@ namespace SanTech.Controllers
             {
                 var code = fileService.GenerateCode(user);
                 var callbackUrl = Url.Action("ResetPassword", "ForgotPassword", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                emailService.SendEmail(model.Email, user.Name, $"Вы пытаетесь сбросить пароль. Для сброса пароля перейдите по <a href='{callbackUrl}'>ссылке</a>", "emailSend.html");
+                emailService.SendEmail(model.Email, user.Name,
+                    $"Вы пытаетесь сбросить пароль. Для сброса пароля перейдите по <a href='{callbackUrl}'>ссылке</a>", "emailSend.html");
                 return View("ForgotPasswordConfirmation");
             }
             ModelState.AddModelError("Email", "Аккаунта с такой почтой не существует");

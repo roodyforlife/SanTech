@@ -12,7 +12,8 @@ namespace SanTech.Controllers
         private readonly IFileService fileService;
         private readonly IDbUserService dbUserService;
         private readonly IOrderService orderService;
-        public AdminPanelController(IDbProductService dbProductService, IFileService fileService, IDbUserService dbUserService, IOrderService orderService)
+        public AdminPanelController(IDbProductService dbProductService, 
+            IFileService fileService, IDbUserService dbUserService, IOrderService orderService)
         {
             this.dbProductService = dbProductService;
             this.fileService = fileService;
@@ -34,7 +35,9 @@ namespace SanTech.Controllers
 
         public bool AddNewProduct(ProductViewModel product)
         {
-            if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100 || product.CategoryId == 0)
+            if (product.Title is null || product.Desc is null || product.Cost == 0 || 
+                product.UploadedFile is null || product.SaleProcent < 0 || 
+                product.SaleProcent > 100 || product.CategoryId == 0)
                 return true;
             dbProductService.Add(product);
             return false;

@@ -13,7 +13,8 @@ namespace SanTech.Controllers
         private readonly IDbProductService dbProductService;
         private readonly IDbBasketService dbBasketService;
         private readonly IDbFavoriteService dbFavoriteService;
-        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService, IDbBasketService dbBasketService, IDbFavoriteService dbFavoriteService)
+        public HomeController(IDbUserService dbUserService, IDbProductService dbProductService, 
+            IDbBasketService dbBasketService, IDbFavoriteService dbFavoriteService)
         {
             this.dbUserService = dbUserService;
             this.dbProductService = dbProductService;

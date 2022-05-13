@@ -11,7 +11,8 @@ namespace SanTech.Controllers
         private readonly IDbUserService dbUserService;
         private readonly IEmailService emailService;
         private readonly IFileService fileService;
-        public RegistAccountController(IAuthorizatService authorizatService, IDbUserService dbUserService, IEmailService emailService, IFileService fileService)
+        public RegistAccountController(IAuthorizatService authorizatService, 
+            IDbUserService dbUserService, IEmailService emailService, IFileService fileService)
         {
             this.authorizatService = authorizatService;
             this.dbUserService = dbUserService;
@@ -38,7 +39,8 @@ namespace SanTech.Controllers
                 user.Password = fileService.HashData(user.Password);
                 user.PasswordConfirm = fileService.HashData(user.PasswordConfirm);
                 dbUserService.Add(user);
-                emailService.SendEmail(user.Email, user.Name, "Вы успешно зарегистрировались на сайте SanTech. Запишите ваш пароль, удачных покупок и хорошего настроения!", "emailSend.html");
+                emailService.SendEmail(user.Email, user.Name, 
+                    "Вы успешно зарегистрировались на сайте SanTech. Запишите ваш пароль, удачных покупок и хорошего настроения!", "emailSend.html");
                 HttpContext.Session.SetString("Email", user.Email);
                 return RedirectPermanent("../Home/Index");
             }
