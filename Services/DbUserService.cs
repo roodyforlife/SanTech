@@ -17,13 +17,12 @@ namespace SanTech.Services
     {
         private readonly ApplicationContext db;
         private readonly IFileService fileService;
-        private readonly IHostingEnvironment hostingEnvironment;
-        public DbUserService(ApplicationContext db, IFileService fileService, IHostingEnvironment hostingEnvironment)
+        public DbUserService(ApplicationContext db, IFileService fileService)
         {
             this.db = db;
             this.fileService = fileService;
-            this.hostingEnvironment = hostingEnvironment;
         }
+
         public void Add(User user)
         {
             user.Avatar = fileService.FromImageToByte("avatar.png");

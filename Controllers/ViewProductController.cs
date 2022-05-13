@@ -17,6 +17,7 @@ namespace SanTech.Controllers
             this.dbUserService = dbUserService;
             this.dbProductService = dbProductService;
         }
+
         public IActionResult ViewProduct(int productId)
         {
             try
@@ -30,7 +31,7 @@ namespace SanTech.Controllers
                 model.Comments = model.Comments.OrderByDescending(x => x.Id).ToList();
                 return View(model);
             }
-            catch (Exception)
+            catch
             {
                 return Redirect("../Home/Index");
             }

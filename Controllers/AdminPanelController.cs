@@ -22,6 +22,7 @@ namespace SanTech.Controllers
             this.dbUserService = dbUserService;
             this.orderService = orderService;
         }
+
         public IActionResult AdminPanel()
             {
             var userEmail = HttpContext.Session.GetString("Email");
@@ -33,6 +34,7 @@ namespace SanTech.Controllers
             var allProducts = dbProductService.GetAll();
             return View(dbProductService.GetProductsInRange(0, 20, allProducts).ToList());
         }
+
         public bool AddNewProduct(ProductViewModel product)
         {
             if (product.Title is null || product.Desc is null || product.Cost == 0 || product.UploadedFile is null || product.SaleProcent < 0 || product.SaleProcent > 100 || product.CategoryId == 0)
@@ -40,6 +42,7 @@ namespace SanTech.Controllers
             dbProductService.Add(product);
             return false;
         }
+
         [HttpPost]
         public ViewResult GetAdditionalProducts(int from, int count)
         {
@@ -47,11 +50,13 @@ namespace SanTech.Controllers
             var products = dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
+
         [HttpPost]
         public void DeleteProduct(int productId)
         {
             dbProductService.DeleteProduct(productId);
         }
+
         [HttpGet]
         public IActionResult RedactProduct(int productId)
         {
@@ -65,6 +70,7 @@ namespace SanTech.Controllers
             ViewBag.Product = dbProductService.Get(productId);
             return View();
         }
+
         [HttpPost]
         public IActionResult RedactProduct(ProductViewModel newProduct, int productId)
         {
@@ -77,6 +83,7 @@ namespace SanTech.Controllers
             doc = System.IO.File.ReadAllBytes(path);
             return File(doc, "application/pdf");
         }
+
         public void UpdateStatus(int applicationId, string value)
         {
             orderService.Update(applicationId, value);

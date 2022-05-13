@@ -18,6 +18,7 @@ namespace SanTech.Services
             this.db = db;
             this.fileService = fileService;
         }
+
         public void Add(ProductViewModel createProduct)
         {
             var image = fileService.FromImageToByte(createProduct.UploadedFile);
@@ -26,14 +27,6 @@ namespace SanTech.Services
             db.SaveChanges();
         }
 
-        public void AddThereAre()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                db.Products.Add(new Product("Title" + i, "Описание", i, i, 400 + i, new byte[] { 1, 34, 2, 54, 3, 35, 45, }, 2));
-            }
-            db.SaveChanges();
-        }
         public Product Get(int Id)
         {
             return db.Products.Include(x => x.Comments).ThenInclude(x => x.User).Include(x => x.Comments).ThenInclude(x => x.SubComments).ToList().FirstOrDefault(x => x.Id == Id);
@@ -53,22 +46,17 @@ namespace SanTech.Services
         }
         public void DeleteProduct(int productId)
         {
-            var product = db.Products.ToList().FirstOrDefault(x => x.Id == productId);
-            var basket = db.Baskets.ToList().Where(x => x.Product.Id == productId);
-            var favorites = db.Favorites.ToList().Where(x => x.Product.Id == productId);
-            db.Baskets.RemoveRange(basket);
-            db.Favorites.RemoveRange(favorites);
-            var subComments = db.SubComments.ToList().Where(x => x.Comment.Product.Id == productId);
-            var comments = db.Comments.ToList().Where(x => x.Product.Id == productId);
-            db.SubComments.RemoveRange(subComments);
-            db.Comments.RemoveRange(comments);
-            db.Products.Remove(product);
+            db.Baskets.RemoveRange(db.Baskets.ToList().Where(x => x.Product.Id == productId));
+            db.Favorites.RemoveRange(db.Favorites.ToList().Where(x => x.Product.Id == productId));
+            db.SubComments.RemoveRange(db.SubComments.ToList().Where(x => x.Comment.Product.Id == productId));
+            db.Comments.RemoveRange(db.Comments.ToList().Where(x => x.Product.Id == productId));
+            db.Products.Remove(db.Products.ToList().FirstOrDefault(x => x.Id == productId));
             db.SaveChanges();
         }
         public void RedactProduct(ProductViewModel newProduct, int productId)
         {
             var product = db.Products.ToList().FirstOrDefault(x => x.Id == productId);
-            if(newProduct.UploadedFile is not null)
+            if (newProduct.UploadedFile is not null)
             product.Image = fileService.FromImageToByte(newProduct.UploadedFile);
             product.Title = newProduct.Title;
             product.Desc = newProduct.Desc ?? product.Desc;
@@ -84,7 +72,7 @@ namespace SanTech.Services
             var products = db.Products.Include(x => x.Comments).AsEnumerable();
             if (search.Category != 0)
                 products = products.ToList().Where(x => x.CategoryId == search.Category);
-            if(search.CostTo != 0)
+            if (search.CostTo != 0)
             products = products.Where(x => x.Cost * (100 - x.SaleProcent) / 100 >= search.CostFrom && x.Cost * (100 - x.SaleProcent) / 100 <= search.CostTo);
             if (!String.IsNullOrEmpty(search.SearchInput))
                 products = products.Where(x => x.Title.Contains(search.SearchInput, StringComparison.OrdinalIgnoreCase));

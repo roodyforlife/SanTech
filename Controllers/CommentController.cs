@@ -18,6 +18,7 @@ namespace SanTech.Controllers
             this.dbUserService = dbUserService;
             this.dbCommentService = dbCommentService;
         }
+
         [HttpPost]
         public bool AddComment(string text, int Evaluation, int productId)
         {
@@ -35,6 +36,7 @@ namespace SanTech.Controllers
             }
             return false;
         }
+
         public bool AddSubComment(string text, int commentId)
         {
             var userEmail = HttpContext.Session.GetString("Email");
@@ -51,6 +53,7 @@ namespace SanTech.Controllers
             }
             return false;
         }
+
         public ViewResult LoadComments(int productId)
         {
             var userEmail = HttpContext.Session.GetString("Email");
@@ -58,10 +61,12 @@ namespace SanTech.Controllers
             ViewBag.User = dbUserService.Get(userEmail);
             return View(model);
         }
+
         public void DeleteComment(int commentId)
         {
             dbCommentService.DeleteComment(commentId);
         }
+
         public void DeleteSubComment(int subCommentId)
         {
             dbCommentService.DeleteSubComment(subCommentId);

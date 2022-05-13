@@ -19,6 +19,7 @@ namespace SanTech.Services
             this.dbProductService = dbProductService;
             this.db = db;
         }
+
         public bool Add(string email, int productId)
         {
             var user = dbUserService.Get(email);
@@ -50,6 +51,7 @@ namespace SanTech.Services
         {
             return db.Favorites.Include(x => x.User).Include(x => x.Product).ToList().FirstOrDefault(x => x.Id == favoriteId);
         }
+
         public Favorite Get(int productId, int userId)
         {
             return db.Favorites.Include(x => x.Product).Include(x => x.User).FirstOrDefault(x => x.User.Id == userId && x.Product.Id == productId);

@@ -21,6 +21,7 @@ namespace SanTech.Controllers
             this.emailService = emailService;
             this.fileService = fileService;
         }
+
         [HttpGet]
         public IActionResult ForgotPassword()
         {
@@ -30,6 +31,7 @@ namespace SanTech.Controllers
             ViewBag.DisabledButton = "pointer-events: auto";
             return View();
         }
+
         [HttpPost]
         public IActionResult ForgotPassword(ForgotPassword model)
         {
@@ -51,6 +53,7 @@ namespace SanTech.Controllers
         {
             return code == null ? Redirect("../Home/Index") : View();
         }
+
         [HttpPost]
         public IActionResult ResetPassword(ResetPassword model)
         {

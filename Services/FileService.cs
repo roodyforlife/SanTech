@@ -20,6 +20,7 @@ namespace SanTech.Services
         {
             this.hostingEnvironment = hostingEnvironment;
         }
+
         public byte[] FromImageToByte(IFormFile uploadedFile)
         {
                 byte[] imageData = null;
@@ -29,7 +30,7 @@ namespace SanTech.Services
                 }
             return imageData;
         }
-
+        
         public byte[] FromImageToByte(string imageFileName)
         {
             string path = Path.Combine(this.hostingEnvironment.WebRootPath, "img", imageFileName);
@@ -38,6 +39,7 @@ namespace SanTech.Services
             return reader.ReadBytes((int)fileStream.Length);
         }
 
+        //Create Pdf file for created order
         public string GetCreatedPdfFile(Order application)
         {
             var pdfDocument = new HtmlToPdf().RenderHtmlAsPdf(GetHTMLBodyForCheck(application));
@@ -46,6 +48,7 @@ namespace SanTech.Services
             return pdfPath;
         }
 
+        //Make a check for Pdf file
         public string GetHTMLBodyForCheck(Order application)
         {
             string body = String.Empty;
@@ -65,6 +68,8 @@ namespace SanTech.Services
             body = body.Replace("{BasketContent}", basket.ToString());
             return body;
         }
+
+        //Data hashing
         public string HashData(string data)
         {
             using (var sha256 = SHA256.Create())

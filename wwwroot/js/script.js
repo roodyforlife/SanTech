@@ -154,6 +154,7 @@ function copyTelephoneToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
+  alert("Телефон успешно скопирован");
 }
 function CountButton(int, id) {
   let value = +($(`#input__count${id}`).val());

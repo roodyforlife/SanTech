@@ -23,9 +23,9 @@ namespace SanTech.Controllers
             this.dbBasketService = dbBasketService;
             this.dbFavoriteService = dbFavoriteService;
         }
+
         public IActionResult Index(SearchViewModel search)
         {
-            //dbProductService.AddThereAre();
             var userEmail = HttpContext.Session.GetString("Email");
             ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
@@ -39,11 +39,13 @@ namespace SanTech.Controllers
             ViewBag.Search = search;
             return View(products);
         }
+
         public string SignOutAccount()
         {
             ControllerContext.HttpContext.Session.Remove("Email");
             return "<li><a href='../SignInAccount/SignInAccount'><div class='text1 pull__menu__list__text login__button'>Вход/Регистрация</div></a></li>";
         }
+
         [HttpPost]
         public ViewResult GetAdditionalProducts(int from, int count, SearchViewModel search)
         {
@@ -51,24 +53,29 @@ namespace SanTech.Controllers
             var products = dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
+
         public bool AddToBasket(int Id)
         {
             var userEmail = HttpContext.Session.GetString("Email");
             return dbBasketService.Add(userEmail, Id);
         }
+
         public bool AddToFavourites(int Id)
         {
             var userEmail = HttpContext.Session.GetString("Email");
             return dbFavoriteService.Add(userEmail, Id);
         }
+
         public void DeleteFromBasket(int basketId)
         {
             dbBasketService.Delete(basketId);
         }
+
         public void DeleteFromFavorites(int favoriteId)
         {
             dbFavoriteService.Delete(favoriteId);
         }
+
         public ViewResult LoadBasket()
         {
             var userEmail = HttpContext.Session.GetString("Email");
@@ -77,6 +84,7 @@ namespace SanTech.Controllers
             ViewBag.TotalCost = model.Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
             return View(model);
         }
+
         public ViewResult LoadFavorites()
         {
             var userEmail = HttpContext.Session.GetString("Email");
@@ -84,20 +92,24 @@ namespace SanTech.Controllers
             var model = dbFavoriteService.Get(userEmail);
             return View(model);
         }
+
         public void ChangeNumberOfBasket(int basketId, int inputValue)
         {
             dbBasketService.ChangeNumberOfBasket(basketId, inputValue);
         }
+
         public void DeleteAllBasket()
         {
             var userEmail = HttpContext.Session.GetString("Email");
             dbBasketService.DeleteAll(userEmail);
         }
+
         public void DeleteAllFavorites()
         {
             var userEmail = HttpContext.Session.GetString("Email");
             dbFavoriteService.DeleteAll(userEmail);
         }
+
         [HttpGet]
         public IActionResult UpdateUser()
         {
@@ -110,6 +122,7 @@ namespace SanTech.Controllers
             else
                 return RedirectToAction("Index");
         }
+
         [HttpPost]
         public IActionResult UpdateUser(User user, IFormFile UploadedFile)
         {

@@ -11,13 +11,12 @@ namespace SanTech.Controllers
 {
     public class SignInAccountController : Controller
     {
-        private readonly IDbUserService dbUserService;
         private readonly IAuthorizatService authorizatService;
-        public SignInAccountController(IDbUserService dbUserService, IAuthorizatService authorizatService)
+        public SignInAccountController(IAuthorizatService authorizatService)
         {
-            this.dbUserService = dbUserService;
             this.authorizatService = authorizatService;
         }
+
         [HttpGet]
         public IActionResult SignInAccount()
         {
@@ -26,6 +25,7 @@ namespace SanTech.Controllers
                 return Redirect("../Home/Index");
             return View();
         }
+
         [HttpPost]
         public IActionResult SignInAccount(UserLogin user)
         {

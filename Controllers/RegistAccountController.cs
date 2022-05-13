@@ -24,6 +24,7 @@ namespace SanTech.Controllers
             this.emailService = emailService;
             this.fileService = fileService;
         }
+
         [HttpGet]
         public IActionResult RegistAccount()
         {
@@ -32,6 +33,7 @@ namespace SanTech.Controllers
                 return Redirect("../Home/Index");
             return View();
         }
+
         [HttpPost]
         public IActionResult RegistAccount(User user)
         {

@@ -24,6 +24,7 @@ namespace SanTech.Controllers
             this.emailService = emailService;
             this.orderService = orderService;
         }
+
         [HttpGet]
         public IActionResult CreateOrder()
         {
@@ -39,6 +40,7 @@ namespace SanTech.Controllers
             }
             return Redirect("../Home/Index");
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateOrder(Order order)
         {

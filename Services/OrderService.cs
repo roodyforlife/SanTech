@@ -21,6 +21,7 @@ namespace SanTech.Services
             this.hostingEnvironment = hostingEnvironment;
             this.db = db;
         }
+
         public void Add(Order order)
         {
             if (order.WriteOffBonuses)

@@ -11,15 +11,14 @@ namespace SanTech.Services
 {
     public class AuthorizatService : IAuthorizatService
     {
-        private readonly ApplicationContext db;
         private readonly IDbUserService dbUserService;
         private readonly IFileService fileService;
-        public AuthorizatService(ApplicationContext db, IDbUserService dbUserService, IFileService fileService)
+        public AuthorizatService(IDbUserService dbUserService, IFileService fileService)
         {
-            this.db = db;
             this.dbUserService = dbUserService;
             this.fileService = fileService;
         }
+
         public bool IsRegistered(string email)
         {
             return dbUserService.Get(email) is not null;

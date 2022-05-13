@@ -17,6 +17,7 @@ namespace SanTech.Services
             this.dbProductService = dbProductService;
             this.db = db;
         }
+
         public void Add(Comment comment, int productId)
         {
             comment.Product = dbProductService.Get(productId);
@@ -47,14 +48,6 @@ namespace SanTech.Services
             db.SubComments.Remove(subComment);
             db.SaveChanges();
         }
-
-        /*public void DeleteAllComments(int productId)
-        {
-            var subComments = db.SubComments.ToList().Where(x => x.Comment.Product.Id == productId);
-            var comments = db.Comments.ToList().Where(x => x.Product.Id == productId);
-            db.SubComments.RemoveRange(subComments);
-            db.Comments.RemoveRange(comments);
-        }*/
 
         public List<Comment> Get(int productId)
         {
