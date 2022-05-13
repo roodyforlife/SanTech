@@ -14,6 +14,7 @@ $(document).ready(function () {
                 $('.profile__pull__menu__list').html(response);
                 $('.exit__alert').addClass('_active__exit__alert');
                 $('.menu__item__count').remove();
+                $('.menu__item__count__favorites').remove();
                 setTimeout(function () {
                     $('.exit__alert').removeClass('_active__exit__alert');
                 }, 3000);
