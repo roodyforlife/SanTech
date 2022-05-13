@@ -31,7 +31,7 @@ namespace SanTech.Controllers
         public IActionResult ForgotPassword(ForgotPassword model)
         {
             var user = dbUserService.Get(model.Email);
-            if(user is not null)
+            if (user is not null)
             {
                 var code = fileService.GenerateCode(user);
                 var callbackUrl = Url.Action("ResetPassword", "ForgotPassword", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);

@@ -42,7 +42,7 @@ namespace SanTech.Services
         public int ClearBonuses(Order order)
         {
             var user = db.Users.ToList().FirstOrDefault(x => x.Email == order.User.Email);
-            if(order.TotalCost >= order.User.Bonus)
+            if (order.TotalCost >= order.User.Bonus)
             {
                 order.TotalCost -= order.User.Bonus;
                 user.Bonus = 0;

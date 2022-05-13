@@ -110,7 +110,7 @@
                                         </div>
                                 </li>
                                 <li><a asp-action="UpdateUser" asp-controller="Home"><div class="text1 pull__menu__list__text login__button">Редактировать профиль</div></a></li>
-                                @if(ViewBag.User.IsAdmin)
+                                @if (ViewBag.User.IsAdmin)
                                 {
                                     <li><a asp-action="AdminPanel" asp-controller="AdminPanel"><div class="text1 pull__menu__list__text login__button">Админ-панель</div></a></li>
                                 }

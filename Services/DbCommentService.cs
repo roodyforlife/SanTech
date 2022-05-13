@@ -32,7 +32,7 @@ namespace SanTech.Services
         public void DeleteComment(int commentId)
         {
             var comment = GetOne(commentId);
-            if(comment.SubComments.Count() == 0)
+            if (comment.SubComments.Count() == 0)
                 db.Comments.Remove(comment);
             else
                 comment.Text = "(Удалено)";

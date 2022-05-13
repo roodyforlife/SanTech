@@ -38,7 +38,7 @@ namespace SanTech.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrder(Order order)
+        public IActionResult CreateOrder(Order order)
         {
             var userEmail = HttpContext.Session.GetString("Email");
             if (ModelState.IsValid)

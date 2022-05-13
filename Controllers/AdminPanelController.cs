@@ -23,7 +23,7 @@ namespace SanTech.Controllers
         public IActionResult AdminPanel()
             {
             var userEmail = HttpContext.Session.GetString("Email");
-            if(userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
+            if (userEmail is null || !dbUserService.Get(userEmail).IsAdmin)
                 return Redirect("../Home/Index");
                 ViewBag.User = dbUserService.Get(userEmail);
                 ViewBag.UserBase = dbUserService.GetAll();

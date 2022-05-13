@@ -50,7 +50,7 @@ namespace SanTech.Services
         {
             var application = db.Applications.ToList().FirstOrDefault(x => x.Id == applicationId);
             application.Status = value;
-            if(value == "delivered")
+            if (value == "delivered")
             {
                 dbUserService.AddBonuses(application);
                 application.BonusCredit = 0;

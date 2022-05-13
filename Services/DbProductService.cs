@@ -45,9 +45,9 @@ namespace SanTech.Services
         }
         public void DeleteProduct(int productId)
         {
-            db.Baskets.RemoveRange(db.Baskets.ToList().Where(x => x.Product.Id == productId));
+            db.Baskets.RemoveRange(db.Baskets.Include(x => x.Product).ToList().Where(x => x.Product.Id == productId));
             db.Favorites.RemoveRange(db.Favorites.ToList().Where(x => x.Product.Id == productId));
-            db.SubComments.RemoveRange(db.SubComments.ToList().Where(x => x.Comment.Product.Id == productId));
+            db.SubComments.RemoveRange(db.SubComments.Include(x => x.Comment).ThenInclude(x => x.Product).ToList().Where(x => x.Comment.Product.Id == productId));
             db.Comments.RemoveRange(db.Comments.ToList().Where(x => x.Product.Id == productId));
             db.Products.Remove(db.Products.ToList().FirstOrDefault(x => x.Id == productId));
             db.SaveChanges();
