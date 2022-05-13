@@ -77,6 +77,7 @@ $(document).ready(function () {
             processData: false,
             data: false,
             success: function (response) {
+                $('.menu__item__count__favorites').html(0);
                 LoadFavorites();
             }
         });
@@ -117,6 +118,7 @@ function AddToFavourites(Id, userEmail) {
             data: formData,
             success: function (response) {
                 if (response) {
+                    $('.menu__item__count__favorites').html(parseInt($('.menu__item__count__favorites').html()) + 1);
                 }
             }
         });
@@ -142,6 +144,7 @@ function DeleteFromBasket(basketId) {
     });
 }
 function DeleteFromFavorites(favoriteId) {
+    $('.menu__item__count__favorites').html(parseInt($('.menu__item__count__favorites').html()) - 1);
     var formData = new FormData();
     formData.append("favoriteId", favoriteId);
     $.ajax({

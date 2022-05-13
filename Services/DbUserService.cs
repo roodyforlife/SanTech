@@ -65,7 +65,7 @@ namespace SanTech.Services
 
         public User Get(string email)
         {
-            return db.Users.Include(x => x.Basket).ToList().FirstOrDefault(x => x.Email == email);
+            return db.Users.Include(x => x.Basket).Include(x => x.Favorites).ToList().FirstOrDefault(x => x.Email == email);
         }
 
         public IEnumerable<User> GetAll()

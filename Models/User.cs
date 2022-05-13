@@ -35,5 +35,6 @@ namespace SanTech.Models
         public bool IsAdmin { get; set; }
         public byte[] Avatar { get; set; }
         public List<Basket> Basket { get; set; } = new List<Basket>();
+        public List<Favorite> Favorites { get; set; } = new List<Favorite>();
     }
 }

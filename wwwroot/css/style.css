@@ -177,7 +177,7 @@ body._lock {
     fill: var(--yellow-color);
 }
 
-.menu__item__count {
+.menu__item__count, .menu__item__count__favorites {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -913,7 +913,7 @@ input[type="range"]:active::-webkit-slider-thumb {
         height: 25px;
     }
 
-    .menu__item__count {
+    .menu__item__count, .menu__item__count__favorites{
         width: 17px;
         height: 17px;
         top: -20%;
@@ -1077,7 +1077,7 @@ input[type="range"]:active::-webkit-slider-thumb {
         display: block;
     }
 
-    .menu__item__count {
+    .menu__item__count, .menu__item__count__favorites{
         width: 17px;
         height: 17px;
         top: -15%;
