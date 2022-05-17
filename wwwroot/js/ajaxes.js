@@ -161,18 +161,20 @@ function DeleteFromFavorites(favoriteId) {
     });
 }
 function DeleteProduct(productId) {
-    var formData = new FormData();
-    formData.append("productId", productId);
-    $.ajax({
-        url: "/AdminPanel/DeleteProduct",
-        type: 'POST',
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: formData,
-        success: function (response) {
-            $(`#productId_${productId}`).css("opacity", "0.3");
-            $(`#productId_${productId}`).css("pointer-events", "none");
-        }
-    });
+    if (confirm(`Вы действительно хотите удалить продукт под номером ${productId}?`)) {
+        var formData = new FormData();
+        formData.append("productId", productId);
+        $.ajax({
+            url: "/AdminPanel/DeleteProduct",
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (response) {
+                $(`#productId_${productId}`).css("opacity", "0.3");
+                $(`#productId_${productId}`).css("pointer-events", "none");
+            }
+        });
+    }
 }

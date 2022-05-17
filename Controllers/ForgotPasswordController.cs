@@ -59,7 +59,6 @@ namespace SanTech.Controllers
             if (ModelState.IsValid)
             {
                 var user = _dbUserService.Get(model.Email);
-                var test = _fileService.GenerateCode(user);
                 if (user is not null && model.Code == _fileService.GenerateCode(user))
                 {
                     model.Password = _fileService.HashData(model.Password);

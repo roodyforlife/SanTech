@@ -84,6 +84,8 @@ namespace SanTech.Services
 
         public string GenerateCode(User user)
         {
+            if (user is null)
+                return null;
             string data = user.Email + user.Phone + user.Password;
             return HashData(data);
         }
