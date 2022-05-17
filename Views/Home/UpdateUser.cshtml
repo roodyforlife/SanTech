@@ -5,7 +5,7 @@
 <link href="~/css/profileRedact.css" rel="stylesheet" />
 <div class="redact">
     <form asp-controller="Home" asp-action="UpdateUser" method="post" enctype="multipart/form-data">
-        <div class="text2 redact__title">Редактирование продукта</div>
+        <div class="text2 redact__title">Редактирование профиля</div>
         <div class="redact__content">
             <div class="redact__content__flex__image">
                 <img src="data:image/jpeg;base64,@(Convert.ToBase64String(ViewBag.User.Avatar))" alt="">
