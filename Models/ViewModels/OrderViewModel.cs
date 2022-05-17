@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SanTech.Models
 {
-    public class Order
+    public class OrderViewModel
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Это обязательное поле")]

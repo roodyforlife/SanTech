@@ -26,7 +26,7 @@ namespace SanTech.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignInAccount(UserLogin user)
+        public IActionResult SignInAccount(UserLoginViewModel user)
         {
             if (!_authorizatService.PasswordIsCorrect(user.Email, user.Password) || !_authorizatService.IsRegistered(user.Email))
             {

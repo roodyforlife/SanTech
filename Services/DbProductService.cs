@@ -10,9 +10,9 @@ namespace SanTech.Services
 {
     public class DbProductService : IDbProductService
     {
-        private readonly ApplicationContext _db;
+        private readonly DataBaseContext _db;
         private readonly IFileService _fileService;
-        public DbProductService(ApplicationContext db, IFileService fileService)
+        public DbProductService(DataBaseContext db, IFileService fileService)
         {
             _db = db;
             _fileService = fileService;

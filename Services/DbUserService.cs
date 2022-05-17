@@ -9,9 +9,9 @@ namespace SanTech.Services
 {
     public class DbUserService : IDbUserService
     {
-        private readonly ApplicationContext _db;
+        private readonly DataBaseContext _db;
         private readonly IFileService _fileService;
-        public DbUserService(ApplicationContext db, IFileService fileService)
+        public DbUserService(DataBaseContext db, IFileService fileService)
         {
             _db = db;
             _fileService = fileService;
@@ -39,7 +39,7 @@ namespace SanTech.Services
             _db.SaveChanges();
         }
 
-        public int ClearBonuses(Order order)
+        public int ClearBonuses(OrderViewModel order)
         {
             var user = _db.Users.ToList().FirstOrDefault(x => x.Email == order.User.Email);
             if (order.TotalCost >= order.User.Bonus)

@@ -9,8 +9,8 @@ namespace SanTech.Services
     public class DbCommentService : IDbCommentService
     {
         private readonly IDbProductService _dbProductService;
-        private readonly ApplicationContext _db;
-        public DbCommentService(IDbProductService dbProductService, ApplicationContext db)
+        private readonly DataBaseContext _db;
+        public DbCommentService(IDbProductService dbProductService, DataBaseContext db)
         {
             _dbProductService = dbProductService;
             _db = db;

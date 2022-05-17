@@ -54,7 +54,7 @@ namespace SanTech.Controllers
         }
 
         [HttpPost]
-        public IActionResult ResetPassword(ResetPassword model)
+        public IActionResult ResetPassword(ResetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {

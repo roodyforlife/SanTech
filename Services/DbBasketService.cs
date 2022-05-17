@@ -9,10 +9,10 @@ namespace SanTech.Services
 {
     public class DbBasketService : IDbBasketService
     {
-        private readonly ApplicationContext _db;
+        private readonly DataBaseContext _db;
         private readonly IDbUserService _dbUserService;
         private readonly IDbProductService _dbProductService;
-        public DbBasketService(ApplicationContext db, IDbUserService dbUserService, IDbProductService dbProductService)
+        public DbBasketService(DataBaseContext db, IDbUserService dbUserService, IDbProductService dbProductService)
         {
             _db = db;
             _dbUserService = dbUserService;

@@ -9,7 +9,7 @@ namespace SanTech.Interfaces
         public void Add(User user);
         public User Get(string email);
         public IEnumerable<User> GetAll();
-        public int ClearBonuses(Order order);
+        public int ClearBonuses(OrderViewModel order);
         public void AddBonuses(Application application);
         public void ChangePassword(User user, string password);
         public void UpdateUser(User newUser, string userEmail, IFormFile uploadedFile);

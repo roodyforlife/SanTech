@@ -22,7 +22,7 @@ namespace SanTech.Services
             _fileService = fileService;
         }
 
-        public void SendCheckToEmail(Order application)
+        public void SendCheckToEmail(OrderViewModel application)
         {
             try
             {

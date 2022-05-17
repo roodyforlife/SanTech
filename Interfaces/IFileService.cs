@@ -7,8 +7,8 @@ namespace SanTech.Interfaces
     {
         public byte[] FromImageToByte(IFormFile uploadedFile);
         public byte[] FromImageToByte(string imageFileName);
-        public string GetHTMLBodyForCheck(Order application);
-        public string GetCreatedPdfFile(Order application);
+        public string GetHTMLBodyForCheck(OrderViewModel application);
+        public string GetCreatedPdfFile(OrderViewModel application);
         public string HashData(string data);
         public string GenerateCode(User user);
     }

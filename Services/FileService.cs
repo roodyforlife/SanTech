@@ -38,7 +38,7 @@ namespace SanTech.Services
         }
 
         // Create Pdf file for created order
-        public string GetCreatedPdfFile(Order application)
+        public string GetCreatedPdfFile(OrderViewModel application)
         {
             var pdfDocument = new HtmlToPdf().RenderHtmlAsPdf(GetHTMLBodyForCheck(application));
             string pdfPath = Path.Combine(_hostingEnvironment.WebRootPath, $"Files/Orders/{application.OrderNumber}.pdf");
@@ -47,7 +47,7 @@ namespace SanTech.Services
         }
 
         // Make a check for Pdf file
-        public string GetHTMLBodyForCheck(Order application)
+        public string GetHTMLBodyForCheck(OrderViewModel application)
         {
             string body = string.Empty;
             StringBuilder basket = new StringBuilder();

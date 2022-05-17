@@ -2,7 +2,7 @@
 
 namespace SanTech.Models
 {
-    public class ApplicationContext : DbContext
+    public class DataBaseContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -11,7 +11,7 @@ namespace SanTech.Models
         public DbSet<SubComment> SubComments { get; set; }
         public DbSet<Application> Applications { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
-        public ApplicationContext()
+        public DataBaseContext()
         {
             // Database.EnsureDeleted();
             Database.EnsureCreated();

@@ -8,10 +8,10 @@ namespace SanTech.Services
 {
     public class DbFavoriteService : IDbFavoriteService
     {
-        private readonly ApplicationContext _db;
+        private readonly DataBaseContext _db;
         private readonly IDbUserService _dbUserService;
         private readonly IDbProductService _dbProductService;
-        public DbFavoriteService(IDbUserService dbUserService, IDbProductService dbProductService, ApplicationContext db)
+        public DbFavoriteService(IDbUserService dbUserService, IDbProductService dbProductService, DataBaseContext db)
         {
             _dbUserService = dbUserService;
             _dbProductService = dbProductService;

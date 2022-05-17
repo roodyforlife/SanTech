@@ -39,7 +39,7 @@ namespace SanTech.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrder(Order order)
+        public IActionResult CreateOrder(OrderViewModel order)
         {
             var userEmail = HttpContext.Session.GetString("Email");
             if (ModelState.IsValid)

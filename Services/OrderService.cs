@@ -12,15 +12,15 @@ namespace SanTech.Services
     {
         private readonly IDbUserService _dbUserService;
         private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly ApplicationContext _db;
-        public OrderService(IDbUserService dbUserService, IHostingEnvironment hostingEnvironment, ApplicationContext db)
+        private readonly DataBaseContext _db;
+        public OrderService(IDbUserService dbUserService, IHostingEnvironment hostingEnvironment, DataBaseContext db)
         {
             _dbUserService = dbUserService;
             _hostingEnvironment = hostingEnvironment;
             _db = db;
         }
 
-        public void Add(Order order)
+        public void Add(OrderViewModel order)
         {
             if (order.WriteOffBonuses)
             {

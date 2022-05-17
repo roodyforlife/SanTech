@@ -28,7 +28,7 @@ namespace SanTech
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<ApplicationContext>();
+            services.AddDbContext<DataBaseContext>();
             services.AddSession();
             services.AddScoped<IDbUserService, DbUserService>();
             services.AddScoped<IAuthorizatService, AuthorizatService>();
