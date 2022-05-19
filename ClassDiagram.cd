@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SanTech.Models.User">
+    <Position X="10.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAgAAAAAQAAAQAigAAAAACAACAIAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Favorites" />
+      <Property Name="Basket" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SanTech.Models.Product">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAkAAAQAAABAAAAAAABAAAAEAQAAAIIA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Comments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SanTech.Models.Favorite">
+    <Position X="6" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Favorite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SanTech.Models.Basket">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Basket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SanTech.Models.Application">
+    <Position X="13.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAgEACAAAAAAAAAAAAQAAAAAAAAAAABAIAAAAAA=</HashCode>
+      <FileName>Models\Application.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SanTech.Models.SubComment">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAEAAAAAAAAAAAAAAAAAAAAAAABAAAACAAAAAA=</HashCode>
+      <FileName>Models\SubComment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Comment" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SanTech.Models.Comment">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <AssociationLine Name="User" Type="SanTech.Models.User" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.812" Y="5" />
+        <Point X="6.812" Y="4.117" />
+        <Point X="9.451" Y="4.117" />
+        <Point X="9.451" Y="3.375" />
+        <Point X="10.75" Y="3.375" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Product" Type="SanTech.Models.Product" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="6.312" />
+        <Point X="2.75" Y="6.312" />
+        <Point X="2.75" Y="4.594" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAADgAAAAAAAAAAAAAAAAAAAAACAAAABAAAACAAAAAA=</HashCode>
+      <FileName>Models\Comment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="Product" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="SubComments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
