@@ -50,8 +50,9 @@ namespace SanTech.Controllers
         [HttpPost]
         public ViewResult GetAdditionalProducts(int from, int count, SearchViewModel search)
         {
-            var allProducts = _dbProductService.Get(search);
-            var products = _dbProductService.GetProductsInRange(from, count, allProducts).ToList();
+            //var allProducts = _dbProductService.Get(search);
+            var products = _dbProductService.GetProductsInRange(from, count, _dbProductService.Get(search)).ToList();
+            //var products = _dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
 

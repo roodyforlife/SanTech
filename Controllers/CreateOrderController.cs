@@ -42,6 +42,8 @@ namespace SanTech.Controllers
         public IActionResult CreateOrder(OrderViewModel order)
         {
             var userEmail = HttpContext.Session.GetString("Email");
+            ViewBag.User = _dbUserService.Get(userEmail);
+            ViewBag.BasketCost = _dbBasketService.Get(userEmail).Sum(x => x.NumberOfProduct * (x.Product.Cost * (100 - x.Product.SaleProcent) / 100));
             if (ModelState.IsValid)
             {
                 order.Basket = _dbBasketService.Get(userEmail);
@@ -50,7 +52,6 @@ namespace SanTech.Controllers
                 _orderService.Add(order);
                 _emailService.SendCheckToEmail(order);
                 _dbBasketService.DeleteAll(userEmail);
-                ViewBag.User = _dbUserService.Get(userEmail);
                 return View("../CreateOrder/Created", order);
             }
 

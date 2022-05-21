@@ -5,36 +5,36 @@
 }
 @foreach (Product u in Model)
 {
-    <div class="admin__toggleContent__item">
-        <div class="admin__toggleContent__item__first">
-            <div class="admin__toggleContent__item__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt=""></div>
-            <div class="admin__toggleContent__item__info">
-                <div class="text1 admin__toggleContent__item__info__title">@u.Title</div>
-                <div class="text1 admin__toggleContent__item__info__code">Код: @u.Id</div>
-                <div class="admin__toggleContent__item__info__bonus">
-                    <div class="admin__toggleContent__item__info__bonus__logo">
-                        <img src="~/img/bonus.svg" alt="">
-                    </div>
-                    <div class="text1 admin__toggleContent__item__info__bonus__text">
-                        Бонусы: <span class="sale__style">@u.BonusNumber</span>
-                    </div>
+<div class="admin__toggleContent__item" id="productId_@u.Id">
+    <div class="admin__toggleContent__item__first">
+        <div class="admin__toggleContent__item__image"><img src="data:image/jpeg;base64,@(Convert.ToBase64String(u.Image))" alt=""></div>
+        <div class="admin__toggleContent__item__info">
+            <div class="text1 admin__toggleContent__item__info__title">@u.Title</div>
+            <div class="text1 admin__toggleContent__item__info__code">Код: @u.Id</div>
+            <div class="admin__toggleContent__item__info__bonus">
+                <div class="admin__toggleContent__item__info__bonus__logo">
+                    <img src="~/img/bonus.svg" alt="">
                 </div>
-                <div class="text1 admin__toggleContent__item__info__sale">
-                    Скидка: <span class="sale__style">@u.SaleProcent%</span>
+                <div class="text1 admin__toggleContent__item__info__bonus__text">
+                    Бонусы: <span class="sale__style">@u.BonusNumber</span>
                 </div>
-                <div class="text1 admin__toggleContent__item__info__cost">@u.Cost.ToString("N0") грн.</div>
             </div>
-        </div>
-        <div class="admin__toggleContent__item__buttons">
-            <div class="admin__toggleContent__item__buttons__delete">
-                <span class="text1">Удалить</span>
+            <div class="text1 admin__toggleContent__item__info__sale">
+                Скидка: <span class="sale__style">@u.SaleProcent%</span>
             </div>
-            <div class="admin__toggleContent__item__buttons__redact">
-                <span class="text1">Редактировать</span>
-            </div>
-            <div class="admin__toggleContent__item__buttons__view">
-                <span class="text1">Просмотреть</span>
-            </div>
+            <div class="text1 admin__toggleContent__item__info__cost">@u.Cost.ToString("N0") грн.</div>
         </div>
     </div>
+    <div class="admin__toggleContent__item__buttons">
+        <div class="admin__toggleContent__item__buttons__delete" onclick="DeleteProduct(@u.Id)">
+            <span class="text1">Удалить</span>
+        </div>
+        <a asp-action="RedactProduct" asp-route-productId="@u.Id" class="admin__toggleContent__item__buttons__redact">
+            <span class="text1">Редактировать</span>
+        </a>
+        <a asp-controller="ViewProduct" asp-action="ViewProduct" asp-route-productId="@u.Id" class="admin__toggleContent__item__buttons__view">
+            <span class="text1">Просмотреть</span>
+        </a>
+    </div>
+</div>
 }
