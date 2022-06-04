@@ -24,7 +24,7 @@ namespace SanTech.Controllers
         public IActionResult Index(SearchViewModel search)
         {
             var userEmail = HttpContext.Session.GetString("Email");
-            ViewBag.LoggedAccount = userEmail;
+            // ViewBag.LoggedAccount = userEmail;
             if (userEmail is not null)
             {
                 ViewBag.User = _dbUserService.Get(userEmail);
@@ -50,9 +50,12 @@ namespace SanTech.Controllers
         [HttpPost]
         public ViewResult GetAdditionalProducts(int from, int count, SearchViewModel search)
         {
-            //var allProducts = _dbProductService.Get(search);
+            var userEmail = HttpContext.Session.GetString("Email");
+            if (userEmail is not null)
+            {
+                ViewBag.User = _dbUserService.Get(userEmail);
+            }
             var products = _dbProductService.GetProductsInRange(from, count, _dbProductService.Get(search)).ToList();
-            //var products = _dbProductService.GetProductsInRange(from, count, allProducts).ToList();
             return View(products);
         }
 

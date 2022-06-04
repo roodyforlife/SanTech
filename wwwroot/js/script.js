@@ -176,6 +176,7 @@ function LoadBasket() {
     processData: false,
     data: formData,
     success: function (response) {
+      console.log(response);
       $('.basket__content__orders').html(response);
       setTimeout(function () {
         $('.basket__content__orders__load').css('display', 'none');

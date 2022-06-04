@@ -128,7 +128,6 @@ function AddToFavourites(Id, userEmail) {
     }
 }
 function DeleteFromBasket(basketId) {
-    //$(`#${basketId}`).remove();
     $('.menu__item__count').html(parseInt($('.menu__item__count').html()) - 1);
     var formData = new FormData();
     formData.append("basketId", basketId);
